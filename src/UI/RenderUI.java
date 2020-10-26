@@ -1,78 +1,66 @@
 package UI;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
+import java.awt.Color;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.border.LineBorder;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
-
-import java.awt.Color;
-import java.awt.Component;
 public class RenderUI extends JFrame {
+	JPanel tags = new JPanel();
+    JTextArea text = new JTextArea();
+    JTextField search = new JTextField();
 
-	private JPanel contentPane;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					RenderUI frame = new RenderUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public RenderUI() {
+		setTitle("demo");
+		setSize(900,600);
+		setLayout(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 695, 576);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		
-		JPanel panel = new JPanel();
-		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel.setBounds(10, 31, 223, 498);
-		contentPane.add(panel);
-		panel.setLayout(null);
-		
-		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
-		lblNewLabel_1.setAlignmentX(Component.CENTER_ALIGNMENT);
-		lblNewLabel_1.setBounds(25, 10, 175, 77);
-		panel.add(lblNewLabel_1);
-		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		lblNewLabel.setBounds(25, 105, 175, 77);
-		panel.add(lblNewLabel);
-		
-		JLabel lblNewLabel_2 = new JLabel("New label");
-		lblNewLabel_2.setBorder(new LineBorder(new Color(0, 0, 0)));
-		lblNewLabel_2.setBounds(25, 203, 175, 77);
-		panel.add(lblNewLabel_2);
-		
-		JLabel lblNewLabel_3 = new JLabel("New label");
-		lblNewLabel_3.setBorder(new LineBorder(new Color(0, 0, 0)));
-		lblNewLabel_3.setBounds(25, 301, 175, 77);
-		panel.add(lblNewLabel_3);
-		
-		JLabel lblNewLabel_4 = new JLabel("New label");
-		lblNewLabel_4.setBorder(new LineBorder(new Color(0, 0, 0)));
-		lblNewLabel_4.setBounds(25, 398, 175, 77);
-		panel.add(lblNewLabel_4);
+		setVisible(true);
+		benTrai();
+		benPhai();
 	}
+	public void benTrai(){
+		JPanel pn1 = new JPanel();
+		pn1.setBackground(Color.green);
+		pn1.setSize(270,600);
+		JButton b = new JButton("Ten");
+		b.setBounds(30, 50, 200, 50);
+		
+		JButton c = new JButton("Ngay");
+		c.setBounds(30, 150, 200, 50);
+		
+		JButton d = new JButton("Ma chung khoan");
+		d.setBounds(30, 250, 200, 50);
+		
+		JButton e = new JButton("...");
+		e.setBounds(30, 350, 200, 50);
+		
+		pn1.add(b);
+		pn1.add(c);
+		pn1.add(d);
+		pn1.add(e);
+		
+		add(pn1);
+		
+	}
+	public void benPhai() {
+		 add(text);
+         text.setBounds(280,100,700,1000);
+         text.setBackground(Color.WHITE);
+
+         add(search);
+         search.setBounds(500,35,300,30);
+
+
+         JButton buttonimage = new JButton("SEARCH");
+         add(buttonimage);
+         buttonimage.setBounds(400,35,100,30);
+	}
+	public static void main(String[] args) {
+	new RenderUI();
 }
+	
+	}
+
