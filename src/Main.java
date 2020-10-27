@@ -1,7 +1,10 @@
+import UI.RenderUI;
+
+import javax.swing.*;
 
 class Main {
     public static void main(String args[]) {
-        System.out.println("begin");
+        new  RenderUI();
     }
 
 }
