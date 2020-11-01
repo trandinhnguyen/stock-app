@@ -1,12 +1,12 @@
-import GetData.GetData;
-import UI.RenderUI;
+import Data.Data;
 
 import java.io.IOException;
 
 class Main {
     public static void main(String args[]) throws IOException {
-        new  RenderUI();
-        new GetData();
+        // new  RenderUI();
+        Data data = new Data();
+        data.getData();
     }
 
 }
