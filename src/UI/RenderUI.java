@@ -7,7 +7,8 @@ import java.awt.event.*;
 public class RenderUI extends JFrame {
 
     private JPanel mainFrame;
-
+    private JScrollPane scroll;
+    
     public RenderUI() {
         createJFrame();
     }
@@ -55,7 +56,7 @@ public class RenderUI extends JFrame {
         panel.setBorder(BorderFactory.createEmptyBorder(15, 100, 15, 30));
         GridBagConstraints grb = new GridBagConstraints();
         grb.gridx = 0;
-        grb.gridy =0;
+        grb.gridy = 0;
         grb.ipady = 4;
         JTextField text = new JTextField(40);
         JButton search = new JButton("SEARCH");
@@ -67,9 +68,14 @@ public class RenderUI extends JFrame {
         return panel;
     }
     private JPanel textPanel() {
-        JPanel panel = new JPanel();
-        JTextArea text = new JTextArea(40,50);
-        panel.add(text);
+    	JPanel panel = new JPanel();
+        scroll = new JScrollPane();
+        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        
+        JTextArea text = new JTextArea(30,50);
+        
+        scroll.getViewport().add(text);
+        panel.add(scroll);
         return panel;
     }
 
