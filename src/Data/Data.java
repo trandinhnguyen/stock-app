@@ -28,9 +28,6 @@ public class Data {
     }
 
 
-
-
-
     public void getData() throws IOException {
         // date format
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
@@ -47,23 +44,24 @@ public class Data {
                 ++count;
                 continue;
             }
-            e.children().forEach(item ->{
-                if (item.hasClass("Item_DateItem")) {
-                    try {
-                        data.setNgay(df.parse(item.text()));
-                    } catch (ParseException parseException) {
-                        parseException.printStackTrace();
-                    }
+            e.children().forEach((item) ->{
+//                if (item.hasClass("Item_DateItem")) {
+//                    try {
+//                        data.setNgay(df.parse(item.text()));
+//                    } catch (ParseException parseException) {
+//                        parseException.printStackTrace();
+//                    }
+                        System.out.println(item.text());;
                 }
                 // TODO
                 // Viet tiep cac du lieu khac vao
-            });
+            );
 
         }
 
-        this.setMaCoPhieu(data);
-        // test
-        System.out.println(data.getNgay());
+//        this.setMaCoPhieu(data);
+//        // test
+//        System.out.println(data.getNgay());
 
     }
 
