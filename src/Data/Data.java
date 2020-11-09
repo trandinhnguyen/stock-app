@@ -10,6 +10,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
 // test JSoup
 public class Data {
@@ -31,7 +32,7 @@ public class Data {
 
 
 
-    public void getData() throws IOException {
+    public void getData() throws IOException, NumberFormatException {
         // date format
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -47,24 +48,59 @@ public class Data {
                 ++count;
                 continue;
             }
-            e.children().forEach(item ->{
-                if (item.hasClass("Item_DateItem")) {
-                    try {
-                        data.setNgay(df.parse(item.text()));
-                    } catch (ParseException parseException) {
-                        parseException.printStackTrace();
+            for (Element item : e.children()) {
+                for (int i = 0; i < 11; i++) {
+                    if (i == 1) {
+                        try {
+                            data.setNgay(df.parse(item.text()));
+                        } catch (ParseException parseException) {
+                            parseException.printStackTrace();
+                        }
                     }
+                    if (i == 3) {
+                        try {
+                            data.setGiaDongCua(Float.parseFloat(item.text()));
+                        } catch (NumberFormatException numberFormatException) {
+                            numberFormatException.printStackTrace();
+                        }
+                    }
+                    float a = 0;
+                    if (i == 6) {
+                        try {
+                            a = Float.parseFloat(item.text());
+                        } catch (NumberFormatException numberFormatException) {
+                            numberFormatException.printStackTrace();
+                        }
+                    }
+                    float b = 0;
+                    if (i == 8) {
+                        try {
+                            b = Float.parseFloat(item.text());
+                        } catch (NumberFormatException numberFormatException) {
+                            numberFormatException.printStackTrace();
+                        }
+                    }
+                    data.setKhoiLuong(a + b);
+                    if (i == 10) {
+                        try {
+                            data.setGiaMoCua(Float.parseFloat(item.text()));
+                        } catch (NumberFormatException numberFormatException) {
+                            numberFormatException.printStackTrace();
+                        }
+                    }
+                    // TODO
+                    // Viet tiep cac du lieu khac vao
                 }
-                // TODO
-                // Viet tiep cac du lieu khac vao
-            });
+            }
 
         }
 
         this.setMaCoPhieu(data);
         // test
         System.out.println(data.getNgay());
-
+        System.out.println(data.getGiaDongCua());
+        System.out.println(data.getGiaMoCua());
+        System.out.println(data.getKhoiLuong());
     }
 
     public ArrayList<DuLieuMaCoPhieu> getDuLieuMaCoPhieu20Ngay() {
