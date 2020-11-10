@@ -34,7 +34,9 @@ public class Action {
 //        }
 //    }
 
-    public void setAnswer(){
+    public void setAnswer(String[] keyword){
+        Search find = new Search();
+        find.search2(keyword, cophieu, nhomnganh );
         for (int i = 0; i < solution.length; i++){
             answer = cophieu.get(solution[i]).getId() + "\t" + cophieu.get(solution[i]).getTen() + "\t" + cophieu.get(solution[i]).getNgay();
             answer += "\n";
@@ -48,7 +50,8 @@ public class Action {
         //du lieu sinh cau cua nhieu doi tuong
     }
 
-    public String getAnswer(){
+    public String getAnswer(String[] key){
+        setAnswer(key);
         return answer;
     }
 }
