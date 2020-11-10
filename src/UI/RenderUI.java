@@ -36,7 +36,7 @@ public class RenderUI extends JFrame {
         panel.setBorder(BorderFactory.createEmptyBorder(15, 30, 15, 30));
         panel.setBackground(Color.green);
 
-        JButton tag1 = new JButton("tagggggggggggggggggg1");
+        JButton tag1 = new JButton("tag1");
         JButton tag2 = new JButton("tag2");
         JButton tag3 = new JButton("tag1");
         JButton tag4 = new JButton("tag1");
@@ -55,7 +55,7 @@ public class RenderUI extends JFrame {
         panel.setBorder(BorderFactory.createEmptyBorder(15, 100, 15, 30));
         GridBagConstraints grb = new GridBagConstraints();
         grb.gridx = 0;
-        grb.gridy =0;
+        grb.gridy = 0;
         grb.ipady = 4;
         JTextField text = new JTextField(40);
         JButton search = new JButton("SEARCH");
@@ -68,7 +68,7 @@ public class RenderUI extends JFrame {
     }
     private JPanel textPanel() {
         JPanel panel = new JPanel();
-        JTextArea text = new JTextArea(40,50);
+        JTextArea text = new JTextArea(40,70);
         panel.add(text);
         return panel;
     }
