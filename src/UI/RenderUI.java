@@ -16,27 +16,27 @@ public class RenderUI extends JFrame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e){
-        //       ActionTag action = new ActionTag();
+        Action action = new Action();
         if(e.getActionCommand() == tag1.getText()){
             text.setText(null);
             text.append("123456789hsdkashndkjasjdlkjasldkjaslkdjldskflkksdhfkjsdhlfknsldfkjlsdkjflksdjflkjsdlkfjlsdjflsdjlfkj");
         }
-//        if(e.getActionCommand() == tag2.getText) {
-//            text.setText(null);
-//            text.append(action.getAnswer(tag2.getText()));
-//        }
-////        if(e.getActionCommand() == tag3.getText) {
-////            text.setText(null);
-////            text.append(action.getAnswer(tag3.getText()));
-////        }
-////        if(e.getActionCommand() == tag4.getText) {
-////            text.setText(null);
-////            text.append(action.getAnswer(tag4.getText()));
-////        }
-////        if(e.getActionCommand() == tag5.getText) {
-////            text.setText(null);
-////            text.append(action.getAnswer(tag5.getText()));
-////        }
+        if(e.getActionCommand() == tag2.getText()) {
+            text.setText(null);
+            text.append(action.getAnswer(tag2.getText()));
+        }
+        if(e.getActionCommand() == tag3.getText()) {
+            text.setText(null);
+            text.append(action.getAnswer(tag3.getText()));
+        }
+        if(e.getActionCommand() == tag4.getText()) {
+            text.setText(null);
+            text.append(action.getAnswer(tag4.getText()));
+        }
+        if(e.getActionCommand() == tag5.getText()) {
+            text.setText(null);
+            text.append(action.getAnswer(tag5.getText()));
+        }
     }
 
     private void createJFrame() {
