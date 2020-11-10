@@ -28,36 +28,36 @@ public class Search {
         }
     }
     ///  tim ID
-    public void search2(String agr1[],ArrayList<DuLieuMaCoPhieu> arraylist1, ArrayList<DuLieuNhomNganh> arraylist2 ){
-        int count = 0;
-        if (agr1.length == 1) {
-            for(int i = 0; i != arraylist1.size(); i++) {
-                String tmp =  arraylist1.get(i).getId();
-                if(search1(agr1, tmp, 0, agr1.length) == 1) {
-                    System.out.println(arraylist1.get(i));
-                    count++;
-                    setSolution(count, i);
-                }
-            }
-
-        }else if(agr1.length>4) {
-            for(int i = 0; i != arraylist2.size(); i++){
-                String tmp =  arraylist1.get(i).getTen();
-                if(search1(agr1, tmp, 0, agr1.length)==1) {
-                    System.out.println(arraylist2.get(i));
-                }
-            }
-
-        }else {
-            for(int i = 0; i != arraylist1.size(); i++){
-                String tmp1 = arraylist1.get(i).getId();
-                String tmp2 = arraylist1.get(i).getTen();
-                if(search1(agr1, tmp1,0,agr1.length)==1||search1(agr1,tmp2,0,agr1.length)==1) {
-                    System.out.println(arraylist1.get(i));
-                }
-            }
-        }
-    }
+//    public void search2(String agr1[],ArrayList<DuLieuMaCoPhieu> arraylist1, ArrayList<DuLieuNhomNganh> arraylist2 ){
+//        int count = 0;
+//        if (agr1.length == 1) {
+//            for(int i = 0; i != arraylist1.size(); i++) {
+//                String tmp =  arraylist1.get(i).getId();
+//                if(search1(agr1, tmp, 0, agr1.length) == 1) {
+//                    System.out.println(arraylist1.get(i));
+//                    count++;
+//                    setSolution(count, i);
+//                }
+//            }
+//
+//        }else if(agr1.length>4) {
+//            for(int i = 0; i != arraylist2.size(); i++){
+//                String tmp =  arraylist1.get(i).getTen();
+//                if(search1(agr1, tmp, 0, agr1.length)==1) {
+//                    System.out.println(arraylist2.get(i));
+//                }
+//            }
+//
+//        }else {
+//            for(int i = 0; i != arraylist1.size(); i++){
+//                String tmp1 = arraylist1.get(i).getId();
+//                String tmp2 = arraylist1.get(i).getTen();
+//                if(search1(agr1, tmp1,0,agr1.length)==1||search1(agr1,tmp2,0,agr1.length)==1) {
+//                    System.out.println(arraylist1.get(i));
+//                }
+//            }
+//        }
+//    }
 
     public Search() {
         ArrayList<DuLieuSinhCau> datas = new ArrayList<DuLieuSinhCau>();
