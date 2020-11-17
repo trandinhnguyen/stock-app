@@ -1,5 +1,7 @@
 package UI;
 
+import seach.Answer;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -16,27 +18,27 @@ public class RenderUI extends JFrame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e){
-//        Answer action = new Answer();
+        Answer action = new Answer();
         if(e.getActionCommand() == tag1.getText()){
             text.setText(null);
-            text.append("123456789hsdkashndkjasjdlkjasldkjaslkdjldskflkksdhfkjsdhlfknsldfkjlsdkjflksdjflkjsdlkfjlsdjflsdjlfkj");
+            text.append(action.getSearch(tag1.getText()));
         }
-//        if(e.getActionCommand() == tag2.getText()) {
-//            text.setText(null);
-//            text.append(action.getSearch(tag2.getText()));
-//        }
-//        if(e.getActionCommand() == tag3.getText()) {
-//            text.setText(null);
-//            text.append(action.getSearch(tag3.getText()));
-//        }
-//        if(e.getActionCommand() == tag4.getText()) {
-//            text.setText(null);
-//            text.append(action.getSearch(tag4.getText()));
-//        }
-//        if(e.getActionCommand() == tag5.getText()) {
-//            text.setText(null);
-//            text.append(action.getSearch(tag5.getText()));
-//        }
+        if(e.getActionCommand() == tag2.getText()) {
+            text.setText(null);
+            text.append(action.getSearch(tag2.getText()));
+        }
+        if(e.getActionCommand() == tag3.getText()) {
+            text.setText(null);
+            text.append(action.getSearch(tag3.getText()));
+        }
+        if(e.getActionCommand() == tag4.getText()) {
+            text.setText(null);
+            text.append(action.getSearch(tag4.getText()));
+        }
+        if(e.getActionCommand() == tag5.getText()) {
+            text.setText(null);
+            text.append(action.getSearch(tag5.getText()));
+        }
     }
 
     private void createJFrame() {
@@ -95,9 +97,8 @@ public class RenderUI extends JFrame implements ActionListener {
         search.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//                Answer answer = new Answer();
-                text.setText("asdasdasdasdasd");
-//                text.setText(answer.getSearch(textsearch.getText()));
+                Answer answer = new Answer();
+                text.setText(answer.getSearch(textsearch.getText()));
             }
         });
 
