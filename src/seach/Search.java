@@ -67,19 +67,7 @@ public class Search {
 
         }
 
-    public Search() {
-            ArrayList<DuLieuSinhCau> datas = new ArrayList<DuLieuSinhCau>();
-            DuLieuSinhCau d = new DuLieuSinhCau("FPT", new Date(), "dfsdfsdfffffffffggggffffffffff");
-            datas.add(d);
-            ArrayList<DuLieuMaCoPhieu> cophieu = new ArrayList<DuLieuMaCoPhieu>();
-            DuLieuMaCoPhieu a = new DuLieuMaCoPhieu("FPT","001","cong ti FPT", new Date(), (float) 12.5,(float)13.5,10000,12500,13500);
-            cophieu.add(a);
-            DuLieuMaCoPhieu b = new DuLieuMaCoPhieu("FPb","001","cong ti FPT", new Date(), (float) 12.5,(float)13.5,10000,12500,13500);
-            cophieu.add(b);
-            String keyword = "FP";
-            ArrayList<DuLieuNhomNganh> nhomnganh=new ArrayList<DuLieuNhomNganh>();
-            search(keyword, cophieu, nhomnganh);
-        }
+
 
 
         public ArrayList<Integer> getSoulution1(){
