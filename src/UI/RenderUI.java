@@ -16,27 +16,27 @@ public class RenderUI extends JFrame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e){
-        Action action = new Action();
+//        Answer action = new Answer();
         if(e.getActionCommand() == tag1.getText()){
             text.setText(null);
             text.append("123456789hsdkashndkjasjdlkjasldkjaslkdjldskflkksdhfkjsdhlfknsldfkjlsdkjflksdjflkjsdlkfjlsdjflsdjlfkj");
         }
-        if(e.getActionCommand() == tag2.getText()) {
-            text.setText(null);
-            text.append(action.getAnswer(tag2.getText()));
-        }
-        if(e.getActionCommand() == tag3.getText()) {
-            text.setText(null);
-            text.append(action.getAnswer(tag3.getText()));
-        }
-        if(e.getActionCommand() == tag4.getText()) {
-            text.setText(null);
-            text.append(action.getAnswer(tag4.getText()));
-        }
-        if(e.getActionCommand() == tag5.getText()) {
-            text.setText(null);
-            text.append(action.getAnswer(tag5.getText()));
-        }
+//        if(e.getActionCommand() == tag2.getText()) {
+//            text.setText(null);
+//            text.append(action.getSearch(tag2.getText()));
+//        }
+//        if(e.getActionCommand() == tag3.getText()) {
+//            text.setText(null);
+//            text.append(action.getSearch(tag3.getText()));
+//        }
+//        if(e.getActionCommand() == tag4.getText()) {
+//            text.setText(null);
+//            text.append(action.getSearch(tag4.getText()));
+//        }
+//        if(e.getActionCommand() == tag5.getText()) {
+//            text.setText(null);
+//            text.append(action.getSearch(tag5.getText()));
+//        }
     }
 
     private void createJFrame() {
@@ -89,15 +89,15 @@ public class RenderUI extends JFrame implements ActionListener {
         grb.gridx = 0;
         grb.gridy = 0;
         grb.ipady = 4;
-        JTextField textserch = new JTextField(40);
+        JTextField textsearch = new JTextField(40);
         search = new JButton("SEARCH");
 
         search.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//                Actiontag action = new ActionTag;
+//                Answer answer = new Answer();
                 text.setText("asdasdasdasdasd");
-//                text.setText(action.getAnswer(textsearch.getText()));
+//                text.setText(answer.getSearch(textsearch.getText()));
             }
         });
 
@@ -105,7 +105,7 @@ public class RenderUI extends JFrame implements ActionListener {
         grb.gridx = 1;
         grb.ipadx = 100;
         grb.ipady = 10;
-        panel.add(textserch,grb);
+        panel.add(textsearch,grb);
         return panel;
     }
     private JPanel textPanel() {
