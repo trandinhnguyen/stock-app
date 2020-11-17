@@ -17,31 +17,6 @@ public class RenderUI extends JFrame {
         createJFrame();
     }
 
-<<<<<<< HEAD
-//    public void actionPerformed(ActionEvent e){
-//        Action action = new Action();
-//        if(e.getActionCommand() == tag1.getText()){
-//            text.setText(null);
-//            text.append("123456789hsdkashndkjasjdlkjasldkjaslkdjldskflkksdhfkjsdhlfknsldfkjlsdkjflksdjflkjsdlkfjlsdjflsdjlfkj");
-//        }
-//        if(e.getActionCommand() == tag2.getText()) {
-//            text.setText(null);
-//            text.append(action.getAnswer(tag2.getText()));
-//        }
-//        if(e.getActionCommand() == tag3.getText()) {
-//            text.setText(null);
-//            text.append(action.getAnswer(tag3.getText()));
-//        }
-//        if(e.getActionCommand() == tag4.getText()) {
-//            text.setText(null);
-//            text.append(action.getAnswer(tag4.getText()));
-//        }
-//        if(e.getActionCommand() == tag5.getText()) {
-//            text.setText(null);
-//            text.append(action.getAnswer(tag5.getText()));
-//        }
-//    }
-=======
     public void actionPerformed(ActionEvent e){
         Answer action = new Answer();
         if(e.getActionCommand() == tag1.getText()){
@@ -65,7 +40,6 @@ public class RenderUI extends JFrame {
             text.append(action.getSearch(tag5.getText()));
         }
     }
->>>>>>> b6f4222f84dfb6eb80cf4ba38ecbedf4fc013e7b
 
     private void createJFrame() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -43,9 +43,9 @@ public class Answer {
         Data datacophieu = new Data();
 
         ArrayList<DuLieuMaCoPhieu> cophieu = new ArrayList<DuLieuMaCoPhieu>();
-        DuLieuMaCoPhieu a = new DuLieuMaCoPhieu("FPT","001","cong ti FPT", new Date(), (float) 12.5,(float)13.5,10000,12500,13500);
+        DuLieuMaCoPhieu a = new DuLieuMaCoPhieu();
         cophieu.add(a);
-        DuLieuMaCoPhieu b = new DuLieuMaCoPhieu("FPb","001","cong ti FPT", new Date(), (float) 12.5,(float)13.5,10000,12500,13500);
+        DuLieuMaCoPhieu b = new DuLieuMaCoPhieu();
         cophieu.add(b);
         datacophieu.getDuLieuMaCoPhieu20Ngay().add(a);
         datacophieu.getDuLieuMaCoPhieu20Ngay().add(b);
