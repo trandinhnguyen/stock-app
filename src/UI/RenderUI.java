@@ -1,5 +1,7 @@
 package UI;
 
+import seach.Answer;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -15,6 +17,7 @@ public class RenderUI extends JFrame {
         createJFrame();
     }
 
+<<<<<<< HEAD
 //    public void actionPerformed(ActionEvent e){
 //        Action action = new Action();
 //        if(e.getActionCommand() == tag1.getText()){
@@ -38,6 +41,31 @@ public class RenderUI extends JFrame {
 //            text.append(action.getAnswer(tag5.getText()));
 //        }
 //    }
+=======
+    public void actionPerformed(ActionEvent e){
+        Answer action = new Answer();
+        if(e.getActionCommand() == tag1.getText()){
+            text.setText(null);
+            text.append(action.getSearch(tag1.getText()));
+        }
+        if(e.getActionCommand() == tag2.getText()) {
+            text.setText(null);
+            text.append(action.getSearch(tag2.getText()));
+        }
+        if(e.getActionCommand() == tag3.getText()) {
+            text.setText(null);
+            text.append(action.getSearch(tag3.getText()));
+        }
+        if(e.getActionCommand() == tag4.getText()) {
+            text.setText(null);
+            text.append(action.getSearch(tag4.getText()));
+        }
+        if(e.getActionCommand() == tag5.getText()) {
+            text.setText(null);
+            text.append(action.getSearch(tag5.getText()));
+        }
+    }
+>>>>>>> b6f4222f84dfb6eb80cf4ba38ecbedf4fc013e7b
 
     private void createJFrame() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -89,15 +117,14 @@ public class RenderUI extends JFrame {
         grb.gridx = 0;
         grb.gridy = 0;
         grb.ipady = 4;
-        JTextField textserch = new JTextField(40);
+        JTextField textsearch = new JTextField(40);
         search = new JButton("SEARCH");
 
         search.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//                Actiontag action = new ActionTag;
-                text.setText("asdasdasdasdasd");
-//                text.setText(action.getAnswer(textsearch.getText()));
+                Answer answer = new Answer();
+                text.setText(answer.getSearch(textsearch.getText()));
             }
         });
 
@@ -105,7 +132,7 @@ public class RenderUI extends JFrame {
         grb.gridx = 1;
         grb.ipadx = 100;
         grb.ipady = 10;
-        panel.add(textserch,grb);
+        panel.add(textsearch,grb);
         return panel;
     }
     private JPanel textPanel() {

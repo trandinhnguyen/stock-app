@@ -1,7 +1,11 @@
 package Data;
 
 import Model.DuLieuMaCoPhieu;
+
 import Model.LinkMaCoPhieu;
+
+import Model.DuLieuNhomNganh;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -104,5 +108,8 @@ public class Data {
     }
     public ArrayList<DuLieuMaCoPhieu> getDuLieuMaCoPhieu20Ngay() {
         return duLieuMaCoPhieu20Ngay;
+    }
+    public ArrayList<DuLieuNhomNganh> getDuLieuMaNhomnganh20Ngay(){
+        return null;
     }
 }
