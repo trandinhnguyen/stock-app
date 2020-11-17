@@ -1,6 +1,7 @@
 package Data;
 
 import Model.DuLieuMaCoPhieu;
+import Model.LinkMaCoPhieu;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -10,18 +11,23 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicInteger;
 
 // test JSoup
 public class Data {
 
     private ArrayList<DuLieuMaCoPhieu> duLieuMaCoPhieu20Ngay;
+    private ArrayList<LinkMaCoPhieu> linksGetData;
 
     public Data() {
-        this(new String[]{});
+        this(new LinkMaCoPhieu[]{});
     }
-    public Data(String[] linksMaCoPhieu){
+    public Data(LinkMaCoPhieu[] linksMaCoPhieu){
         this.duLieuMaCoPhieu20Ngay = new ArrayList<DuLieuMaCoPhieu>();
+        this.linksGetData = new ArrayList<LinkMaCoPhieu>();
+        for (LinkMaCoPhieu item: linksMaCoPhieu) {
+            this.linksGetData.add(item);
+        }
+
 
     }
     public void setMaCoPhieu(DuLieuMaCoPhieu maCoPhieu) {
@@ -36,73 +42,66 @@ public class Data {
         // date format
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 
-        Document doc = Jsoup.connect("https://s.cafef.vn/Lich-su-giao-dich-FPT-1.chn").get();
+        for (LinkMaCoPhieu link : this.linksGetData) {
+            Document doc = Jsoup.connect(link.getLink()).get();
 
-        Element div = doc.getElementById("ctl00_ContentPlaceHolder1_ctl03_divHO");
-        Element tbody = div.getElementsByTag("tbody").first();
+            Element div = doc.getElementById("ctl00_ContentPlaceHolder1_ctl03_divHO");
+            Element tbody = div.getElementsByTag("tbody").first();
 
-        DuLieuMaCoPhieu data = new DuLieuMaCoPhieu();
-        int count = 0;
-        for(Element e: tbody.children()) {
-            if (count < 2) {
-                ++count;
-                continue;
-            }
-            for (Element item : e.children()) {
-                for (int i = 0; i < 11; i++) {
-                    if (i == 1) {
-                        try {
-                            data.setNgay(df.parse(item.text()));
-                        } catch (ParseException parseException) {
-                            parseException.printStackTrace();
-                        }
-                    }
-                    if (i == 3) {
-                        try {
-                            data.setGiaDongCua(Float.parseFloat(item.text()));
-                        } catch (NumberFormatException numberFormatException) {
-                            numberFormatException.printStackTrace();
-                        }
-                    }
-                    float a = 0;
-                    if (i == 6) {
-                        try {
-                            a = Float.parseFloat(item.text());
-                        } catch (NumberFormatException numberFormatException) {
-                            numberFormatException.printStackTrace();
-                        }
-                    }
-                    float b = 0;
-                    if (i == 8) {
-                        try {
-                            b = Float.parseFloat(item.text());
-                        } catch (NumberFormatException numberFormatException) {
-                            numberFormatException.printStackTrace();
-                        }
-                    }
-                    data.setKhoiLuong(a + b);
-                    if (i == 10) {
-                        try {
-                            data.setGiaMoCua(Float.parseFloat(item.text()));
-                        } catch (NumberFormatException numberFormatException) {
-                            numberFormatException.printStackTrace();
-                        }
-                    }
-                    // TODO
-                    // Viet tiep cac du lieu khac vao
+            int count = 0;
+            for (Element e : tbody.children()) {
+                DuLieuMaCoPhieu data = new DuLieuMaCoPhieu();
+                data.setTen(link.getTen());
+                if (count < 2) {
+                    ++count;
+                    continue;
                 }
+                int index = 1;
+                for (Element item : e.children()) {
+                    switch (index) {
+                        case 1:
+                            try {
+                                data.setNgay(df.parse(item.text()));
+                            } catch (ParseException parseException) {
+                                parseException.printStackTrace();
+                            }
+                            index++;
+                            break;
+                        case 3:
+                            data.setGiaDongCua(item.text());
+                            index++;
+                            break;
+                        case 4:
+                            data.setTyLe(item.text());
+                            index++;
+                            break;
+                        case 6:
+                            data.setKhoiLuong(item.text().replace("&nbsp;", ""));
+                            index++;
+                            break;
+                        case 8:
+                            String text = item.text().replace("&nbsp;", "");
+                            float a = Float.parseFloat(data.getKhoiLuong().replace(",", ""));
+                            float b = Float.parseFloat(text.replace(",", ""));
+                            String result = String.valueOf(a + b);
+                            data.setKhoiLuong(result);
+                            index++;
+                            break;
+                        case 10:
+                            data.setGiaMoCua(item.text().replace("&nbsp;", ""));
+                            index++;
+                            break;
+                        default:
+                            index++;
+                            break;
+                    }
+                }
+                this.setMaCoPhieu(data);
             }
+
 
         }
-
-        this.setMaCoPhieu(data);
-        // test
-        System.out.println(data.getNgay());
-        System.out.println(data.getGiaDongCua());
-        System.out.println(data.getGiaMoCua());
-        System.out.println(data.getKhoiLuong());
     }
-
     public ArrayList<DuLieuMaCoPhieu> getDuLieuMaCoPhieu20Ngay() {
         return duLieuMaCoPhieu20Ngay;
     }

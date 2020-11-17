@@ -7,18 +7,19 @@ public class DuLieuMaCoPhieu {
     private String idNhomNganh;
     private String ten;
     private Date ngay;
-    private float diem;
-    private float tyLe;
-    private float khoiLuong;
-    private float giaMoCua;
-    private float giaDongCua;
-    private float RSI;
+    private String diem;
+    private String tyLe;
+    private String khoiLuong;
+    private String giaTri;
+    private String giaMoCua;
+    private String giaDongCua;
+    private String RSI;
 
     public DuLieuMaCoPhieu() {
-        this("","","", new Date(), 0,0,0,0,0);
+        this("","","", new Date(), "", "", "", "", "", "");
     }
 
-    public DuLieuMaCoPhieu(String id, String idNhomNganh, String ten, Date ngay, float diem, float tyLe, float khoiLuong, float giaMoCua, float giaDongCua) {
+    public DuLieuMaCoPhieu(String id, String idNhomNganh, String ten, Date ngay, String diem, String tyLe, String khoiLuong, String giaMoCua, String giaDongCua, String giaTri) {
         this.id = id;
         this.idNhomNganh = idNhomNganh;
         this.ten = ten;
@@ -28,6 +29,7 @@ public class DuLieuMaCoPhieu {
         this.tyLe = tyLe;
         this.giaMoCua = giaMoCua;
         this.giaDongCua = giaDongCua;
+        this.giaTri = giaTri;
     }
     public String getId() {
         return id;
@@ -61,54 +63,60 @@ public class DuLieuMaCoPhieu {
         this.ngay = ngay;
     }
 
-    public float getDiem() {
+    public String getDiem() {
         return diem;
     }
 
-    public void setDiem(float diem) {
+    public void setDiem(String diem) {
         this.diem = diem;
     }
 
-    public float getTyLe() {
+    public String getTyLe() {
         return tyLe;
     }
 
-    public void setTyLe(float tyLe) {
+    public void setTyLe(String tyLe) {
         this.tyLe = tyLe;
     }
 
-    public float getKhoiLuong() {
+    public String getKhoiLuong() {
         return khoiLuong;
     }
 
-    public void setKhoiLuong(float khoiLuong) {
+    public void setKhoiLuong(String khoiLuong) {
         this.khoiLuong = khoiLuong;
     }
 
-    public float getGiaMoCua() {
+    public String getGiaMoCua() {
         return giaMoCua;
     }
 
-    public void setGiaMoCua(float giaMoCua) {
+    public void setGiaMoCua(String giaMoCua) {
         this.giaMoCua = giaMoCua;
     }
 
-    public float getGiaDongCua() {
+    public String getGiaDongCua() {
         return giaDongCua;
     }
 
-    public void setGiaDongCua(float giaDongCua) {
+    public void setGiaDongCua(String giaDongCua) {
         this.giaDongCua = giaDongCua;
     }
 
-    public float getRSI() {
+    public String getRSI() {
         return RSI;
     }
 
-    public void setRSI(float RSI) {
+    public void setRSI(String RSI) {
         this.RSI = RSI;
     }
 
+    public void setGiaTri(String giaTri) {
+        this.giaTri = giaTri;
+    }
 
-    public float compare( DuLieuMaCoPhieu quaKhu) {return 1; };
+    public String getGiaTri() {return this.giaTri;}
+
+
+    public String compare( DuLieuMaCoPhieu quaKhu) {return ""; };
 }

@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class RenderUI extends JFrame implements ActionListener {
+public class RenderUI extends JFrame {
 
     private JPanel mainFrame;
     private JButton tag1, tag2, tag3, tag4, tag5, search;
@@ -15,29 +15,29 @@ public class RenderUI extends JFrame implements ActionListener {
         createJFrame();
     }
 
-    public void actionPerformed(ActionEvent e){
-        Action action = new Action();
-        if(e.getActionCommand() == tag1.getText()){
-            text.setText(null);
-            text.append("123456789hsdkashndkjasjdlkjasldkjaslkdjldskflkksdhfkjsdhlfknsldfkjlsdkjflksdjflkjsdlkfjlsdjflsdjlfkj");
-        }
-        if(e.getActionCommand() == tag2.getText()) {
-            text.setText(null);
-            text.append(action.getAnswer(tag2.getText()));
-        }
-        if(e.getActionCommand() == tag3.getText()) {
-            text.setText(null);
-            text.append(action.getAnswer(tag3.getText()));
-        }
-        if(e.getActionCommand() == tag4.getText()) {
-            text.setText(null);
-            text.append(action.getAnswer(tag4.getText()));
-        }
-        if(e.getActionCommand() == tag5.getText()) {
-            text.setText(null);
-            text.append(action.getAnswer(tag5.getText()));
-        }
-    }
+//    public void actionPerformed(ActionEvent e){
+//        Action action = new Action();
+//        if(e.getActionCommand() == tag1.getText()){
+//            text.setText(null);
+//            text.append("123456789hsdkashndkjasjdlkjasldkjaslkdjldskflkksdhfkjsdhlfknsldfkjlsdkjflksdjflkjsdlkfjlsdjflsdjlfkj");
+//        }
+//        if(e.getActionCommand() == tag2.getText()) {
+//            text.setText(null);
+//            text.append(action.getAnswer(tag2.getText()));
+//        }
+//        if(e.getActionCommand() == tag3.getText()) {
+//            text.setText(null);
+//            text.append(action.getAnswer(tag3.getText()));
+//        }
+//        if(e.getActionCommand() == tag4.getText()) {
+//            text.setText(null);
+//            text.append(action.getAnswer(tag4.getText()));
+//        }
+//        if(e.getActionCommand() == tag5.getText()) {
+//            text.setText(null);
+//            text.append(action.getAnswer(tag5.getText()));
+//        }
+//    }
 
     private void createJFrame() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -67,11 +67,11 @@ public class RenderUI extends JFrame implements ActionListener {
         tag4 = new JButton("tag1");
         tag5 = new JButton("tag1");
 
-        tag1.addActionListener(this);
-        tag2.addActionListener(this);
-        tag3.addActionListener(this);
-        tag4.addActionListener(this);
-        tag5.addActionListener(this);
+//        tag1.addActionListener(this);
+//        tag2.addActionListener(this);
+//        tag3.addActionListener(this);
+//        tag4.addActionListener(this);
+//        tag5.addActionListener(this);
 
 
         panel.add(tag1);
