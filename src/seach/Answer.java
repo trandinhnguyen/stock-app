@@ -41,6 +41,15 @@ public class Answer {
     public String getSearch(String keyword) {
         Search search = new Search();
         Data datacophieu = new Data();
+
+        ArrayList<DuLieuMaCoPhieu> cophieu = new ArrayList<DuLieuMaCoPhieu>();
+        DuLieuMaCoPhieu a = new DuLieuMaCoPhieu("FPT","001","cong ti FPT", new Date(), (float) 12.5,(float)13.5,10000,12500,13500);
+        cophieu.add(a);
+        DuLieuMaCoPhieu b = new DuLieuMaCoPhieu("FPb","001","cong ti FPT", new Date(), (float) 12.5,(float)13.5,10000,12500,13500);
+        cophieu.add(b);
+        datacophieu.getDuLieuMaCoPhieu20Ngay().add(a);
+        datacophieu.getDuLieuMaCoPhieu20Ngay().add(b);
+
         Answer answer = new Answer();
         search.search(keyword, datacophieu.getDuLieuMaCoPhieu20Ngay(), datacophieu.getDuLieuMaNhomnganh20Ngay());
         String tmp = "";
