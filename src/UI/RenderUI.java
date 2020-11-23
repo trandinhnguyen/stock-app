@@ -17,25 +17,25 @@ public class RenderUI extends JFrame {
         createJFrame();
     }
 
-    public void actionPerformed(ActionEvent e){
+    public void actionPerformed(ActionEvent e) {
         Answer action = new Answer();
-        if(e.getActionCommand() == tag1.getText()){
+        if (e.getActionCommand() == tag1.getText()) {
             text.setText(null);
             text.append(action.getSearch(tag1.getText()));
         }
-        if(e.getActionCommand() == tag2.getText()) {
+        if (e.getActionCommand() == tag2.getText()) {
             text.setText(null);
             text.append(action.getSearch(tag2.getText()));
         }
-        if(e.getActionCommand() == tag3.getText()) {
+        if (e.getActionCommand() == tag3.getText()) {
             text.setText(null);
             text.append(action.getSearch(tag3.getText()));
         }
-        if(e.getActionCommand() == tag4.getText()) {
+        if (e.getActionCommand() == tag4.getText()) {
             text.setText(null);
             text.append(action.getSearch(tag4.getText()));
         }
-        if(e.getActionCommand() == tag5.getText()) {
+        if (e.getActionCommand() == tag5.getText()) {
             text.setText(null);
             text.append(action.getSearch(tag5.getText()));
         }
@@ -43,15 +43,16 @@ public class RenderUI extends JFrame {
 
     private void createJFrame() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(900,600);
+
+        setSize(900, 600);
+        this.setLocationRelativeTo(null);
         mainFrame = createMainFrame();
-        add(mainFrame);
-        setLocationRelativeTo(null);
-        setVisible(true);
+        this.add(mainFrame);
     }
 
+
     private JPanel createMainFrame() {
-        JPanel panel = new JPanel(new BorderLayout(10,10));
+        JPanel panel = new JPanel(new BorderLayout(10, 10));
         panel.add(buttonPanel(), BorderLayout.WEST);
         panel.add(searchPanel(), BorderLayout.NORTH);
         panel.add(textPanel(), BorderLayout.CENTER);
@@ -59,7 +60,7 @@ public class RenderUI extends JFrame {
     }
 
     private JPanel buttonPanel() {
-        JPanel panel = new JPanel(new GridLayout(5,1,15,15));
+        JPanel panel = new JPanel(new GridLayout(5, 1, 15, 15));
         panel.setBorder(BorderFactory.createEmptyBorder(15, 30, 15, 30));
         panel.setBackground(Color.green);
 
@@ -84,6 +85,7 @@ public class RenderUI extends JFrame {
 
         return panel;
     }
+
     private JPanel searchPanel() {
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(15, 100, 15, 30));
@@ -106,19 +108,15 @@ public class RenderUI extends JFrame {
         grb.gridx = 1;
         grb.ipadx = 100;
         grb.ipady = 10;
-        panel.add(textsearch,grb);
+        panel.add(textsearch, grb);
         return panel;
     }
+
     private JPanel textPanel() {
         JPanel panel = new JPanel();
-        text = new JTextArea(40,70);
+        text = new JTextArea(40, 70);
         panel.add(text);
         return panel;
-    }
-
-
-    public static void main(String[] args) {
-        new RenderUI();
     }
 
 }

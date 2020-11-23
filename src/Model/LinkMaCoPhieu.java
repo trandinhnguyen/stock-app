@@ -2,30 +2,50 @@ package Model;
 
 public class LinkMaCoPhieu {
     private String ten;
-    private String link;
+    private String linkDataHistory;
+    private String linkDataCompany;
+    private String linkDataIndex;
 
     public LinkMaCoPhieu() {
-        this("", "");
+        this("", "", "", "");
     }
 
-    public LinkMaCoPhieu(String ten, String link) {
+    public LinkMaCoPhieu(String ten, String linkDataHistory, String linkDataCompany, String linkDataIndex) {
         this.ten = ten;
-        this.link = link;
+        this.linkDataHistory = linkDataHistory;
+        this.linkDataCompany = linkDataCompany;
+        this.linkDataIndex = linkDataIndex;
     }
 
     public String getTen() {
         return ten;
     }
 
-    public String getLink() {
-        return link;
-    }
-
     public void setTen(String ten) {
         this.ten = ten;
     }
 
-    public void setLink(String link) {
-        this.link = link;
+    public String getLinkDataHistory() {
+        return linkDataHistory;
+    }
+
+    public void setLinkDataHistory(String linkDataHistory) {
+        this.linkDataHistory = linkDataHistory;
+    }
+
+    public String getLinkDataCompany() {
+        return linkDataCompany;
+    }
+
+    public void setLinkDataCompany(String linkDataCompany) {
+        this.linkDataCompany = linkDataCompany;
+    }
+
+    public String getLinkDataIndex() {
+        return linkDataIndex;
+    }
+
+    public void setLinkDataIndex(String linkDataIndex) {
+        this.linkDataIndex = linkDataIndex;
     }
 }
