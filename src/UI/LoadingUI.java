@@ -7,14 +7,16 @@ public class LoadingUI extends JDialog {
 
     public LoadingUI(Frame parent) {
         super(parent);
-
+        this.init();
         this.setSize(200,100);
         this.setLocationRelativeTo(parent);
-        this.setUndecorated(true);
-        this.init();
+        // this.setUndecorated(true);
+
 
         this.pack();
-        this.setModal(true);
+        // this.setModal(true);
+        
+
 
 
     }

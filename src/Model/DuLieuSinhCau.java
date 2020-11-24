@@ -5,40 +5,99 @@ import java.util.Date;
 public class DuLieuSinhCau {
     private String id;
     private Date ngay;
-    private String cauSinhDuoc;
+    private String coCauDoanhNghiep;
+    private String sucKhoeTaiChinh;
+    private String no;
+    private String khaNangTangTruong;
+    private String khoiLuong;
+    private String thayDoiGia;
+    private String nhanDinhGia;
 
     public DuLieuSinhCau() {
-        this("", null, "");
+        this("", null, "", "", "", "", "", "", "");
     }
 
-
-    public DuLieuSinhCau(String id, Date ngay, String cauSinhDuoc) {
+    public DuLieuSinhCau(String id, Date ngay, String coCauDoanhNghiep, String sucKhoeTaiChinh, String no, String khaNangTangTruong, String khoiLuong, String thayDoiGia, String nhanDinhGia) {
         this.id = id;
         this.ngay = ngay;
-        this.cauSinhDuoc = cauSinhDuoc;
+        this.coCauDoanhNghiep = coCauDoanhNghiep;
+        this.sucKhoeTaiChinh = sucKhoeTaiChinh;
+        this.no = no;
+        this.khaNangTangTruong = khaNangTangTruong;
+        this.khoiLuong = khoiLuong;
+        this.thayDoiGia = thayDoiGia;
+        this.nhanDinhGia = nhanDinhGia;
     }
 
     public String getId() {
         return id;
     }
 
-    public Date getNgay() {
-        return ngay;
-    }
-
-    public String getCauSinhDuoc() {
-        return cauSinhDuoc;
-    }
-
     public void setId(String id) {
         this.id = id;
+    }
+
+    public Date getNgay() {
+        return ngay;
     }
 
     public void setNgay(Date ngay) {
         this.ngay = ngay;
     }
 
-    public void setCauSinhDuoc(String cauSinhDuoc) {
-        this.cauSinhDuoc = cauSinhDuoc;
+    public String getCoCauDoanhNghiep() {
+        return coCauDoanhNghiep;
+    }
+
+    public void setCoCauDoanhNghiep(String coCauDoanhNghiep) {
+        this.coCauDoanhNghiep = coCauDoanhNghiep;
+    }
+
+    public String getSucKhoeTaiChinh() {
+        return sucKhoeTaiChinh;
+    }
+
+    public void setSucKhoeTaiChinh(String sucKhoeTaiChinh) {
+        this.sucKhoeTaiChinh = sucKhoeTaiChinh;
+    }
+
+    public String getNo() {
+        return no;
+    }
+
+    public void setNo(String no) {
+        this.no = no;
+    }
+
+    public String getKhaNangTangTruong() {
+        return khaNangTangTruong;
+    }
+
+    public void setKhaNangTangTruong(String khaNangTangTruong) {
+        this.khaNangTangTruong = khaNangTangTruong;
+    }
+
+    public String getKhoiLuong() {
+        return khoiLuong;
+    }
+
+    public void setKhoiLuong(String khoiLuong) {
+        this.khoiLuong = khoiLuong;
+    }
+
+    public String getThayDoiGia() {
+        return thayDoiGia;
+    }
+
+    public void setThayDoiGia(String thayDoiGia) {
+        this.thayDoiGia = thayDoiGia;
+    }
+
+    public String getNhanDinhGia() {
+        return nhanDinhGia;
+    }
+
+    public void setNhanDinhGia(String nhanDinhGia) {
+        this.nhanDinhGia = nhanDinhGia;
     }
 }

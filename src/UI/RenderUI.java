@@ -1,20 +1,23 @@
 package UI;
 
+import Model.DuLieuSinhCau;
 import seach.Answer;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 public class RenderUI extends JFrame {
 
     private JPanel mainFrame;
     private JButton tag1, tag2, tag3, tag4, tag5, search;
     private JTextArea text;
-
+    private ArrayList<DuLieuSinhCau> duLieuSinhCauArrayList;
 
     public RenderUI() {
         createJFrame();
+
     }
 
     public void actionPerformed(ActionEvent e) {
