@@ -1,7 +1,6 @@
 package UI;
 
 import Model.DuLieuSinhCau;
-import seach.Answer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +13,7 @@ public class RenderUI extends JFrame {
 
     private JPanel mainFrame;
     private JButton tag1, tag2, tag3, tag4, tag5, search;
-    private JTextArea text;
+    private JTextArea text1,text2,text3,text4,text5,text6,text7;
     private ArrayList<DuLieuSinhCau> duLieuSinhCauArrayList;
     private String out1,out2,out3,out4,out5,out6,out7;
 
@@ -40,30 +39,30 @@ public class RenderUI extends JFrame {
 
     }
 
-    public void actionPerformed(ActionEvent e) {
-        Answer action = new Answer();
-        if (e.getActionCommand() == tag1.getText()) {
-            text.setText(null);
-            text.append(action.getSearch(tag1.getText()));
-        }
-        if (e.getActionCommand() == tag2.getText()) {
-            text.setText(null);
-            text.append(action.getSearch(tag2.getText()));
-        }
-        if (e.getActionCommand() == tag3.getText()) {
-            text.setText(null);
-            text.append(action.getSearch(tag3.getText()));
-        }
-        if (e.getActionCommand() == tag4.getText()) {
-            text.setText(null);
-            text.append(action.getSearch(tag4.getText()));
-        }
-        if (e.getActionCommand() == tag5.getText()) {
-            text.setText(null);
-            text.append(action.getSearch(tag5.getText()));
-        }
-
-    }
+//    public void actionPerformed(ActionEvent e) {
+//        Answer action = new Answer();
+//        if (e.getActionCommand() == tag1.getText()) {
+//            text.setText(null);
+//            text.append(action.getSearch(tag1.getText()));
+//        }
+//        if (e.getActionCommand() == tag2.getText()) {
+//            text.setText(null);
+//            text.append(action.getSearch(tag2.getText()));
+//        }
+//        if (e.getActionCommand() == tag3.getText()) {
+//            text.setText(null);
+//            text.append(action.getSearch(tag3.getText()));
+//        }
+//        if (e.getActionCommand() == tag4.getText()) {
+//            text.setText(null);
+//            text.append(action.getSearch(tag4.getText()));
+//        }
+//        if (e.getActionCommand() == tag5.getText()) {
+//            text.setText(null);
+//            text.append(action.getSearch(tag5.getText()));
+//        }
+//
+//    }
 
     private void createJFrame() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -133,7 +132,13 @@ public class RenderUI extends JFrame {
         search.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                text.setText(out1+ "\n\n" + out2 +"\n\n" + out3 +"\n\n" + out4 +"\n\n" + out5 +"\n\n" + out6 +"\n\n" + out7);
+                text1.setText(out1);
+                text2.setText(out2);
+                text3.setText(out2);
+                text4.setText(out4);
+                text5.setText(out5);
+                text6.setText(out6);
+                text7.setText(out7);
 
 //                Answer answer = new Answer();
 //                text.setText(answer.getSearch(textsearch.getText()));
@@ -149,9 +154,28 @@ public class RenderUI extends JFrame {
     }
 
     private JPanel textPanel() {
-        JPanel panel = new JPanel();
-        text = new JTextArea(40, 70);
-        panel.add(text);
+        JPanel panel = new JPanel(new GridLayout(7, 1, 15, 15));
+
+        text1 = new JTextArea(40, 70);
+        panel.add(text1);
+
+        text2 = new JTextArea(40, 70);
+        panel.add(text2);
+
+        text3 = new JTextArea(40, 70);
+        panel.add(text3);
+
+        text4 = new JTextArea(40, 70);
+        panel.add(text4);
+
+        text5 = new JTextArea(40, 70);
+        panel.add(text5);
+
+        text6 = new JTextArea(40, 70);
+        panel.add(text6);
+
+        text7 = new JTextArea(40, 70);
+        panel.add(text7);
         return panel;
     }
 
