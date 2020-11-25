@@ -15,10 +15,10 @@ class Main {
 
         UI.setVisible(true);
 
-        loading.setVisible(true);
-        data.getDataCompany();
-        data.getData20Ngay();
-        loading.setVisible(false);
+//        loading.setVisible(true);
+//        data.getDataCompany();
+//        data.getData20Ngay();
+//        loading.setVisible(false);
         System.out.println(data.getDuLieuMaCoPhieu20Ngay().size());
     }
 
