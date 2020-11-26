@@ -16,6 +16,7 @@ public class RenderUI extends JFrame {
     private JTextArea text1,text2,text3,text4,text5,text6,text7;
     private ArrayList<DuLieuSinhCau> duLieuSinhCauArrayList;
     private String out1,out2,out3,out4,out5,out6,out7;
+    private JScrollPane scroll;
 
     public RenderUI() {
         this.duLieuSinhCauArrayList = new ArrayList<DuLieuSinhCau>();
@@ -153,30 +154,36 @@ public class RenderUI extends JFrame {
         return panel;
     }
 
-    private JPanel textPanel() {
+    private JScrollPane textPanel() {
         JPanel panel = new JPanel(new GridLayout(7, 1, 15, 15));
 
-        text1 = new JTextArea(40, 70);
+        text1 = new JTextArea(10,20);
         panel.add(text1);
 
-        text2 = new JTextArea(40, 70);
+        text2 = new JTextArea();
         panel.add(text2);
 
-        text3 = new JTextArea(40, 70);
+        text3 = new JTextArea();
         panel.add(text3);
 
-        text4 = new JTextArea(40, 70);
+        text4 = new JTextArea();
         panel.add(text4);
 
-        text5 = new JTextArea(40, 70);
+        text5 = new JTextArea();
         panel.add(text5);
 
-        text6 = new JTextArea(40, 70);
+        text6 = new JTextArea();
         panel.add(text6);
 
-        text7 = new JTextArea(40, 70);
+        text7 = new JTextArea();
         panel.add(text7);
-        return panel;
+
+        scroll = new JScrollPane(panel);
+        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scroll.getViewport().add(panel);
+
+
+        return scroll;
     }
 
 }
