@@ -36,11 +36,11 @@ public class LinkData {
                         "https://s.cafef.vn/Lich-su-giao-dich-GEX-1.chn",
                         "https://s.cafef.vn/hose/GEX-tong-cong-ty-co-phan-thiet-bi-dien-viet-nam.chn",
                         "https://e.cafef.vn/fi.ashx?symbol=GEX"),
-                new LinkMaCoPhieu(
-                        "VNINDEX",
-                        "https://s.cafef.vn/Lich-su-giao-dich-VNINDEX-1.chn",
-                        "",
-                        ""
-                )
+//                new LinkMaCoPhieu(
+//                        "VNINDEX",
+//                        "https://s.cafef.vn/Lich-su-giao-dich-VNINDEX-1.chn",
+//                        "",
+//                        ""
+//                )
     };
 }

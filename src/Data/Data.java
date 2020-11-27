@@ -26,7 +26,7 @@ public class Data {
     private final String idVonChuSoHuu = "ctl00_ContentPlaceHolder1_CompanyInfo_FinanceStatement1_rptNhomChiTieu_ctl01_rptData_ctl04_TrData";
 
 
-    private ArrayList<DuLieuMaCoPhieu> duLieuMaCoPhieu20Ngay;
+    private ArrayList<ArrayList<DuLieuMaCoPhieu>> duLieuMaCoPhieu20Ngay;
     private ArrayList<LinkMaCoPhieu> linksGetData;
     private ArrayList<DuLieuCongTy> duLieuCongTyArrayList;
 
@@ -34,7 +34,7 @@ public class Data {
         this(new LinkMaCoPhieu[]{});
     }
     public Data(LinkMaCoPhieu[] linksMaCoPhieu){
-        this.duLieuMaCoPhieu20Ngay = new ArrayList<DuLieuMaCoPhieu>();
+        this.duLieuMaCoPhieu20Ngay = new ArrayList<ArrayList<DuLieuMaCoPhieu>>();
         this.duLieuCongTyArrayList = new ArrayList<DuLieuCongTy>();
         this.linksGetData = new ArrayList<LinkMaCoPhieu>();
         for (LinkMaCoPhieu item: linksMaCoPhieu) {
@@ -43,7 +43,7 @@ public class Data {
 
 
     }
-    public void setMaCoPhieu(DuLieuMaCoPhieu maCoPhieu) {
+    public void setMaCoPhieu(ArrayList<DuLieuMaCoPhieu> maCoPhieu) {
         this.duLieuMaCoPhieu20Ngay.add(maCoPhieu);
     }
 
@@ -112,8 +112,10 @@ public class Data {
             Element div = doc.getElementById("ctl00_ContentPlaceHolder1_ctl03_divHO");
             Element tbody = div.getElementsByTag("tbody").first();
 
+            ArrayList<DuLieuMaCoPhieu> dataArrayList = new ArrayList<DuLieuMaCoPhieu>();
             int count = 0;
             for (Element e : tbody.children()) {
+
                 DuLieuMaCoPhieu data = new DuLieuMaCoPhieu();
                 data.setTen(link.getTen());
                 if (count < 2) {
@@ -132,7 +134,7 @@ public class Data {
                             index++;
                             break;
                         case 3:
-                            data.setGiaDongCua(item.text());
+                            data.setGiaDongCua(Double.parseDouble(item.text().replace("&nbsp;", "")));
                             index++;
                             break;
                         case 4:
@@ -140,7 +142,7 @@ public class Data {
                             index++;
                             break;
                         case 6:
-                            data.setKhoiLuong(item.text().replace("&nbsp;", ""));
+                            data.setKhoiLuong(Double.parseDouble(item.text().replace("&nbsp;", "").replace(",", "")));
                             index++;
                             break;
                         case 7:
@@ -149,22 +151,22 @@ public class Data {
                             break;
                         case 9:
                             String text_GiaTri = item.text().replace("&nbsp;", "");
-                            float a_giaTri = Float.parseFloat(data.getKhoiLuong().replace(",", ""));
-                            float b_giaTrib = Float.parseFloat(text_GiaTri.replace(",", ""));
-                            String result_giaTri = String.valueOf(a_giaTri + b_giaTrib);
+                            double a_giaTri = Double.parseDouble(data.getGiaTri().replace(",", ""));
+                            double b_giaTri = Double.parseDouble(text_GiaTri.replace(",", ""));
+                            String result_giaTri = String.valueOf(a_giaTri + b_giaTri);
                             data.setGiaTri(result_giaTri);
                             index++;
                             break;
                         case 8:
                             String text = item.text().replace("&nbsp;", "");
-                            float a = Float.parseFloat(data.getKhoiLuong().replace(",", ""));
-                            float b = Float.parseFloat(text.replace(",", ""));
-                            String result = String.valueOf(a + b);
+                            double a = data.getKhoiLuong();
+                            double b = Double.parseDouble(text.replace(",", ""));
+                            double result = a + b;
                             data.setKhoiLuong(result);
                             index++;
                             break;
                         case 10:
-                            data.setGiaMoCua(item.text().replace("&nbsp;", ""));
+                            data.setGiaMoCua(Double.parseDouble(item.text().replace("&nbsp;", "")));
                             index++;
                             break;
                         default:
@@ -172,13 +174,19 @@ public class Data {
                             break;
                     }
                 }
-                this.setMaCoPhieu(data);
+                dataArrayList.add(data);
             }
+            this.setMaCoPhieu(dataArrayList);
 
 
         }
     }
-    public ArrayList<DuLieuMaCoPhieu> getDuLieuMaCoPhieu20Ngay() {
+
+    public ArrayList<DuLieuCongTy> getDuLieuCongTyArrayList() {
+        return duLieuCongTyArrayList;
+    }
+
+    public ArrayList<ArrayList<DuLieuMaCoPhieu>> getDuLieuMaCoPhieu20Ngay() {
         return duLieuMaCoPhieu20Ngay;
     }
     public ArrayList<DuLieuNhomNganh> getDuLieuMaNhomnganh20Ngay(){

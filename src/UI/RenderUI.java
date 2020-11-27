@@ -1,7 +1,7 @@
 package UI;
 
 import Model.DuLieuSinhCau;
-import seach.Answer;
+// import seach.Answer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,27 +21,27 @@ public class RenderUI extends JFrame {
     }
 
     public void actionPerformed(ActionEvent e) {
-        Answer action = new Answer();
-        if (e.getActionCommand() == tag1.getText()) {
-            text.setText(null);
-            text.append(action.getSearch(tag1.getText()));
-        }
-        if (e.getActionCommand() == tag2.getText()) {
-            text.setText(null);
-            text.append(action.getSearch(tag2.getText()));
-        }
-        if (e.getActionCommand() == tag3.getText()) {
-            text.setText(null);
-            text.append(action.getSearch(tag3.getText()));
-        }
-        if (e.getActionCommand() == tag4.getText()) {
-            text.setText(null);
-            text.append(action.getSearch(tag4.getText()));
-        }
-        if (e.getActionCommand() == tag5.getText()) {
-            text.setText(null);
-            text.append(action.getSearch(tag5.getText()));
-        }
+//        Answer action = new Answer();
+//        if (e.getActionCommand() == tag1.getText()) {
+//            text.setText(null);
+//            text.append(action.getSearch(tag1.getText()));
+//        }
+//        if (e.getActionCommand() == tag2.getText()) {
+//            text.setText(null);
+//            text.append(action.getSearch(tag2.getText()));
+//        }
+//        if (e.getActionCommand() == tag3.getText()) {
+//            text.setText(null);
+//            text.append(action.getSearch(tag3.getText()));
+//        }
+//        if (e.getActionCommand() == tag4.getText()) {
+//            text.setText(null);
+//            text.append(action.getSearch(tag4.getText()));
+//        }
+//        if (e.getActionCommand() == tag5.getText()) {
+//            text.setText(null);
+//            text.append(action.getSearch(tag5.getText()));
+//        }
     }
 
     private void createJFrame() {
@@ -99,13 +99,13 @@ public class RenderUI extends JFrame {
         JTextField textsearch = new JTextField(40);
         search = new JButton("SEARCH");
 
-        search.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Answer answer = new Answer();
-                text.setText(answer.getSearch(textsearch.getText()));
-            }
-        });
+//        search.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                Answer answer = new Answer();
+//                text.setText(answer.getSearch(textsearch.getText()));
+//            }
+//        });
 
         panel.add(search, grb);
         grb.gridx = 1;

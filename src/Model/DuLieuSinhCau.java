@@ -100,4 +100,5 @@ public class DuLieuSinhCau {
     public void setNhanDinhGia(String nhanDinhGia) {
         this.nhanDinhGia = nhanDinhGia;
     }
+
 }

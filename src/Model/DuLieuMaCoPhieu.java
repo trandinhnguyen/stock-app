@@ -9,17 +9,17 @@ public class DuLieuMaCoPhieu {
     private Date ngay;
     private String diem;
     private String tyLe;
-    private String khoiLuong;
+    private double khoiLuong;
     private String giaTri;
-    private String giaMoCua;
-    private String giaDongCua;
+    private double giaMoCua;
+    private double giaDongCua;
     private String RSI;
 
     public DuLieuMaCoPhieu() {
-        this("","","", new Date(), "", "", "", "", "", "");
+        this("","","", new Date(), "", "", 0.00, 0.00, 0.00, "");
     }
 
-    public DuLieuMaCoPhieu(String id, String idNhomNganh, String ten, Date ngay, String diem, String tyLe, String khoiLuong, String giaMoCua, String giaDongCua, String giaTri) {
+    public DuLieuMaCoPhieu(String id, String idNhomNganh, String ten, Date ngay, String diem, String tyLe, double khoiLuong, double giaMoCua, double giaDongCua, String giaTri) {
         this.id = id;
         this.idNhomNganh = idNhomNganh;
         this.ten = ten;
@@ -79,27 +79,27 @@ public class DuLieuMaCoPhieu {
         this.tyLe = tyLe;
     }
 
-    public String getKhoiLuong() {
+    public double getKhoiLuong() {
         return khoiLuong;
     }
 
-    public void setKhoiLuong(String khoiLuong) {
+    public void setKhoiLuong(double khoiLuong) {
         this.khoiLuong = khoiLuong;
     }
 
-    public String getGiaMoCua() {
+    public double getGiaMoCua() {
         return giaMoCua;
     }
 
-    public void setGiaMoCua(String giaMoCua) {
+    public void setGiaMoCua(double giaMoCua) {
         this.giaMoCua = giaMoCua;
     }
 
-    public String getGiaDongCua() {
+    public double getGiaDongCua() {
         return giaDongCua;
     }
 
-    public void setGiaDongCua(String giaDongCua) {
+    public void setGiaDongCua(double giaDongCua) {
         this.giaDongCua = giaDongCua;
     }
 
