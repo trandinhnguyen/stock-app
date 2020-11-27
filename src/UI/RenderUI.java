@@ -1,47 +1,43 @@
 package UI;
 
 import Model.DuLieuSinhCau;
-// import seach.Answer;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class RenderUI extends JFrame {
 
     private JPanel mainFrame;
     private JButton tag1, tag2, tag3, tag4, tag5, search;
-    private JTextArea text;
+    private JTextArea text1,text2,text3,text4,text5,text6,text7;
     private ArrayList<DuLieuSinhCau> duLieuSinhCauArrayList;
+    private String out1,out2,out3,out4,out5,out6,out7;
+    private JScrollPane scroll;
 
     public RenderUI() {
+        this.duLieuSinhCauArrayList = new ArrayList<DuLieuSinhCau>();
+        DuLieuSinhCau duLieu = new DuLieuSinhCau("FPT",new Date(), "1","2","3","b","a","v","k");
+        DuLieuSinhCau duLieu1 = new DuLieuSinhCau("VI",new Date(), "abc","xz","a","b","a","v","k");
+        DuLieuSinhCau duLieu2 = new DuLieuSinhCau("ABC",new Date(), "2","xqz","a","b","a","v","k");
+        DuLieuSinhCau duLieu3 = new DuLieuSinhCau("APP",new Date(), "3","xz","a","b","a","v","k");
+        DuLieuSinhCau duLieu4 = new DuLieuSinhCau("FQW",new Date(), "t","xqz","a","b","a","v","k");
+        DuLieuSinhCau duLieu5 = new DuLieuSinhCau("VNM",new Date(), "q","xwz","a","b","a","v","k");
+        DuLieuSinhCau duLieu6 = new DuLieuSinhCau("VIN",new Date(), "fc","xz","a","b","a","v","k");
+        DuLieuSinhCau duLieu7 = new DuLieuSinhCau("FP", new Date(), "abc","xz","a","b","a","v","k");
+        this.duLieuSinhCauArrayList.add(0,duLieu);
+        this.duLieuSinhCauArrayList.add(1,duLieu1);
+        this.duLieuSinhCauArrayList.add(2,duLieu2);
+        this.duLieuSinhCauArrayList.add(3,duLieu3);
+        this.duLieuSinhCauArrayList.add(4,duLieu4);
+        this.duLieuSinhCauArrayList.add(5,duLieu5);
+        this.duLieuSinhCauArrayList.add(6,duLieu6);
+        this.duLieuSinhCauArrayList.add(7,duLieu7);
         createJFrame();
 
-    }
-
-    public void actionPerformed(ActionEvent e) {
-//        Answer action = new Answer();
-//        if (e.getActionCommand() == tag1.getText()) {
-//            text.setText(null);
-//            text.append(action.getSearch(tag1.getText()));
-//        }
-//        if (e.getActionCommand() == tag2.getText()) {
-//            text.setText(null);
-//            text.append(action.getSearch(tag2.getText()));
-//        }
-//        if (e.getActionCommand() == tag3.getText()) {
-//            text.setText(null);
-//            text.append(action.getSearch(tag3.getText()));
-//        }
-//        if (e.getActionCommand() == tag4.getText()) {
-//            text.setText(null);
-//            text.append(action.getSearch(tag4.getText()));
-//        }
-//        if (e.getActionCommand() == tag5.getText()) {
-//            text.setText(null);
-//            text.append(action.getSearch(tag5.getText()));
-//        }
     }
 
     private void createJFrame() {
@@ -97,15 +93,18 @@ public class RenderUI extends JFrame {
         grb.gridy = 0;
         grb.ipady = 4;
         JTextField textsearch = new JTextField(40);
+        String data = textsearch.getText();
+
+        out1 = this.duLieuSinhCauArrayList.get(1).getId() + this.duLieuSinhCauArrayList.get(1).getNgay() +this.duLieuSinhCauArrayList.get(1).getCoCauDoanhNghiep() +this.duLieuSinhCauArrayList.get(1).getKhaNangTangTruong()+this.duLieuSinhCauArrayList.get(1).getKhoiLuong()+this.duLieuSinhCauArrayList.get(1).getNhanDinhGia()+this.duLieuSinhCauArrayList.get(1).getId()+this.duLieuSinhCauArrayList.get(1).getId()+this.duLieuSinhCauArrayList.get(1).getId();
+        out2 = this.duLieuSinhCauArrayList.get(2).getId() + this.duLieuSinhCauArrayList.get(2).getNgay() +this.duLieuSinhCauArrayList.get(2).getCoCauDoanhNghiep() +this.duLieuSinhCauArrayList.get(2).getKhaNangTangTruong()+this.duLieuSinhCauArrayList.get(2).getKhoiLuong()+this.duLieuSinhCauArrayList.get(2).getNhanDinhGia()+this.duLieuSinhCauArrayList.get(2).getId()+this.duLieuSinhCauArrayList.get(1).getId()+this.duLieuSinhCauArrayList.get(2).getId();
+        out3 = this.duLieuSinhCauArrayList.get(3).getId() + this.duLieuSinhCauArrayList.get(3).getNgay() +this.duLieuSinhCauArrayList.get(3).getCoCauDoanhNghiep() +this.duLieuSinhCauArrayList.get(2).getKhaNangTangTruong()+this.duLieuSinhCauArrayList.get(2).getKhoiLuong()+this.duLieuSinhCauArrayList.get(2).getNhanDinhGia()+this.duLieuSinhCauArrayList.get(2).getId()+this.duLieuSinhCauArrayList.get(1).getId()+this.duLieuSinhCauArrayList.get(2).getId();
+        out4 = this.duLieuSinhCauArrayList.get(4).getId() + this.duLieuSinhCauArrayList.get(4).getNgay() +this.duLieuSinhCauArrayList.get(4).getCoCauDoanhNghiep() +this.duLieuSinhCauArrayList.get(2).getKhaNangTangTruong()+this.duLieuSinhCauArrayList.get(2).getKhoiLuong()+this.duLieuSinhCauArrayList.get(2).getNhanDinhGia()+this.duLieuSinhCauArrayList.get(2).getId()+this.duLieuSinhCauArrayList.get(1).getId()+this.duLieuSinhCauArrayList.get(2).getId();
+        out5 = this.duLieuSinhCauArrayList.get(5).getId() + this.duLieuSinhCauArrayList.get(5).getNgay() +this.duLieuSinhCauArrayList.get(5).getCoCauDoanhNghiep() +this.duLieuSinhCauArrayList.get(2).getKhaNangTangTruong()+this.duLieuSinhCauArrayList.get(2).getKhoiLuong()+this.duLieuSinhCauArrayList.get(2).getNhanDinhGia()+this.duLieuSinhCauArrayList.get(2).getId()+this.duLieuSinhCauArrayList.get(1).getId()+this.duLieuSinhCauArrayList.get(2).getId();
+        out6 = this.duLieuSinhCauArrayList.get(6).getId() + this.duLieuSinhCauArrayList.get(6).getNgay() +this.duLieuSinhCauArrayList.get(6).getCoCauDoanhNghiep() +this.duLieuSinhCauArrayList.get(2).getKhaNangTangTruong()+this.duLieuSinhCauArrayList.get(2).getKhoiLuong()+this.duLieuSinhCauArrayList.get(2).getNhanDinhGia()+this.duLieuSinhCauArrayList.get(2).getId()+this.duLieuSinhCauArrayList.get(1).getId()+this.duLieuSinhCauArrayList.get(2).getId();
+        out7 = this.duLieuSinhCauArrayList.get(7).getId() + this.duLieuSinhCauArrayList.get(7).getNgay() +this.duLieuSinhCauArrayList.get(7).getCoCauDoanhNghiep() +this.duLieuSinhCauArrayList.get(2).getKhaNangTangTruong()+this.duLieuSinhCauArrayList.get(2).getKhoiLuong()+this.duLieuSinhCauArrayList.get(2).getNhanDinhGia()+this.duLieuSinhCauArrayList.get(2).getId()+this.duLieuSinhCauArrayList.get(1).getId()+this.duLieuSinhCauArrayList.get(2).getId();
+
         search = new JButton("SEARCH");
 
-//        search.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                Answer answer = new Answer();
-//                text.setText(answer.getSearch(textsearch.getText()));
-//            }
-//        });
 
         panel.add(search, grb);
         grb.gridx = 1;
@@ -115,11 +114,36 @@ public class RenderUI extends JFrame {
         return panel;
     }
 
-    private JPanel textPanel() {
-        JPanel panel = new JPanel();
-        text = new JTextArea(40, 70);
-        panel.add(text);
-        return panel;
+    private JScrollPane textPanel() {
+        JPanel panel = new JPanel(new GridLayout(7, 1, 15, 15));
+
+        text1 = new JTextArea(10,20);
+        panel.add(text1);
+
+        text2 = new JTextArea();
+        panel.add(text2);
+
+        text3 = new JTextArea();
+        panel.add(text3);
+
+        text4 = new JTextArea();
+        panel.add(text4);
+
+        text5 = new JTextArea();
+        panel.add(text5);
+
+        text6 = new JTextArea();
+        panel.add(text6);
+
+        text7 = new JTextArea();
+        panel.add(text7);
+
+        scroll = new JScrollPane(panel);
+        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scroll.getViewport().add(panel);
+
+
+        return scroll;
     }
 
 }

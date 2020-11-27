@@ -23,6 +23,7 @@ class Main {
 
         System.out.println(sinhCau.getDuLieuSinhCau().getThayDoiGia());
         System.out.println(123);
+
     }
 
 }
