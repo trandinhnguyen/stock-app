@@ -80,10 +80,10 @@ public class SinhCau {
     private void coCauDoanhNghiep() {
         for(ArrayList<DuLieuCongTy> item: duLieuCongTyArrayList) {
             DuLieuCongTy duLieuNamGanNhat = item.get(0);
-            double R = 0.00;
             double ratio = 0.00;
-
-
+            double EPS1 = Double.parseDouble(item.get(0).getEPS());
+            double EPS2 = Double.parseDouble(item.get(1).getEPS());
+            double R = EPS1/EPS2;
         }
     }
 

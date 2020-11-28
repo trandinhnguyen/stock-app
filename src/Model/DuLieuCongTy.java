@@ -73,7 +73,7 @@ public class DuLieuCongTy extends ArrayList<DuLieuCongTy> {
         this.vonChuSoHuu.add(vonChuSoHuu);
     }
 
+    public String getEPS(int i) { return ""; }
+    }
 
-
-}
 

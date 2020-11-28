@@ -15,7 +15,7 @@ class Main {
         LinkMaCoPhieu[] links = LinkData.linkMaCoPhieus;
         Data data = new Data(links);
 
-        UI.setVisible(true);
+        //UI.setVisible(true);
 
 
 
