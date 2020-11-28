@@ -12,8 +12,10 @@ import java.util.Date;
 public class RenderUI extends JFrame {
 
     private JPanel mainFrame;
-    private JButton tag1, tag2, tag3, tag4, tag5, search;
+    private JButton tag1, tag2, tag3, search;
     private ArrayList<DuLieuSinhCau> duLieuSinhCauArrayList;
+
+
 
     public RenderUI() {
         this.createJFrame();
@@ -81,8 +83,11 @@ public class RenderUI extends JFrame {
     private JScrollPane textPanel() {
         JPanel panel = new JPanel(new GridLayout(7, 1, 15, 15));
 
-//         JTextArea nhanDinh_1= new JTextArea(10,20);
-//        panel.add(text1);
+        if(this.duLieuSinhCauArrayList != null)
+            for(DuLieuSinhCau item: this.duLieuSinhCauArrayList) {
+                JTextArea nhanDinh= new JTextArea(10,20);
+                panel.add(nhanDinh);
+            }
 
 
         JScrollPane scroll = new JScrollPane(panel);
@@ -91,6 +96,10 @@ public class RenderUI extends JFrame {
 
 
         return scroll;
+    }
+
+    public void setDuLieuSinhCauArrayList(ArrayList<DuLieuSinhCau> duLieuSinhCauArrayList) {
+        this.duLieuSinhCauArrayList = duLieuSinhCauArrayList;
     }
 
 }
