@@ -4,10 +4,9 @@ import Model.DuLieuSinhCau;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.util.ArrayList;
-import java.util.Date;
+
 
 public class RenderUI extends JFrame {
 
@@ -25,6 +24,7 @@ public class RenderUI extends JFrame {
 
         setSize(900, 600);
         this.setLocationRelativeTo(null);
+        this.setTitle("Nhận đinh chứng khoán");
         JPanel mainFrame = this.createMainFrame();
         this.add(mainFrame);
     }
@@ -41,7 +41,7 @@ public class RenderUI extends JFrame {
     private JPanel buttonPanel() {
         JPanel panel = new JPanel(new GridLayout(5, 1, 15, 15));
         panel.setBorder(BorderFactory.createEmptyBorder(15, 30, 15, 30));
-        panel.setBackground(Color.green);
+        panel.setBackground(Color.LIGHT_GRAY);
 
         JButton tag1 = new JButton("Nhận đinh cổ phiếu");
         JButton tag2 = new JButton("Nhận đinh doanh nghiệp");
@@ -84,11 +84,17 @@ public class RenderUI extends JFrame {
         if(this.duLieuSinhCauArrayList != null)
             for(DuLieuSinhCau item: this.duLieuSinhCauArrayList) {
                 JTextArea nhanDinh= new JTextArea(10,20);
+                nhanDinh.setLineWrap(true);
+                nhanDinh.setWrapStyleWord(true);
+                nhanDinh.setFont(new Font("monospaced", Font.PLAIN, 14));
+                nhanDinh.setEnabled(false);
+                nhanDinh.setBackground(Color.GRAY);
 
                 nhanDinh.append("- Nhận định mã cổ phiếu " + item.getId() +":");
                 nhanDinh.append("\n");
-                nhanDinh.append(item.getThayDoiGia());
+                nhanDinh.append("- Thay đổi giá: " + item.getThayDoiGia());
                 panel.add(nhanDinh);
+
             }
 
 
