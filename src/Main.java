@@ -14,14 +14,15 @@ class Main {
         LinkMaCoPhieu[] links = LinkData.linkMaCoPhieus;
         Data data = new Data(links);
 
-        // UI.setVisible(true);
+        UI.setVisible(true);
+
 
         data.getDataCompany();
         data.getData20Ngay();
 
         SinhCau sinhCau = new SinhCau(data.getDuLieuCongTyArrayList(), data.getDuLieuMaCoPhieu20Ngay());
 
-        System.out.println(sinhCau.getDuLieuSinhCau().getThayDoiGia());
+        System.out.println();
         System.out.println(123);
 
     }

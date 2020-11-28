@@ -101,4 +101,13 @@ public class DuLieuSinhCau {
         this.nhanDinhGia = nhanDinhGia;
     }
 
+    @Override
+    public String toString() {
+        return this.getId() + "+" + this.getCoCauDoanhNghiep() +"+"
+                + this.getThayDoiGia() + "+" + this.getNgay() + "+"
+                + this.getKhaNangTangTruong() + "+" + this.getNhanDinhGia() + "+"
+                + this.getNo() + "+" + this.getSucKhoeTaiChinh() + "+ "
+                + this.getKhoiLuong();
+    }
+
 }
