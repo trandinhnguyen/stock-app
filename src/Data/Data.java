@@ -13,9 +13,12 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 // test JSoup
@@ -104,7 +107,7 @@ public class Data {
 
     public void getData20Ngay() throws IOException, NumberFormatException {
         // date format
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        DateTimeFormatter df =  DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         for (LinkMaCoPhieu link : this.linksGetData) {
             Document doc = Jsoup.connect(link.getLinkDataHistory()).userAgent("Mozilla/5.0").timeout(100 * 1000).get();
@@ -126,11 +129,9 @@ public class Data {
                 for (Element item : e.children()) {
                     switch (index) {
                         case 1:
-                            try {
-                                data.setNgay(df.parse(item.text()));
-                            } catch (ParseException parseException) {
-                                parseException.printStackTrace();
-                            }
+
+                            data.setNgay(LocalDate.parse(item.text(), df));
+
                             index++;
                             break;
                         case 3:

@@ -11,10 +11,8 @@ import java.util.Date;
 
 public class RenderUI extends JFrame {
 
-    private JPanel mainFrame;
-    private JButton tag1, tag2, tag3, search;
     private ArrayList<DuLieuSinhCau> duLieuSinhCauArrayList;
-
+    private JPanel panel;
 
 
     public RenderUI() {
@@ -27,16 +25,16 @@ public class RenderUI extends JFrame {
 
         setSize(900, 600);
         this.setLocationRelativeTo(null);
-        mainFrame = createMainFrame();
+        JPanel mainFrame = this.createMainFrame();
         this.add(mainFrame);
     }
 
 
     private JPanel createMainFrame() {
-        JPanel panel = new JPanel(new BorderLayout(10, 10));
-        panel.add(buttonPanel(), BorderLayout.WEST);
-        panel.add(searchPanel(), BorderLayout.NORTH);
-        panel.add(textPanel(), BorderLayout.CENTER);
+        this.panel = new JPanel(new BorderLayout(10, 10));
+        panel.add(this.buttonPanel(), BorderLayout.WEST);
+        panel.add(this.searchPanel(), BorderLayout.NORTH);
+        panel.add(this.textPanel(), BorderLayout.CENTER);
         return panel;
     }
 
@@ -45,9 +43,9 @@ public class RenderUI extends JFrame {
         panel.setBorder(BorderFactory.createEmptyBorder(15, 30, 15, 30));
         panel.setBackground(Color.green);
 
-        tag1 = new JButton("Nhận đinh cổ phiếu");
-        tag2 = new JButton("Nhận đinh doanh nghiệp");
-        tag3 = new JButton("Tổng hợp");
+        JButton tag1 = new JButton("Nhận đinh cổ phiếu");
+        JButton tag2 = new JButton("Nhận đinh doanh nghiệp");
+        JButton tag3 = new JButton("Tổng hợp");
 
 
         panel.add(tag1);
@@ -69,7 +67,7 @@ public class RenderUI extends JFrame {
         String data = textsearch.getText();
 
 
-        search = new JButton("SEARCH");
+        JButton search = new JButton("SEARCH");
 
 
         panel.add(search, grb);
@@ -86,8 +84,13 @@ public class RenderUI extends JFrame {
         if(this.duLieuSinhCauArrayList != null)
             for(DuLieuSinhCau item: this.duLieuSinhCauArrayList) {
                 JTextArea nhanDinh= new JTextArea(10,20);
+
+                nhanDinh.append("- Nhận định mã cổ phiếu " + item.getId() +":");
+                nhanDinh.append("\n");
+                nhanDinh.append(item.getThayDoiGia());
                 panel.add(nhanDinh);
             }
+
 
 
         JScrollPane scroll = new JScrollPane(panel);
@@ -100,6 +103,9 @@ public class RenderUI extends JFrame {
 
     public void setDuLieuSinhCauArrayList(ArrayList<DuLieuSinhCau> duLieuSinhCauArrayList) {
         this.duLieuSinhCauArrayList = duLieuSinhCauArrayList;
+        this.panel.add(this.textPanel());
+        System.out.println(duLieuSinhCauArrayList.size());
+
     }
 
 }
