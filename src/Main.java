@@ -1,5 +1,6 @@
 import Constants.LinkData;
 import Data.Data;
+import Model.DuLieuCongTy;
 import Model.LinkMaCoPhieu;
 import SinhCau.SinhCau;
 import UI.LoadingUI;
@@ -14,7 +15,7 @@ class Main {
         LinkMaCoPhieu[] links = LinkData.linkMaCoPhieus;
         Data data = new Data(links);
 
-        // UI.setVisible(true);
+        //UI.setVisible(true);
 
         data.getDataCompany();
         data.getData20Ngay();
@@ -22,8 +23,6 @@ class Main {
         SinhCau sinhCau = new SinhCau(data.getDuLieuCongTyArrayList(), data.getDuLieuMaCoPhieu20Ngay());
 
         System.out.println(sinhCau.getDuLieuSinhCau().getThayDoiGia());
-        System.out.println(123);
-
     }
 
 }

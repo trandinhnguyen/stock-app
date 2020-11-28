@@ -185,7 +185,6 @@ public class Data {
     public ArrayList<DuLieuCongTy> getDuLieuCongTyArrayList() {
         return duLieuCongTyArrayList;
     }
-
     public ArrayList<ArrayList<DuLieuMaCoPhieu>> getDuLieuMaCoPhieu20Ngay() {
         return duLieuMaCoPhieu20Ngay;
     }

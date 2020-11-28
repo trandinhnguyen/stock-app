@@ -2,7 +2,7 @@ package Model;
 
 import java.util.ArrayList;
 
-public class DuLieuCongTy {
+public class DuLieuCongTy extends ArrayList<DuLieuCongTy> {
     private String ten;
     private ArrayList<String> EPS;
     private ArrayList<String> ROE;
@@ -29,17 +29,13 @@ public class DuLieuCongTy {
         this.ten = ten;
     }
 
-    public ArrayList<String> getEPS() {
-        return EPS;
-    }
+    public ArrayList<String> getEPS() { return EPS; }
 
     public void setEPS(String EPS) {
         this.EPS.add(EPS);
     }
 
-    public ArrayList<String> getROE() {
-        return ROE;
-    }
+    public ArrayList<String> getROE() { return ROE; }
 
     public void setROE(String ROE) {
         this.ROE.add(ROE);
@@ -76,4 +72,8 @@ public class DuLieuCongTy {
     public void setVoiChuSoHuu(String vonChuSoHuu) {
         this.vonChuSoHuu.add(vonChuSoHuu);
     }
+
+
+
 }
+
