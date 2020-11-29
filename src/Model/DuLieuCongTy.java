@@ -2,7 +2,7 @@ package Model;
 
 import java.util.ArrayList;
 
-public class DuLieuCongTy extends ArrayList<DuLieuCongTy> {
+public class DuLieuCongTy {
     private String ten;
     private ArrayList<String> EPS;
     private ArrayList<String> ROE;

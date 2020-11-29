@@ -81,12 +81,52 @@ public class SinhCau {
     }
 
     private void coCauDoanhNghiep() {
-        for(ArrayList<DuLieuCongTy> item: duLieuCongTyArrayList) {
-            DuLieuCongTy duLieuNamGanNhat = item.get(0);
+        for(DuLieuCongTy item: duLieuCongTyArrayList) {
             double ratio = 0.00;
-            double EPS1 = Double.parseDouble(item.get(0).getEPS());
-            double EPS2 = Double.parseDouble(item.get(1).getEPS());
-            double R = EPS1/EPS2;
+            double R = 0.00;
+            double EPS0 = Double.parseDouble(item.getEPS().get(0));
+            double EPS1 = Double.parseDouble(item.getEPS().get(1));
+            double DAR0 = Double.parseDouble(item.getDAR().get(0));
+            double ROE0 = Double.parseDouble(item.getROE().get(0));
+            ratio = EPS0/EPS1;
+            DuLieuSinhCau duLieuSinhCau = new DuLieuSinhCau();
+            if (ROE0 > 25) {
+                String coCauDoanhNghiep1 = "Công ty đang có tình hình tài chính cực tốt với mức sinh lời trên tài sản (ROE) đạt top đầu " +
+                        "các công ty trên thị trường: " + ROE0 + "%/năm.";
+                duLieuSinhCau.setCoCauDoanhNghiep(coCauDoanhNghiep1);
+            }
+            if (ROE0 > 10 && ROE0 < 25) {
+                String coCauDoanhNghiep1 = "Công ty có tình hình tài chính ổn với mức sinh lời trên tài sản (ROE) đạt mức " + ROE0 +
+                        "%/ năm.";
+                duLieuSinhCau.setCoCauDoanhNghiep(coCauDoanhNghiep1);
+            }
+            if (ROE0 < 10) {
+                String coCauDoanhNghiep1 = "Công ty đang gặp vấn đề về tài chính cũng như hoạt động kinh doanh của công ty đang vận hành " +
+                        "có vấn đề khi mà khả năng sinh lời trên tài sản của công ty đang ở mức đáng báo động, chỉ " + ROE0 +
+                        "%/ năm.";
+                duLieuSinhCau.setCoCauDoanhNghiep(coCauDoanhNghiep1);
+            }
+            if (DAR0 > 70){
+                String coCauDoanhNghiep2 = "Công ty có một cấu trúc nợ khá lớn lên đến " + DAR0 + "% tài sản công ty. Điều này cản trở" +
+                        "công ty phát triển do phải gánh trên vai một khoản nợ khổng lồ.";
+                duLieuSinhCau.setCoCauDoanhNghiep(coCauDoanhNghiep2);
+            }
+            if (DAR0 < 70 && DAR0 >30) {
+                String coCauDoanhNghiep2 = "Công ty đang cân bằng được giữa tài sản và các khoản vay khi tỷ lệ nợ chỉ có " + DAR0 +
+                        "% tài sản của công ty. Cơ cấu tài sản cho thấy công ty đang có tham vọng phát triển trong tương lai, do đó trong " +
+                        "cấu trúc tài chính của công ty mới tồn tại một món nợ để công ty tái đầu tư và mở rộng thị phần. Đây là một " +
+                        "công ty thích hợp với những nhà đầu tư có tính cách mạo hiểm.";
+                duLieuSinhCau.setCoCauDoanhNghiep(coCauDoanhNghiep2);
+            }
+            if (DAR0 < 30) {
+                String coCauDoanhNghiep2 = "Đây là công ty có sức khoẻ về tài chính khá tốt khi có tỷ lệ nợ vô cùng thấp: " + DAR0 +
+                        "% tài sản công ty. Tuy nhiên cơ cấu tài sản hiện tại của công ty cho thấy công ty không có tham vọng phát triển" +
+                        " hoặc khó có tiềm năng mở rộng phát triển. Đây là một công ty phù hợp với những nhà đầu tư ưa cảm giác an toàn" +
+                        " và muốn được chia cổ phiếu thường xuyên.";
+                duLieuSinhCau.setCoCauDoanhNghiep(coCauDoanhNghiep2);
+            }
+            if
+            this.duLieuSinhCauArrayList.add(duLieuSinhCau);
         }
     }
 
