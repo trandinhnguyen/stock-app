@@ -58,7 +58,7 @@ public class SinhCau {
                 duLieuSinhCau.setThayDoiGia(thayDoiGia);
             }
             if(item.get(0).getGiaDongCua() >= item.get(1).getGiaDongCua()){
-                String thayDoiGia = "Ngày "+ duLieuNgayGanNhat.getNgay().toString() + " cổ phiếu " + duLieuNgayGanNhat.getTen() + " giao"
+                String thayDoiGia = "Ngày "+ duLieuNgayGanNhat.getNgay().format(dateFormat) + " cổ phiếu " + duLieuNgayGanNhat.getTen() + " giao"
                         + " dịch với khối lượng là " + duLieuNgayGanNhat.getKhoiLuong() + " cổ phiếu; trong khi giá cổ phiếu đã tăng "
                         + duLieuNgayGanNhat.getTyLe().replace("-", "");
                 if(item.get(0).getKhoiLuong() > MA20Khoiluong) {
@@ -125,7 +125,7 @@ public class SinhCau {
                         " và muốn được chia cổ phiếu thường xuyên.";
                 duLieuSinhCau.setCoCauDoanhNghiep(coCauDoanhNghiep2);
             }
-            if
+
             this.duLieuSinhCauArrayList.add(duLieuSinhCau);
         }
     }
