@@ -1,12 +1,12 @@
 package Model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class DuLieuMaCoPhieu {
     private String id;
     private String idNhomNganh;
     private String ten;
-    private Date ngay;
+    private LocalDate ngay;
     private String diem;
     private String tyLe;
     private double khoiLuong;
@@ -16,10 +16,10 @@ public class DuLieuMaCoPhieu {
     private String RSI;
 
     public DuLieuMaCoPhieu() {
-        this("","","", new Date(), "", "", 0.00, 0.00, 0.00, "");
+        this("","","", null, "", "", 0.00, 0.00, 0.00, "");
     }
 
-    public DuLieuMaCoPhieu(String id, String idNhomNganh, String ten, Date ngay, String diem, String tyLe, double khoiLuong, double giaMoCua, double giaDongCua, String giaTri) {
+    public DuLieuMaCoPhieu(String id, String idNhomNganh, String ten, LocalDate ngay, String diem, String tyLe, double khoiLuong, double giaMoCua, double giaDongCua, String giaTri) {
         this.id = id;
         this.idNhomNganh = idNhomNganh;
         this.ten = ten;
@@ -55,11 +55,11 @@ public class DuLieuMaCoPhieu {
         this.ten = ten;
     }
 
-    public Date getNgay() {
+    public LocalDate getNgay() {
         return ngay;
     }
 
-    public void setNgay(Date ngay) {
+    public void setNgay(LocalDate ngay) {
         this.ngay = ngay;
     }
 

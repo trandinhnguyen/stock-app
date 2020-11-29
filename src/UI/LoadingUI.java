@@ -5,18 +5,16 @@ import java.awt.*;
 
 public class LoadingUI extends JDialog {
 
-    public LoadingUI(Frame parent) {
-        super(parent);
+    public LoadingUI() {
         this.init();
         this.setSize(200,100);
-        this.setLocationRelativeTo(parent);
+        this.setLocationRelativeTo(null);
         // this.setUndecorated(true);
 
 
         this.pack();
         // this.setModal(true);
         
-
 
 
     }

@@ -4,19 +4,21 @@ import Model.DuLieuCongTy;
 import Model.DuLieuMaCoPhieu;
 import Model.DuLieuSinhCau;
 
+
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class SinhCau {
     private ArrayList<DuLieuSinhCau> duLieuSinhCauArrayList;
     private  ArrayList<DuLieuCongTy> duLieuCongTyArrayList;
     private ArrayList<ArrayList<DuLieuMaCoPhieu>> duLieuMaCoPhieuArrayList;
-    private  DuLieuSinhCau duLieuSinhCau;
+    private static final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
 
     public SinhCau(ArrayList<DuLieuCongTy> duLieuCongTyArrayList, ArrayList<ArrayList<DuLieuMaCoPhieu>> duLieuMaCoPhieuArrayList) {
         this.duLieuCongTyArrayList = duLieuCongTyArrayList;
         this.duLieuMaCoPhieuArrayList = duLieuMaCoPhieuArrayList;
 
-        this.duLieuSinhCau = new DuLieuSinhCau();
         this.duLieuSinhCauArrayList = new ArrayList<>();
 
 
@@ -29,15 +31,16 @@ public class SinhCau {
             double MA20Gia = 0.00;
             double MA20Khoiluong = 0.00;
             DuLieuMaCoPhieu duLieuNgayGanNhat = item.get(0);
+            DuLieuSinhCau duLieuSinhCau = new DuLieuSinhCau();
 
-            this.duLieuSinhCau.setId(duLieuNgayGanNhat.getTen());
-            this.duLieuSinhCau.setNgay(duLieuNgayGanNhat.getNgay());
+            duLieuSinhCau.setId(duLieuNgayGanNhat.getTen());
+            duLieuSinhCau.setNgay(duLieuNgayGanNhat.getNgay());
             for(DuLieuMaCoPhieu value: item) {
                 MA20Gia += value.getGiaDongCua();
                 MA20Khoiluong += value.getKhoiLuong() * 1.5;
             }
             if(item.get(0).getGiaDongCua() < item.get(1).getGiaDongCua()) {
-                String thayDoiGia = "Ngày " + duLieuNgayGanNhat.getNgay().toString() + " cổ phiếu " + duLieuNgayGanNhat.getTen() +
+                String thayDoiGia = "Ngày " + duLieuNgayGanNhat.getNgay().format(dateFormat) + " cổ phiếu " + duLieuNgayGanNhat.getTen() +
                         " giao dịch với khối lượng là " + duLieuNgayGanNhat.getKhoiLuong() +
                         " cổ phiếu; trong khi giá cổ phiếu đã giảm "
                         + duLieuNgayGanNhat.getTyLe().replace("-", "") + ".";
@@ -52,7 +55,7 @@ public class SinhCau {
                             ". Các nhà đầu tư không nên mở mua mới tại thời điểm này; và nếu đang nắm giữ nên cân nhắc cắt lỗ.";
                 }
 
-                this.duLieuSinhCau.setThayDoiGia(thayDoiGia);
+                duLieuSinhCau.setThayDoiGia(thayDoiGia);
             }
             if(item.get(0).getGiaDongCua() >= item.get(1).getGiaDongCua()){
                 String thayDoiGia = "Ngày "+ duLieuNgayGanNhat.getNgay().toString() + " cổ phiếu " + duLieuNgayGanNhat.getTen() + " giao"
@@ -70,10 +73,10 @@ public class SinhCau {
                             "có thể chỉ là một đợt phục hồi nhẹ của mã " + duLieuNgayGanNhat.getTen() + ". Nhà đầu tư cần bỏ tư duy" +
                             " bắt đáy, không nên tham lam mà phải chờ có dấu hiệu đảo chiều thực sự mới quyết định giải ngân.";
                 }
-                this.duLieuSinhCau.setThayDoiGia(thayDoiGia);
+                duLieuSinhCau.setThayDoiGia(thayDoiGia);
             }
 
-            this.duLieuSinhCauArrayList.add(this.duLieuSinhCau);
+            this.duLieuSinhCauArrayList.add(duLieuSinhCau);
         }
     }
 
@@ -85,10 +88,6 @@ public class SinhCau {
             double EPS2 = Double.parseDouble(item.get(1).getEPS());
             double R = EPS1/EPS2;
         }
-    }
-
-    public DuLieuSinhCau getDuLieuSinhCau() {
-        return duLieuSinhCau;
     }
 
     public ArrayList<DuLieuSinhCau> getDuLieuSinhCauArrayList() {

@@ -10,22 +10,26 @@ import java.io.IOException;
 
 class Main {
     public static void main(String args[]) throws IOException {
-        RenderUI UI = new RenderUI();
-        LoadingUI loading = new LoadingUI(UI);
+        LoadingUI loading = new LoadingUI();
         LinkMaCoPhieu[] links = LinkData.linkMaCoPhieus;
         Data data = new Data(links);
+
 
         //UI.setVisible(true);
 
 
 
+
+        loading.setVisible(true);
+
         data.getDataCompany();
         data.getData20Ngay();
 
         SinhCau sinhCau = new SinhCau(data.getDuLieuCongTyArrayList(), data.getDuLieuMaCoPhieu20Ngay());
-
+        RenderUI UI = new RenderUI();
         UI.setDuLieuSinhCauArrayList(sinhCau.getDuLieuSinhCauArrayList());
-        System.out.println(sinhCau.getDuLieuSinhCau().getThayDoiGia());
+        loading.setVisible(false);
+        UI.setVisible(true);
     }
 
 }
