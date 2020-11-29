@@ -11,6 +11,8 @@ public class DuLieuCongTy {
     private ArrayList<String> loiNhuanSauThue;
     private ArrayList<String> vonChuSoHuu;
 
+    private ArrayList<DuLieuMaCoPhieu> duLieuLichSu;
+
     public DuLieuCongTy() {
         this.ten = "";
         this.EPS = new ArrayList<String>();
@@ -19,6 +21,7 @@ public class DuLieuCongTy {
         this.doanhThuThuan = new ArrayList<String>();
         this.loiNhuanSauThue = new ArrayList<String>();
         this.vonChuSoHuu = new ArrayList<String>();
+        this.duLieuLichSu = new ArrayList<>();
     }
 
     public String getTen() {
@@ -74,6 +77,18 @@ public class DuLieuCongTy {
     }
 
     public String getEPS(int i) { return ""; }
+
+    public void setDuLieuLichSu(ArrayList<DuLieuMaCoPhieu> duLieuLichSu) {
+        this.duLieuLichSu = duLieuLichSu;
     }
+
+    public ArrayList<String> getVonChuSoHuu() {
+        return vonChuSoHuu;
+    }
+
+    public ArrayList<DuLieuMaCoPhieu> getDuLieuLichSu() {
+        return duLieuLichSu;
+    }
+}
 
 

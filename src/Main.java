@@ -18,14 +18,12 @@ class Main {
         //UI.setVisible(true);
 
 
-
-
         loading.setVisible(true);
 
-        data.getDataCompany();
         data.getData20Ngay();
+        data.getDataCompany();
 
-        SinhCau sinhCau = new SinhCau(data.getDuLieuCongTyArrayList(), data.getDuLieuMaCoPhieu20Ngay());
+        SinhCau sinhCau = new SinhCau(data.getDuLieuCongTyArrayList());
         RenderUI UI = new RenderUI();
         UI.setDuLieuSinhCauArrayList(sinhCau.getDuLieuSinhCauArrayList());
         loading.setVisible(false);

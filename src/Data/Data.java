@@ -101,7 +101,15 @@ public class Data {
                 }
             }
 
-        }
+            for(ArrayList<DuLieuMaCoPhieu> data: this.duLieuMaCoPhieu20Ngay) {
+                if (data.get(0).getTen().equals(duLieuCongTy.getTen())) {
+                    duLieuCongTy.setDuLieuLichSu(data);
+                    break;
+                }
+            }
+            this.duLieuCongTyArrayList.add(duLieuCongTy);
+        };
+
 
     }
 

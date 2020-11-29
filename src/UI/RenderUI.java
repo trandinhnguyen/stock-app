@@ -93,6 +93,10 @@ public class RenderUI extends JFrame {
                 nhanDinh.append("- Nhận định mã cổ phiếu " + item.getId() +":");
                 nhanDinh.append("\n");
                 nhanDinh.append("- Thay đổi giá: " + item.getThayDoiGia());
+                nhanDinh.append("\n");
+                nhanDinh.append(" - Nhận định công ty " + item.getId() + ":");
+                nhanDinh.append("\n");
+                nhanDinh.append("Cơ cấu doanh nghiệp: " + item.getCoCauDoanhNghiep());
                 panel.add(nhanDinh);
 
             }
