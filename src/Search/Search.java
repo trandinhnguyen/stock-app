@@ -7,10 +7,10 @@ public class  Search<T> {
     private ArrayList<T> result;
 
     private void implementationSearch(String text) {
+        this.result.clear();
         for(T item: this.searchArrayList) {
-            String resource = item.toString();
-
-            if(resource.contains(text)) this.result.add(item);
+            String resource = item.toString().toLowerCase();
+            if(resource.contains(text.toLowerCase())) this.result.add(item);
         }
     }
 

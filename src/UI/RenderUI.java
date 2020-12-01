@@ -1,9 +1,11 @@
 package UI;
 
 import Model.DuLieuSinhCau;
+import Search.Search;
 
 import javax.swing.*;
 import java.awt.*;
+
 
 import java.util.ArrayList;
 
@@ -12,11 +14,12 @@ public class RenderUI extends JFrame {
 
     private ArrayList<DuLieuSinhCau> duLieuSinhCauArrayList;
     private JPanel panel;
+    private ArrayList<DuLieuSinhCau> duLieuSinhCauSearch;
 
 
     public RenderUI() {
         this.createJFrame();
-        this.duLieuSinhCauArrayList = new ArrayList<DuLieuSinhCau>();
+        this.duLieuSinhCauArrayList = new ArrayList<DuLieuSinhCau>() ;
     }
 
     private void createJFrame() {
@@ -33,7 +36,7 @@ public class RenderUI extends JFrame {
     private JPanel createMainFrame() {
         this.panel = new JPanel(new BorderLayout(10, 10));
         panel.add(this.buttonPanel(), BorderLayout.WEST);
-        panel.add(this.searchPanel(), BorderLayout.NORTH);
+
         panel.add(this.textPanel(), BorderLayout.CENTER);
         return panel;
     }
@@ -64,10 +67,18 @@ public class RenderUI extends JFrame {
         grb.gridy = 0;
         grb.ipady = 4;
         JTextField textsearch = new JTextField(40);
-        String data = textsearch.getText();
+
+
+        Search<DuLieuSinhCau> searchEngine = new Search<DuLieuSinhCau>(this.duLieuSinhCauArrayList);
 
 
         JButton search = new JButton("SEARCH");
+
+        search.addActionListener(e -> {
+            String data = textsearch.getText();
+            ArrayList<DuLieuSinhCau> dataSearch = searchEngine.getResult(data);
+            System.out.println(dataSearch.toString());
+        });
 
 
         panel.add(search, grb);
@@ -114,6 +125,7 @@ public class RenderUI extends JFrame {
     public void setDuLieuSinhCauArrayList(ArrayList<DuLieuSinhCau> duLieuSinhCauArrayList) {
         this.duLieuSinhCauArrayList = duLieuSinhCauArrayList;
         this.panel.add(this.textPanel());
+        this.panel.add(this.searchPanel(), BorderLayout.NORTH);
         System.out.println(duLieuSinhCauArrayList.size());
 
     }
