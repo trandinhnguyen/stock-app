@@ -36,8 +36,6 @@ public class RenderUI extends JFrame {
     private JPanel createMainFrame() {
         this.panel = new JPanel(new BorderLayout(10, 10));
         panel.add(this.buttonPanel(), BorderLayout.WEST);
-
-        panel.add(this.textPanel(), BorderLayout.CENTER);
         return panel;
     }
 
@@ -46,9 +44,9 @@ public class RenderUI extends JFrame {
         panel.setBorder(BorderFactory.createEmptyBorder(15, 30, 15, 30));
         panel.setBackground(Color.LIGHT_GRAY);
 
-        JButton tag1 = new JButton("Nhận đinh cổ phiếu");
-        JButton tag2 = new JButton("Nhận đinh doanh nghiệp");
-        JButton tag3 = new JButton("Tổng hợp");
+        JButton tag1 = new JButton("Tổng hợp");
+        JButton tag2 = new JButton("Nhận định mã cổ phiếu");
+        JButton tag3 = new JButton("Nhận định công ti");
 
 
         panel.add(tag1);
@@ -89,7 +87,7 @@ public class RenderUI extends JFrame {
         return panel;
     }
 
-    private JScrollPane textPanel() {
+    private JScrollPane textPanelTongHop() {
         JPanel panel = new JPanel(new GridLayout(7, 1, 15, 15));
 
         if(this.duLieuSinhCauArrayList != null)
@@ -105,14 +103,12 @@ public class RenderUI extends JFrame {
                 nhanDinh.append("\n");
                 nhanDinh.append("- Thay đổi giá: " + item.getThayDoiGia());
                 nhanDinh.append("\n");
-                nhanDinh.append(" - Nhận định công ty " + item.getId() + ":");
+                nhanDinh.append("- Nhận định công ty " + item.getId() + ":");
                 nhanDinh.append("\n");
-                nhanDinh.append("Cơ cấu doanh nghiệp: " + item.getCoCauDoanhNghiep());
+                nhanDinh.append("- Cơ cấu doanh nghiệp: " + item.getCoCauDoanhNghiep());
                 panel.add(nhanDinh);
 
             }
-
-
 
         JScrollPane scroll = new JScrollPane(panel);
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -124,10 +120,9 @@ public class RenderUI extends JFrame {
 
     public void setDuLieuSinhCauArrayList(ArrayList<DuLieuSinhCau> duLieuSinhCauArrayList) {
         this.duLieuSinhCauArrayList = duLieuSinhCauArrayList;
-        this.panel.add(this.textPanel());
+        this.panel.add(this.textPanelTongHop());
         this.panel.add(this.searchPanel(), BorderLayout.NORTH);
         System.out.println(duLieuSinhCauArrayList.size());
-
     }
 
 }
