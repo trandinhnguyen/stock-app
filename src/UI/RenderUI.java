@@ -15,6 +15,7 @@ public class RenderUI extends JFrame {
     private ArrayList<DuLieuSinhCau> duLieuSinhCauArrayList;
     private JPanel panel;
     private ArrayList<DuLieuSinhCau> duLieuSinhCauSearch;
+    private Search<DuLieuSinhCau> searchEngine;
 
 
     public RenderUI() {
@@ -67,15 +68,18 @@ public class RenderUI extends JFrame {
         JTextField textsearch = new JTextField(40);
 
 
-        Search<DuLieuSinhCau> searchEngine = new Search<DuLieuSinhCau>(this.duLieuSinhCauArrayList);
+//        Search<DuLieuSinhCau> searchEngine = new Search<DuLieuSinhCau>(this.duLieuSinhCauArrayList, "F");
 
 
         JButton search = new JButton("SEARCH");
 
         search.addActionListener(e -> {
             String data = textsearch.getText();
-            ArrayList<DuLieuSinhCau> dataSearch = searchEngine.getResult(data);
+            Search<DuLieuSinhCau> searchEngine = new Search<DuLieuSinhCau>(this.duLieuSinhCauArrayList, data);
+            ArrayList<DuLieuSinhCau> dataSearch = searchEngine.getResult();
+
             System.out.println(dataSearch.toString());
+
         });
 
 
