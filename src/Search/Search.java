@@ -32,6 +32,7 @@ public class  Search<T> {
                 i++;
             }
         }
+        java.util.Collections.sort(this.cauTraLoi ,  new Answer() );
     }
 
     public ArrayList<T> getResult() {

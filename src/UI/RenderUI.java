@@ -5,7 +5,8 @@ import Search.Search;
 
 import javax.swing.*;
 import java.awt.*;
-
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import java.util.ArrayList;
 
@@ -67,19 +68,44 @@ public class RenderUI extends JFrame {
         grb.ipady = 4;
         JTextField textsearch = new JTextField(40);
 
-
-//        Search<DuLieuSinhCau> searchEngine = new Search<DuLieuSinhCau>(this.duLieuSinhCauArrayList, "F");
-
-
         JButton search = new JButton("SEARCH");
+
+        DocumentListener realtime = new DocumentListener() {
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                updateFieldState();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                updateFieldState();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                updateFieldState();
+            }
+
+            protected void updateFieldState(){
+                String data = textsearch.getText();
+                Search<DuLieuSinhCau> abc = new Search<DuLieuSinhCau>(duLieuSinhCauArrayList, data);
+                System.out.println(abc.getResult().toString());
+
+            }
+
+        };
+
+        textsearch.getDocument().addDocumentListener(realtime);
 
         search.addActionListener(e -> {
             String data = textsearch.getText();
             Search<DuLieuSinhCau> searchEngine = new Search<DuLieuSinhCau>(this.duLieuSinhCauArrayList, data);
             ArrayList<DuLieuSinhCau> dataSearch = searchEngine.getResult();
-
             System.out.println(dataSearch.toString());
-
+//            for(int i = 0 ; i != 5 ; i++){
+//                System.out.println(searchEngine.getCauTraLoi().get(i).getCauHienThi());
+//            }
         });
 
 
