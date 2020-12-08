@@ -43,12 +43,12 @@ public class RenderUI extends JFrame {
 
     private JPanel buttonPanel() {
         JPanel panel = new JPanel(new GridLayout(5, 1, 15, 15));
-        panel.setBorder(BorderFactory.createEmptyBorder(15, 30, 15, 30));
+        panel.setBorder(BorderFactory.createEmptyBorder(10, 30, 10, 30));
         panel.setBackground(Color.LIGHT_GRAY);
 
         JButton tag1 = new JButton("Tổng hợp");
         JButton tag2 = new JButton("Nhận định mã cổ phiếu");
-        JButton tag3 = new JButton("Nhận định công ti");
+        JButton tag3 = new JButton("Nhận định công ty");
 
 
         panel.add(tag1);
