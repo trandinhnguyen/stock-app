@@ -19,21 +19,22 @@ public class  Search<T> {
 //        }
 //    }
 
-    public Search(ArrayList<T> searchArrayList,int type , String text){
+    public Search(ArrayList<T> searchArrayList , String text){
         this.result = new ArrayList<T>();
+        this.cauTraLoi = new ArrayList<Answer>();
         int i = 0;
         for(T item: searchArrayList) {
             String resource = item.toString().toLowerCase();
             if(resource.indexOf(text.toLowerCase()) != -1){
                 this.result.add(item);
-                Answer a = new Answer((item.toString().substring(0,item.toString().indexOf(" ",50)-1)+"..."), type, i , resource.indexOf(text.toLowerCase()));
+                Answer a = new Answer((item.toString().substring(0,item.toString().indexOf(" ",50)-1)+"..."), i , resource.indexOf(text.toLowerCase()));
                 this.cauTraLoi.add(a);
                 i++;
             }
         }
     }
 
-    public ArrayList<T> getResult(String text) {
+    public ArrayList<T> getResult() {
 //        this.implementationSearch(text);
         return result;
     }
