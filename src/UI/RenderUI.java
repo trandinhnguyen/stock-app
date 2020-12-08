@@ -7,6 +7,8 @@ import javax.swing.*;
 import java.awt.*;
 
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 
@@ -66,7 +68,11 @@ public class RenderUI extends JFrame {
         grb.ipady = 4;
         JTextField textsearch = new JTextField(40);
 
-
+        textsearch.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Text=" + textsearch.getText());
+            }
+        });
         Search<DuLieuSinhCau> searchEngine = new Search<DuLieuSinhCau>(this.duLieuSinhCauArrayList);
 
 
@@ -88,7 +94,7 @@ public class RenderUI extends JFrame {
     }
 
     private JScrollPane textPanelTongHop() {
-        JPanel panel = new JPanel(new GridLayout(7, 1, 15, 15));
+        JPanel panel = new JPanel(new GridLayout(30, 1, 15, 15));
 
         if(this.duLieuSinhCauArrayList != null)
             for(DuLieuSinhCau item: this.duLieuSinhCauArrayList) {

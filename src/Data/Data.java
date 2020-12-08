@@ -5,8 +5,6 @@ import Model.DuLieuMaCoPhieu;
 
 import Model.LinkMaCoPhieu;
 
-import Model.DuLieuNhomNganh;
-
 import org.json.JSONArray;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -17,8 +15,9 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 
-// test JSoup
+
 public class Data {
 
     private final String idDoanhThu = "ctl00_ContentPlaceHolder1_CompanyInfo_FinanceStatement1_rptNhomChiTieu_ctl00_rptData_ctl00_TrData";
@@ -26,9 +25,9 @@ public class Data {
     private final String idVonChuSoHuu = "ctl00_ContentPlaceHolder1_CompanyInfo_FinanceStatement1_rptNhomChiTieu_ctl01_rptData_ctl04_TrData";
 
 
-    private ArrayList<ArrayList<DuLieuMaCoPhieu>> duLieuMaCoPhieu20Ngay;
-    private ArrayList<LinkMaCoPhieu> linksGetData;
-    private ArrayList<DuLieuCongTy> duLieuCongTyArrayList;
+    private final ArrayList<ArrayList<DuLieuMaCoPhieu>> duLieuMaCoPhieu20Ngay;
+    private final ArrayList<LinkMaCoPhieu> linksGetData;
+    private final ArrayList<DuLieuCongTy> duLieuCongTyArrayList;
 
     public Data() {
         this(new LinkMaCoPhieu[]{});
@@ -37,9 +36,7 @@ public class Data {
         this.duLieuMaCoPhieu20Ngay = new ArrayList<ArrayList<DuLieuMaCoPhieu>>();
         this.duLieuCongTyArrayList = new ArrayList<DuLieuCongTy>();
         this.linksGetData = new ArrayList<LinkMaCoPhieu>();
-        for (LinkMaCoPhieu item: linksMaCoPhieu) {
-            this.linksGetData.add(item);
-        }
+        this.linksGetData.addAll(Arrays.asList(linksMaCoPhieu));
 
 
     }
@@ -50,7 +47,7 @@ public class Data {
     public void getDataCompany() throws IOException {
 
         for(LinkMaCoPhieu link: this.linksGetData) {
-            if (link.getTen() == "VNINDEX") continue;
+            if (link.getTen().equals("VNINDEX")) continue;
 
             Document docRequest = Jsoup.connect(link.getLinkDataIndex()).userAgent("Mozilla/5.0").timeout(100 * 1000).get();
             Document docHTML = Jsoup.connect(link.getLinkDataCompany()).userAgent("Mozilla/5.0").timeout(100 * 1000).get();
@@ -87,11 +84,11 @@ public class Data {
                     }
 
                     if (index == 5) break;
-                    if (item == this.idDoanhThu)
+                    if (item.equals(this.idDoanhThu))
                         duLieuCongTy.setDoanhThuThuan(value.text().replace(",", ""));
-                    if (item == this.idLoiNhuanSauThue)
+                    if (item.equals(this.idLoiNhuanSauThue))
                         duLieuCongTy.setLoiNhuanSauThue(value.text().replace(",", ""));
-                    if (item == this.idVonChuSoHuu)
+                    if (item.equals(this.idVonChuSoHuu))
                         duLieuCongTy.setVoiChuSoHuu(value.text().replace(",", ""));
 
                     index++;
@@ -131,53 +128,97 @@ public class Data {
                     continue;
                 }
                 int index = 1;
-                for (Element item : e.children()) {
-                    switch (index) {
-                        case 1:
-
-                            data.setNgay(LocalDate.parse(item.text(), df));
-
-                            index++;
-                            break;
-                        case 3:
-                            data.setGiaDongCua(Double.parseDouble(item.text().replace("&nbsp;", "")));
-                            index++;
-                            break;
-                        case 4:
-                            data.setTyLe(item.text());
-                            index++;
-                            break;
-                        case 6:
-                            data.setKhoiLuong(Double.parseDouble(item.text().replace("&nbsp;", "").replace(",", "")));
-                            index++;
-                            break;
-                        case 7:
-                            data.setGiaTri(item.text().replace("&nbsp;", ""));
-                            index++;
-                            break;
-                        case 9:
-                            String text_GiaTri = item.text().replace("&nbsp;", "");
-                            double a_giaTri = Double.parseDouble(data.getGiaTri().replace(",", ""));
-                            double b_giaTri = Double.parseDouble(text_GiaTri.replace(",", ""));
-                            String result_giaTri = String.valueOf(a_giaTri + b_giaTri);
-                            data.setGiaTri(result_giaTri);
-                            index++;
-                            break;
-                        case 8:
-                            String text = item.text().replace("&nbsp;", "");
-                            double a = data.getKhoiLuong();
-                            double b = Double.parseDouble(text.replace(",", ""));
-                            double result = a + b;
-                            data.setKhoiLuong(result);
-                            index++;
-                            break;
-                        case 10:
-                            data.setGiaMoCua(Double.parseDouble(item.text().replace("&nbsp;", "")));
-                            index++;
-                            break;
-                        default:
-                            index++;
-                            break;
+                if (!link.getTen().equals("VNINDEX")) {
+                    for (Element item : e.children()) {
+                        switch (index) {
+                            case 1 -> {
+                                data.setNgay(LocalDate.parse(item.text(), df));
+                                index++;
+                            }
+                            case 3 -> {
+                                data.setGiaDongCua(Double.parseDouble(item.text().replace("&nbsp;", "")));
+                                index++;
+                            }
+                            case 4 -> {
+                                data.setTyLe(item.text());
+                                index++;
+                            }
+                            case 6 -> {
+                                data.setKhoiLuong(Double.parseDouble(item.text().replace("&nbsp;", "").replace(",", "")));
+                                index++;
+                            }
+                            case 7 -> {
+                                data.setGiaTri(item.text().replace("&nbsp;", ""));
+                                index++;
+                            }
+                            case 9 -> {
+                                String text_GiaTri = item.text().replace("&nbsp;", "");
+                                double a_giaTri = Double.parseDouble(data.getGiaTri().replace(",", ""));
+                                double b_giaTri = Double.parseDouble(text_GiaTri.replace(",", ""));
+                                String result_giaTri = String.valueOf(a_giaTri + b_giaTri);
+                                data.setGiaTri(result_giaTri);
+                                index++;
+                            }
+                            case 8 -> {
+                                String text = item.text().replace("&nbsp;", "");
+                                double a = data.getKhoiLuong();
+                                double b = Double.parseDouble(text.replace(",", ""));
+                                double result = a + b;
+                                data.setKhoiLuong(result);
+                                index++;
+                            }
+                            case 10 -> {
+                                data.setGiaMoCua(Double.parseDouble(item.text().replace("&nbsp;", "")));
+                                index++;
+                            }
+                            default -> index++;
+                        }
+                    }
+                } else {
+                    for (Element item : e.children()) {
+                        switch (index) {
+                            case 1 -> {
+                                data.setNgay(LocalDate.parse(item.text(), df));
+                                index++;
+                            }
+                            case 2 -> {
+                                data.setGiaDongCua(Double.parseDouble(item.text().replace("&nbsp;", "").replace(",", "")));
+                                index++;
+                            }
+                            case 3 -> {
+                                data.setTyLe(item.text());
+                                index++;
+                            }
+                            case 5 -> {
+                                data.setKhoiLuong(Double.parseDouble(item.text().replace("&nbsp;", "").replace(",", "")));
+                                index++;
+                            }
+                            case 6 -> {
+                                data.setGiaTri(item.text().replace("&nbsp;", ""));
+                                index++;
+                            }
+                            case 8 -> {
+                                String text_GiaTri = item.text().replace("&nbsp;", "");
+                                double a_giaTri = Double.parseDouble(data.getGiaTri().replace(",", ""));
+                                double b_giaTri = Double.parseDouble(text_GiaTri.replace(",", ""));
+                                String result_giaTri = String.valueOf(a_giaTri + b_giaTri);
+                                data.setGiaTri(result_giaTri);
+                                index++;
+                            }
+                            case 7 -> {
+                                String text = item.text().replace("&nbsp;", "");
+                                double a = data.getKhoiLuong();
+                                double b = Double.parseDouble(text.replace(",", ""));
+                                double result = a + b;
+                                data.setKhoiLuong(result);
+                                index++;
+                            }
+                            case 9 -> {
+                                data.setGiaMoCua(Double.parseDouble(item.text().replace("&nbsp;", "").replace(",", "")));
+                                index++;
+                            }
+                            default -> index++;
+                        }
                     }
                 }
                 dataArrayList.add(data);
@@ -193,8 +234,5 @@ public class Data {
     }
     public ArrayList<ArrayList<DuLieuMaCoPhieu>> getDuLieuMaCoPhieu20Ngay() {
         return duLieuMaCoPhieu20Ngay;
-    }
-    public ArrayList<DuLieuNhomNganh> getDuLieuMaNhomnganh20Ngay(){
-        return null;
     }
 }

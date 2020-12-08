@@ -16,12 +16,11 @@ public class DuLieuMaCoPhieu {
     private String RSI;
 
     public DuLieuMaCoPhieu() {
-        this("","","", null, "", "", 0.00, 0.00, 0.00, "");
+        this("","", null, "", "", 0.00, 0.00, 0.00, "");
     }
 
-    public DuLieuMaCoPhieu(String id, String idNhomNganh, String ten, LocalDate ngay, String diem, String tyLe, double khoiLuong, double giaMoCua, double giaDongCua, String giaTri) {
+    public DuLieuMaCoPhieu(String id, String ten, LocalDate ngay, String diem, String tyLe, double khoiLuong, double giaMoCua, double giaDongCua, String giaTri) {
         this.id = id;
-        this.idNhomNganh = idNhomNganh;
         this.ten = ten;
         this.ngay = ngay;
         this.diem = diem;
