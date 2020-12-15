@@ -19,11 +19,10 @@ class Main {
         // set loadding
         loading.setVisible(true);
         // lay dữ liệu từ trên web
-        data.getData20Ngay();
-        data.getDataCompany();
+        data.getData();
 
         // Bắt đầu sinh câu từ dữ liệu
-        SinhCau sinhCau = new SinhCau(data.getDuLieuCongTyArrayList());
+        SinhCau sinhCau = new SinhCau(data.getDuLieuCongTyArrayList(), data.getVNINDEX());
 
         // truyền dữ liệu vào UI để hiển thi
         UI.setDuLieuSinhCauArrayList(sinhCau.getDuLieuSinhCauArrayList());
