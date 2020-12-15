@@ -21,6 +21,11 @@ public class LinkData {
                         "https://s.cafef.vn/Lich-su-giao-dich-VIC-1.chn",
                         "https://s.cafef.vn/hose/VIC-tap-doan-vingroup-cong-ty-co-phan.chn",
                         "https://e.cafef.vn/fi.ashx?symbol=VIC"),
+            new LinkMaCoPhieu(
+                        "VNINDEX",
+                        "https://s.cafef.vn/Lich-su-giao-dich-VNINDEX-1.chn",
+                        "",
+                        ""),
 //            new LinkMaCoPhieu(
 //                        "VHM",
 //                        "https://s.cafef.vn/Lich-su-giao-dich-VHM-1.chn",
