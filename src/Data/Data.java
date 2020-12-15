@@ -28,15 +28,19 @@ public class Data {
     private final ArrayList<ArrayList<DuLieuMaCoPhieu>> duLieuMaCoPhieu20Ngay;
     private final ArrayList<LinkMaCoPhieu> linksGetData;
     private final ArrayList<DuLieuCongTy> duLieuCongTyArrayList;
+    private final ArrayList<DuLieuMaCoPhieu> VNINDEX;
 
     public Data() {
         this(new LinkMaCoPhieu[]{});
     }
+
+
     public Data(LinkMaCoPhieu[] linksMaCoPhieu){
         this.duLieuMaCoPhieu20Ngay = new ArrayList<ArrayList<DuLieuMaCoPhieu>>();
         this.duLieuCongTyArrayList = new ArrayList<DuLieuCongTy>();
         this.linksGetData = new ArrayList<LinkMaCoPhieu>();
         this.linksGetData.addAll(Arrays.asList(linksMaCoPhieu));
+        this.VNINDEX = new ArrayList<>();
 
 
     }

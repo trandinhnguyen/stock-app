@@ -5,13 +5,12 @@ import Model.DuLieuMaCoPhieu;
 import Model.DuLieuSinhCau;
 
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class SinhCau {
-    private ArrayList<DuLieuSinhCau> duLieuSinhCauArrayList; // 6 cong ti thì 6 phan tu
-    private ArrayList<DuLieuCongTy> duLieuCongTyArrayList;
+    private final ArrayList<DuLieuSinhCau> duLieuSinhCauArrayList; // 6 cong ti thì 6 phan tu
+    private final ArrayList<DuLieuCongTy> duLieuCongTyArrayList;
     private static final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 

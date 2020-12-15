@@ -3,7 +3,7 @@ package Constants;
 import Model.LinkMaCoPhieu;
 
 public class LinkData {
-    public static final LinkMaCoPhieu[] linkMaCoPhieus = {
+    public static final LinkMaCoPhieu[] LINK_MA_CO_PHIEU = {
             new LinkMaCoPhieu(
                         "FPT",
                         "https://s.cafef.vn/Lich-su-giao-dich-FPT-1.chn",

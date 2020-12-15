@@ -13,8 +13,8 @@ class Main {
         // Khởi tạo các đối tượng ban đầu
         RenderUI UI = new RenderUI();
         LoadingUI loading = new LoadingUI();
-        LinkMaCoPhieu[] links = LinkData.linkMaCoPhieus;
-        Data data = new Data(links);
+        LinkMaCoPhieu[] LINKS = LinkData.LINK_MA_CO_PHIEU;
+        Data data = new Data(LINKS);
 
         // set loadding
         loading.setVisible(true);
