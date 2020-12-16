@@ -25,29 +25,21 @@ public class Data {
     private final String idVonChuSoHuu = "ctl00_ContentPlaceHolder1_CompanyInfo_FinanceStatement1_rptNhomChiTieu_ctl01_rptData_ctl04_TrData";
 
 
-    private final ArrayList<ArrayList<DuLieuMaCoPhieu>> duLieuMaCoPhieu20Ngay;
     private final ArrayList<LinkMaCoPhieu> linksGetData;
     private final ArrayList<DuLieuCongTy> duLieuCongTyArrayList;
+    private  ArrayList<DuLieuMaCoPhieu> VNINDEX;
 
-    public Data() {
-        this(new LinkMaCoPhieu[]{});
-    }
+
     public Data(LinkMaCoPhieu[] linksMaCoPhieu){
-        this.duLieuMaCoPhieu20Ngay = new ArrayList<ArrayList<DuLieuMaCoPhieu>>();
         this.duLieuCongTyArrayList = new ArrayList<DuLieuCongTy>();
         this.linksGetData = new ArrayList<LinkMaCoPhieu>();
         this.linksGetData.addAll(Arrays.asList(linksMaCoPhieu));
+        this.VNINDEX = new ArrayList<>();
 
 
     }
-    public void setMaCoPhieu(ArrayList<DuLieuMaCoPhieu> maCoPhieu) {
-        this.duLieuMaCoPhieu20Ngay.add(maCoPhieu);
-    }
 
-    public void getDataCompany() throws IOException {
-
-        for(LinkMaCoPhieu link: this.linksGetData) {
-            if (link.getTen().equals("VNINDEX")) continue;
+    private DuLieuCongTy getDataCompany(LinkMaCoPhieu link) throws IOException {
 
             Document docRequest = Jsoup.connect(link.getLinkDataIndex()).userAgent("Mozilla/5.0").timeout(100 * 1000).get();
             Document docHTML = Jsoup.connect(link.getLinkDataCompany()).userAgent("Mozilla/5.0").timeout(100 * 1000).get();
@@ -95,22 +87,15 @@ public class Data {
                 }
             }
 
-            for(ArrayList<DuLieuMaCoPhieu> data: this.duLieuMaCoPhieu20Ngay) {
-                if (data.get(0).getTen().equals(duLieuCongTy.getTen())) {
-                    duLieuCongTy.setDuLieuLichSu(data);
-                    break;
-                }
-            }
-            this.duLieuCongTyArrayList.add(duLieuCongTy);
+            return duLieuCongTy;
         };
 
-
-    }
-
-    public void getData20Ngay() throws IOException, NumberFormatException {
+    // lấy dữ liệu mã cổ phiếu và dữ liệu công ty
+    public void getData() throws IOException, NumberFormatException {
         // date format
         DateTimeFormatter df =  DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
+        // lấy dữ liệu mã cổ phiếu
         for (LinkMaCoPhieu link : this.linksGetData) {
             Document doc = Jsoup.connect(link.getLinkDataHistory()).userAgent("Mozilla/5.0").timeout(100 * 1000).get();
 
@@ -223,16 +208,27 @@ public class Data {
                 }
                 dataArrayList.add(data);
             }
-            this.setMaCoPhieu(dataArrayList);
 
+            if(link.getTen().equals("VNINDEX")) {
+                this.VNINDEX = dataArrayList;
+                continue;
+            }
+
+
+            // lấy dữ liệu công ty
+            DuLieuCongTy duLieuCongTy = this.getDataCompany(link);
+            duLieuCongTy.setDuLieuLichSu(dataArrayList);
+
+            this.duLieuCongTyArrayList.add(duLieuCongTy);
 
         }
     }
 
+    public ArrayList<DuLieuMaCoPhieu> getVNINDEX() {
+        return VNINDEX;
+    }
+
     public ArrayList<DuLieuCongTy> getDuLieuCongTyArrayList() {
         return duLieuCongTyArrayList;
-    }
-    public ArrayList<ArrayList<DuLieuMaCoPhieu>> getDuLieuMaCoPhieu20Ngay() {
-        return duLieuMaCoPhieu20Ngay;
     }
 }

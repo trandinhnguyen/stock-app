@@ -5,20 +5,20 @@ import Model.DuLieuMaCoPhieu;
 import Model.DuLieuSinhCau;
 
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class SinhCau {
-    private ArrayList<DuLieuSinhCau> duLieuSinhCauArrayList; // 6 cong ti thì 6 phan tu
-    private ArrayList<DuLieuCongTy> duLieuCongTyArrayList;
+    private final ArrayList<DuLieuSinhCau> duLieuSinhCauArrayList; // 6 cong ti thì 6 phan tu
+    private final ArrayList<DuLieuCongTy> duLieuCongTyArrayList;
+    private final ArrayList<DuLieuMaCoPhieu> VNINDEX;
     private static final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 
-    public SinhCau(ArrayList<DuLieuCongTy> duLieuCongTyArrayList) {
+    public SinhCau(ArrayList<DuLieuCongTy> duLieuCongTyArrayList, ArrayList<DuLieuMaCoPhieu> VNINDEX) {
         this.duLieuCongTyArrayList = duLieuCongTyArrayList;
+        this.VNINDEX = VNINDEX;
         this.duLieuSinhCauArrayList = new ArrayList<>();
-
         System.out.println(duLieuCongTyArrayList.get(0).getTen());
 
     }

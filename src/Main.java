@@ -13,17 +13,16 @@ class Main {
         // Khởi tạo các đối tượng ban đầu
         RenderUI UI = new RenderUI();
         LoadingUI loading = new LoadingUI();
-        LinkMaCoPhieu[] links = LinkData.linkMaCoPhieus;
-        Data data = new Data(links);
+        LinkMaCoPhieu[] LINKS = LinkData.LINK_MA_CO_PHIEU;
+        Data data = new Data(LINKS);
 
         // set loadding
         loading.setVisible(true);
         // lay dữ liệu từ trên web
-        data.getData20Ngay();
-        data.getDataCompany();
+        data.getData();
 
         // Bắt đầu sinh câu từ dữ liệu
-        SinhCau sinhCau = new SinhCau(data.getDuLieuCongTyArrayList());
+        SinhCau sinhCau = new SinhCau(data.getDuLieuCongTyArrayList(), data.getVNINDEX());
 
         // truyền dữ liệu vào UI để hiển thi
         UI.setDuLieuSinhCauArrayList(sinhCau.getDuLieuSinhCauArrayList());
