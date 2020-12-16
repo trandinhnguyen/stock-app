@@ -68,11 +68,8 @@ public class DuLieuCongTy {
         this.loiNhuanSauThue.add(loiNhuanSauThue);
     }
 
-    public ArrayList<String> getVoiChuSoHuu() {
-        return vonChuSoHuu;
-    }
 
-    public void setVoiChuSoHuu(String vonChuSoHuu) {
+    public void setVonChuSoHuu(String vonChuSoHuu) {
         this.vonChuSoHuu.add(vonChuSoHuu);
     }
 

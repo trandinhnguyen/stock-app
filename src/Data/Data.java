@@ -81,7 +81,7 @@ public class Data {
                     if (item.equals(this.idLoiNhuanSauThue))
                         duLieuCongTy.setLoiNhuanSauThue(value.text().replace(",", ""));
                     if (item.equals(this.idVonChuSoHuu))
-                        duLieuCongTy.setVoiChuSoHuu(value.text().replace(",", ""));
+                        duLieuCongTy.setVonChuSoHuu(value.text().replace(",", ""));
 
                     index++;
                 }

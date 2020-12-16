@@ -12,6 +12,7 @@ public class SinhCau {
     private final ArrayList<DuLieuSinhCau> duLieuSinhCauArrayList; // 6 cong ti thì 6 phan tu
     private final ArrayList<DuLieuCongTy> duLieuCongTyArrayList;
     private final ArrayList<DuLieuMaCoPhieu> VNINDEX;
+    private final DuLieuSinhCau sinhCauVNINDEX;
     private static final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 
@@ -19,7 +20,8 @@ public class SinhCau {
         this.duLieuCongTyArrayList = duLieuCongTyArrayList;
         this.VNINDEX = VNINDEX;
         this.duLieuSinhCauArrayList = new ArrayList<>();
-        System.out.println(duLieuCongTyArrayList.get(0).getTen());
+
+        this.sinhCauVNINDEX = new DuLieuSinhCau();
 
     }
 
@@ -35,8 +37,8 @@ public class SinhCau {
             duLieuSinhCau.setId(duLieuNgayGanNhat.getTen());
             duLieuSinhCau.setNgay(duLieuNgayGanNhat.getNgay());
             for (DuLieuMaCoPhieu value : item.getDuLieuLichSu()) {
-                MA20Gia += value.getGiaDongCua();
-                MA20Khoiluong += value.getKhoiLuong() * 1.5;
+                MA20Gia += value.getGiaDongCua()/20;
+                MA20Khoiluong += value.getKhoiLuong()/20;
             }
 
             String thayDoiGia = "";
@@ -91,8 +93,14 @@ public class SinhCau {
                 double EPS1 = Double.parseDouble(item.getEPS().get(1));
                 double DAR0 = Double.parseDouble(item.getDAR().get(0));
                 double ROE0 = Double.parseDouble(item.getROE().get(0));
+                double vonChuSoHuu0 = Double.parseDouble(item.getVonChuSoHuu().get(0));
+                double vonChuSoHuu1 = Double.parseDouble(item.getVonChuSoHuu().get(0));
+                double loiNhuan = Double.parseDouble(item.getLoiNhuanSauThue().get(0));
+                double doanhThu = Double.parseDouble(item.getDoanhThuThuan().get(0));
+                R = (vonChuSoHuu0/vonChuSoHuu1 -1)/100;
                 ratio = EPS0 / EPS1;
                 String coCauDoanhNghiep = "";
+                //ROE
                 if (ROE0 > 25) {
                     coCauDoanhNghiep = "Công ty đang có tình hình tài chính cực tốt với mức sinh lời trên tài sản (ROE) đạt top đầu " +
                             "các công ty trên thị trường: " + ROE0 + "%/năm.";
@@ -109,6 +117,7 @@ public class SinhCau {
                             "%/ năm.";
 
                 }
+                //DAR
                 if (DAR0 > 70) {
                     coCauDoanhNghiep = "Công ty có một cấu trúc nợ khá lớn lên đến " + DAR0 + "% tài sản công ty. Điều này cản trở" +
                             "công ty phát triển do phải gánh trên vai một khoản nợ khổng lồ.";
@@ -127,10 +136,72 @@ public class SinhCau {
                             " hoặc khó có tiềm năng mở rộng phát triển. Đây là một công ty phù hợp với những nhà đầu tư ưa cảm giác an toàn" +
                             " và muốn được chia cổ phiếu thường xuyên.";
                 }
+                //EPS
+                if (ratio == 1) {
+                    coCauDoanhNghiep = "Công ty đang  có hoạt động kinh doanh vô cùng tốt. ban lãnh đạo đã có những" +
+                            " chính sách tích cực đẩy mạnh tăng trưởng doanh thu và lợi nhuân trong một thời gian" +
+                            " ngắn khi đạt lợi nhuận quý 3 "+ loiNhuan + " tỉ đồng và vốn chủ sở hữu tăng từ " +
+                            vonChuSoHuu1 + " lên đến " + vonChuSoHuu0 + " tương đương " +
+                            R + "%.";
+                }
+
+
 
             return coCauDoanhNghiep;
     }
 
+    private void SinhCauVNINDEX() {
+        String maVNINDEX= "";
+        double diemHomNay =  this.VNINDEX.get(0).getGiaDongCua();
+        double diemHomQua = this.VNINDEX.get(1).getGiaDongCua();
+        double khoiLuongHomNay = this.VNINDEX.get(0).getKhoiLuong();
+        double MA20DIEM=0.00;
+        double MA20KHOILUONG=0.00;
+        for ( DuLieuMaCoPhieu value: this.VNINDEX ) {
+            MA20DIEM += value.getGiaDongCua()/20;
+            MA20KHOILUONG += value.getKhoiLuong()/20;
+        }
+        double hieuDiem = diemHomNay - diemHomQua;
+        double tyLeDiem = diemHomNay/MA20DIEM;
+        double tyLeKhoiLuong = khoiLuongHomNay/MA20KHOILUONG;
+        if (diemHomNay < diemHomQua) {
+            if ( Math.abs(hieuDiem) < 10){
+                maVNINDEX = "Trong phiên hôm nay thị trường đã trải qua một phiên ảm đạm khi chỉ số VNINDEX có sự sụt giảm nhẹ ~" +
+                        hieuDiem + " điểm ( tương ứng với " + ""+ "%).";
+                if (tyLeDiem > 1.05){
+                    maVNINDEX += "Thị trường mới chỉ có pha điều chỉnh nhẹ do VNINDEX đang đi đến vùng cản " +
+                            "nên không tránh khỏi việc thị trường có một vài nhịp rung lắc. Nhìn chung thị trường vẫn " +
+                            "đang trong xu hướng uptrend nên các nhà đâu tư vẫn nên giữ bình tĩnh, quản trị tốt " +
+                            "danh mục của mình.";
+                }
+                if (tyLeDiem < 0.95){
+                    maVNINDEX += "Thị trường vẫn đang ở trong một kênh giá giảm. Tuy nhiên hôm nay thị trường" +
+                            " chỉ có một pha giảm nhẹ nên vẫn chưa thể vội vàng kết luận điều gì, nhà đầu tư c" +
+                            "ần phải chờ hành động giá của thị trường trong thời gian tới để đưa ra kết luận mua" +
+                            " bán, k nên vội vàng trong thời điểm hiện tại.";
+                }
+                if (tyLeDiem > 0.95 && tyLeDiem <1.05){
+                    maVNINDEX += "Thị trường có thể đang trong giai đoạn tích lũy. Đây chính là thời điểm rất " +
+                            "tốt để các nhà đầu tư mua gom chờ thời điểm thị trường bùng nổ.";
+                }
+            } else {
+                maVNINDEX = "Thị trường hôm nay có một pha sụt giảm vô cùng nghiêm trọng khi chỉ sổ VNINDEX sụt giảm tận " +
+                        hieuDiem + " điểm (tương ứng với " + "..............." + "%). Phiên giảm điểm hôm nay" +
+                        " có thể là một dấu hiệu cho thấy dòng tiền chảy vào thị trường đang giảm dần, thị trường có thể " +
+                        "đang đi đến giai đoạn phân phối. Các nhà đầu tư cần hết sức chú ý đến thị trường trong thời điểm" +
+                        " này, và cũng có thể cân nhắc tìm điểm đẹp để giảm bớt tỉ trọng trong danh mục của mình.";
+            }
+        }
+        if (tyLeKhoiLuong > 1.2){
+            maVNINDEX = "Thanh khoản thị trường thời gian gần đây tăng đột biến chứng tỏ nhà đầu tư ngày" +
+                    " càng quan tâm đến thị trường chứng khoán, dự báo tương lai sẽ có thêm nhiều dòng" +
+                    " tiền đổ vào thị trường.";
+        } else {
+            maVNINDEX = "Thanh khoản thị trường thời gian gần đây đang có xu hướng giảm rõ rệt, thị trường" +
+                    " đang đi đến giai đoạn kiệt sức. Tại vùng này xu hướng rất có dấu hiệu sẽ đảo chiều nên" +
+                    " các nhà đầu tư cần rất cẩn thận.";
+        }
+    }
     public ArrayList<DuLieuSinhCau> getDuLieuSinhCauArrayList() {
         this.sinhCau();
         return duLieuSinhCauArrayList;
