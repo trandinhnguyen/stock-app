@@ -20,34 +20,30 @@ public class SinhCau {
         this.duLieuCongTyArrayList = duLieuCongTyArrayList;
         this.VNINDEX = VNINDEX;
         this.duLieuSinhCauArrayList = new ArrayList<>();
-
         this.sinhCauVNINDEX = new DuLieuSinhCau();
-
     }
 
 
     private void sinhCau() {
         for (DuLieuCongTy item : this.duLieuCongTyArrayList) {
             DuLieuSinhCau duLieuSinhCau = new DuLieuSinhCau();
-
             double MA20Gia = 0.00;
             double MA20Khoiluong = 0.00;
             DuLieuMaCoPhieu duLieuNgayGanNhat = item.getDuLieuLichSu().get(0);
-
             duLieuSinhCau.setId(duLieuNgayGanNhat.getTen());
             duLieuSinhCau.setNgay(duLieuNgayGanNhat.getNgay());
             for (DuLieuMaCoPhieu value : item.getDuLieuLichSu()) {
                 MA20Gia += value.getGiaDongCua()/20;
                 MA20Khoiluong += value.getKhoiLuong()/20;
             }
-
+            double tyLeKhoiLuong = duLieuNgayGanNhat.getKhoiLuong()/(MA20Khoiluong * 1.5);
             String thayDoiGia = "";
             if (duLieuNgayGanNhat.getGiaDongCua() < item.getDuLieuLichSu().get(1).getGiaDongCua()) {
                 thayDoiGia += "Ngày " + duLieuNgayGanNhat.getNgay().format(dateFormat) + " cổ phiếu " + duLieuNgayGanNhat.getTen() +
                         " giao dịch với khối lượng là " + duLieuNgayGanNhat.getKhoiLuong() +
                         " cổ phiếu; trong khi giá cổ phiếu đã giảm "
                         + duLieuNgayGanNhat.getTyLe().replace("-", "") + ".";
-                if (duLieuNgayGanNhat.getKhoiLuong() > MA20Khoiluong) {
+                if (duLieuNgayGanNhat.getKhoiLuong() > tyLeKhoiLuong) {
                     thayDoiGia += "Trong phiên hôm nay ghi nhận sự đột biến về thanh khoản.";
                 }
                 if (duLieuNgayGanNhat.getGiaDongCua() > MA20Gia) {
@@ -57,13 +53,12 @@ public class SinhCau {
                     thayDoiGia += "Phiên giảm giá hôm nay đã xác nhận xu hướng giảm của mã cổ phiếu" +
                             ". Các nhà đầu tư không nên mở mua mới tại thời điểm này; và nếu đang nắm giữ nên cân nhắc cắt lỗ.";
                 }
-
             }
             else{
                 thayDoiGia += "Ngày " + duLieuNgayGanNhat.getNgay().toString() + " cổ phiếu " + duLieuNgayGanNhat.getTen() + " giao"
                             + " dịch với khối lượng là " + duLieuNgayGanNhat.getKhoiLuong() + " cổ phiếu; trong khi giá cổ phiếu đã tăng "
                             + duLieuNgayGanNhat.getTyLe().replace("-", "");
-                    if (duLieuNgayGanNhat.getKhoiLuong() > MA20Khoiluong) {
+                    if (duLieuNgayGanNhat.getKhoiLuong() > tyLeKhoiLuong) {
                         thayDoiGia += "Trong phiên hôm nay ghi nhận sự đột biến về thanh khoản.";
                     }
                     if (duLieuNgayGanNhat.getGiaDongCua() > MA20Gia) {
@@ -75,82 +70,83 @@ public class SinhCau {
                                 "có thể chỉ là một đợt phục hồi nhẹ của mã " + duLieuNgayGanNhat.getTen() + ". Nhà đầu tư cần bỏ tư duy" +
                                 " bắt đáy, không nên tham lam mà phải chờ có dấu hiệu đảo chiều thực sự mới quyết định giải ngân.";
                     }
-
                 }
-
                 String coCauDoanhNghiep = this.coCauDoanhNghiep(item);
-
                 duLieuSinhCau.setThayDoiGia(thayDoiGia);
                 duLieuSinhCau.setCoCauDoanhNghiep(coCauDoanhNghiep);
                 this.duLieuSinhCauArrayList.add(duLieuSinhCau);
         }
     }
 
-        private String coCauDoanhNghiep(DuLieuCongTy item) {
-                double ratio = 0.00;
-                double R = 0.00;
-                double EPS0 = Double.parseDouble(item.getEPS().get(0));
-                double EPS1 = Double.parseDouble(item.getEPS().get(1));
-                double DAR0 = Double.parseDouble(item.getDAR().get(0));
-                double ROE0 = Double.parseDouble(item.getROE().get(0));
-                double vonChuSoHuu0 = Double.parseDouble(item.getVonChuSoHuu().get(0));
-                double vonChuSoHuu1 = Double.parseDouble(item.getVonChuSoHuu().get(0));
-                double loiNhuan = Double.parseDouble(item.getLoiNhuanSauThue().get(0));
-                double doanhThu = Double.parseDouble(item.getDoanhThuThuan().get(0));
-                R = (vonChuSoHuu0/vonChuSoHuu1 -1)/100;
-                ratio = EPS0 / EPS1;
-                String coCauDoanhNghiep = "";
-                //ROE
-                if (ROE0 > 25) {
-                    coCauDoanhNghiep = "Công ty đang có tình hình tài chính cực tốt với mức sinh lời trên tài sản (ROE) đạt top đầu " +
+    private String coCauDoanhNghiep(DuLieuCongTy item) {
+        double ratio = 0.00;
+        double R = 0.00;
+        double EPS0 = Double.parseDouble(item.getEPS().get(0));
+        double EPS1 = Double.parseDouble(item.getEPS().get(1));
+        double DAR0 = Double.parseDouble(item.getDAR().get(0));
+        double ROE0 = Double.parseDouble(item.getROE().get(0));
+        double vonChuSoHuu0 = Double.parseDouble(item.getVonChuSoHuu().get(0));
+        double vonChuSoHuu1 = Double.parseDouble(item.getVonChuSoHuu().get(0));
+        double loiNhuan = Double.parseDouble(item.getLoiNhuanSauThue().get(0));
+        double doanhThu = Double.parseDouble(item.getDoanhThuThuan().get(0));
+        R = (vonChuSoHuu0/vonChuSoHuu1 -1)/100;
+        ratio = EPS0 / EPS1;
+        String coCauDoanhNghiep = "";
+        //ROE
+        if (ROE0 > 25) {
+            coCauDoanhNghiep = "Công ty đang có tình hình tài chính cực tốt với mức sinh lời trên tài sản (ROE) đạt top đầu " +
                             "các công ty trên thị trường: " + ROE0 + "%/năm.";
-
-                }
-                if (ROE0 > 10 && ROE0 < 25) {
-                    coCauDoanhNghiep = "Công ty có tình hình tài chính ổn với mức sinh lời trên tài sản (ROE) đạt mức " + ROE0 +
+        }
+        if (ROE0 > 10 && ROE0 < 25) {
+            coCauDoanhNghiep = "Công ty có tình hình tài chính ổn với mức sinh lời trên tài sản (ROE) đạt mức " + ROE0 +
                             "%/ năm.";
-
-                }
-                if (ROE0 < 10) {
-                    coCauDoanhNghiep = "Công ty đang gặp vấn đề về tài chính cũng như hoạt động kinh doanh của công ty đang vận hành " +
+        }
+        if (ROE0 < 10) {
+            coCauDoanhNghiep = "Công ty đang gặp vấn đề về tài chính cũng như hoạt động kinh doanh của công ty đang vận hành " +
                             "có vấn đề khi mà khả năng sinh lời trên tài sản của công ty đang ở mức đáng báo động, chỉ " + ROE0 +
                             "%/ năm.";
-
-                }
-                //DAR
-                if (DAR0 > 70) {
-                    coCauDoanhNghiep = "Công ty có một cấu trúc nợ khá lớn lên đến " + DAR0 + "% tài sản công ty. Điều này cản trở" +
+        }
+        //DAR
+        if (DAR0 > 70) {
+            coCauDoanhNghiep = "Công ty có một cấu trúc nợ khá lớn lên đến " + DAR0 + "% tài sản công ty. Điều này cản trở" +
                             "công ty phát triển do phải gánh trên vai một khoản nợ khổng lồ.";
-
-                }
-                if (DAR0 < 70 && DAR0 > 30) {
-                    coCauDoanhNghiep = "Công ty đang cân bằng được giữa tài sản và các khoản vay khi tỷ lệ nợ chỉ có " + DAR0 +
+        }
+        if (DAR0 < 70 && DAR0 > 30) {
+            coCauDoanhNghiep = "Công ty đang cân bằng được giữa tài sản và các khoản vay khi tỷ lệ nợ chỉ có " + DAR0 +
                             "% tài sản của công ty. Cơ cấu tài sản cho thấy công ty đang có tham vọng phát triển trong tương lai, do đó trong " +
                             "cấu trúc tài chính của công ty mới tồn tại một món nợ để công ty tái đầu tư và mở rộng thị phần. Đây là một " +
                             "công ty thích hợp với những nhà đầu tư có tính cách mạo hiểm.";
-
-                }
-                if (DAR0 < 30) {
-                    coCauDoanhNghiep = "Đây là công ty có sức khoẻ về tài chính khá tốt khi có tỷ lệ nợ vô cùng thấp: " + DAR0 +
+        }
+        if (DAR0 < 30) {
+            coCauDoanhNghiep = "Đây là công ty có sức khoẻ về tài chính khá tốt khi có tỷ lệ nợ vô cùng thấp: " + DAR0 +
                             "% tài sản công ty. Tuy nhiên cơ cấu tài sản hiện tại của công ty cho thấy công ty không có tham vọng phát triển" +
                             " hoặc khó có tiềm năng mở rộng phát triển. Đây là một công ty phù hợp với những nhà đầu tư ưa cảm giác an toàn" +
                             " và muốn được chia cổ phiếu thường xuyên.";
-                }
-                //EPS
-                if (ratio == 1) {
-                    coCauDoanhNghiep = "Công ty đang  có hoạt động kinh doanh vô cùng tốt. ban lãnh đạo đã có những" +
+        }
+        //EPS
+        if (ratio > 1.2) {
+            coCauDoanhNghiep = "Công ty đang  có hoạt động kinh doanh vô cùng tốt. ban lãnh đạo đã có những" +
                             " chính sách tích cực đẩy mạnh tăng trưởng doanh thu và lợi nhuân trong một thời gian" +
                             " ngắn khi đạt lợi nhuận quý 3 "+ loiNhuan + " tỉ đồng và vốn chủ sở hữu tăng từ " +
                             vonChuSoHuu1 + " lên đến " + vonChuSoHuu0 + " tương đương " +
                             R + "%.";
-                }
-
-
-
-            return coCauDoanhNghiep;
+        }
+        if (ratio > 0.9 && ratio < 1.2) {
+            coCauDoanhNghiep = "Công ty vẫn duy trì ổn hoạt động kinh doanh của mình tuy nhiên không có sự tăng" +
+                            " trưởng quá rõ rệt, ban lãnh đạo đã làm tròn vai trò của mình. Doanh thu và lợi nhuận" +
+                            " vẫn giữ nguyên ở mức " + doanhThu + " và " + loiNhuan + ".";
+        }
+        if (ratio < 0.9) {
+            coCauDoanhNghiep = "Công ty đang gặp vấn đề trong hoạt động kinh doanh dẫn đến doanh thu và lợi" +
+                            " nhuận đều giảm mạnh. Nhà đầu tư nên tránh xa công ty này thời điểm hiện tại và chờ đợi" +
+                            " khi nào có thay đổi tích cực ở ban lãnh đạo và kết quả kinh doanh có sự phục hồi thì" +
+                            " mới tham gia đầu tư.";
+        }
+        return coCauDoanhNghiep;
     }
 
     private void SinhCauVNINDEX() {
+        DuLieuSinhCau duLieuSinhCau = new DuLieuSinhCau();
         String maVNINDEX= "";
         double diemHomNay =  this.VNINDEX.get(0).getGiaDongCua();
         double diemHomQua = this.VNINDEX.get(1).getGiaDongCua();
@@ -192,6 +188,7 @@ public class SinhCau {
                         " này, và cũng có thể cân nhắc tìm điểm đẹp để giảm bớt tỉ trọng trong danh mục của mình.";
             }
         }
+
         if (tyLeKhoiLuong > 1.2){
             maVNINDEX = "Thanh khoản thị trường thời gian gần đây tăng đột biến chứng tỏ nhà đầu tư ngày" +
                     " càng quan tâm đến thị trường chứng khoán, dự báo tương lai sẽ có thêm nhiều dòng" +
@@ -201,7 +198,10 @@ public class SinhCau {
                     " đang đi đến giai đoạn kiệt sức. Tại vùng này xu hướng rất có dấu hiệu sẽ đảo chiều nên" +
                     " các nhà đầu tư cần rất cẩn thận.";
         }
+        duLieuSinhCau.setMaVNINDEX(maVNINDEX);
+        this.duLieuSinhCauArrayList.add(duLieuSinhCau);
     }
+
     public ArrayList<DuLieuSinhCau> getDuLieuSinhCauArrayList() {
         this.sinhCau();
         return duLieuSinhCauArrayList;
