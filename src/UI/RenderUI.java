@@ -4,13 +4,9 @@ import Model.DuLieuSinhCau;
 import Search.Search;
 
 import javax.swing.*;
-import java.awt.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.SQLOutput;
+import java.awt.*;
 import java.util.ArrayList;
 
 
@@ -184,13 +180,11 @@ public class RenderUI extends JFrame {
     }
 
     public void setDuLieuSearch(ArrayList<DuLieuSinhCau> duLieuSinhCauArrayList) {
-        System.out.println("123");
         this.solution = duLieuSinhCauArrayList;
         this.panel.remove(this.scroll);
 
         this.panel.revalidate();
         this.panel.repaint();
-
 
         this.panel.add(this.textPanelTongHop());
     }
