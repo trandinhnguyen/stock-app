@@ -19,7 +19,6 @@ import java.util.Arrays;
 
 
 public class Data {
-
     private final String idDoanhThu = "ctl00_ContentPlaceHolder1_CompanyInfo_FinanceStatement1_rptNhomChiTieu_ctl00_rptData_ctl00_TrData";
     private final String idLoiNhuanSauThue = "ctl00_ContentPlaceHolder1_CompanyInfo_FinanceStatement1_rptNhomChiTieu_ctl00_rptData_ctl08_TrData";
     private final String idVonChuSoHuu = "ctl00_ContentPlaceHolder1_CompanyInfo_FinanceStatement1_rptNhomChiTieu_ctl01_rptData_ctl04_TrData";
@@ -40,9 +39,9 @@ public class Data {
     }
 
     private DuLieuCongTy getDataCompany(LinkMaCoPhieu link) throws IOException {
-
-            Document docRequest = Jsoup.connect(link.getLinkDataIndex()).userAgent("Mozilla/5.0").timeout(100 * 1000).get();
-            Document docHTML = Jsoup.connect(link.getLinkDataCompany()).userAgent("Mozilla/5.0").timeout(100 * 1000).get();
+        System.out.println(link.getTen());
+            Document docRequest = Jsoup.connect(link.getLinkDataIndex()).timeout(100 * 1000).get();
+            Document docHTML = Jsoup.connect(link.getLinkDataCompany()).timeout(100 * 1000).get();
 
             DuLieuCongTy duLieuCongTy = new DuLieuCongTy();
             duLieuCongTy.setTen(link.getTen());
@@ -68,6 +67,13 @@ public class Data {
 
             for (String item : id) {
                 Element content = docHTML.getElementById(item);
+                // i dont know why it  is  wrong ?????????
+                while (content == null) {
+                    System.out.println("die :" + link.getTen());
+                    docHTML = Jsoup.connect(link.getLinkDataCompany()).userAgent("Mozilla/5.0").timeout(100 * 1000).get();
+
+                    content = docHTML.getElementById(item);
+                }
                 int index = 0;
                 for (Element value : content.children()) {
                     if (index == 0) {
