@@ -25,7 +25,7 @@ class Main {
         SinhCau sinhCau = new SinhCau(data.getDuLieuCongTyArrayList(), data.getVNINDEX());
 
         // truyền dữ liệu vào UI để hiển thi
-        UI.setDuLieuSinhCauArrayList(sinhCau.getDuLieuSinhCauArrayList());
+        UI.setDuLieuSinhCauArrayList(sinhCau.getDuLieuSinhCauArrayList(), sinhCau.getSinhCauVNINDEX());
         // set loading visiable = false để xóa frame loading
         loading.setVisible(false);
 

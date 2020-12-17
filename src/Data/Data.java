@@ -2,16 +2,13 @@ package Data;
 
 import Model.DuLieuCongTy;
 import Model.DuLieuMaCoPhieu;
-
 import Model.LinkMaCoPhieu;
-
 import org.json.JSONArray;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import java.io.IOException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -26,10 +23,10 @@ public class Data {
 
     private final ArrayList<LinkMaCoPhieu> linksGetData;
     private final ArrayList<DuLieuCongTy> duLieuCongTyArrayList;
-    private  ArrayList<DuLieuMaCoPhieu> VNINDEX;
+    private ArrayList<DuLieuMaCoPhieu> VNINDEX;
 
 
-    public Data(LinkMaCoPhieu[] linksMaCoPhieu){
+    public Data(LinkMaCoPhieu[] linksMaCoPhieu) {
         this.duLieuCongTyArrayList = new ArrayList<DuLieuCongTy>();
         this.linksGetData = new ArrayList<LinkMaCoPhieu>();
         this.linksGetData.addAll(Arrays.asList(linksMaCoPhieu));
@@ -40,66 +37,68 @@ public class Data {
 
     private DuLieuCongTy getDataCompany(LinkMaCoPhieu link) throws IOException {
         System.out.println(link.getTen());
-            Document docRequest = Jsoup.connect(link.getLinkDataIndex()).timeout(100 * 1000).get();
-            Document docHTML = Jsoup.connect(link.getLinkDataCompany()).timeout(100 * 1000).get();
+        Document docRequest = Jsoup.connect(link.getLinkDataIndex()).userAgent("Mozilla/5.0").timeout(100 * 1000).get();
+        Document docHTML = Jsoup.connect(link.getLinkDataCompany()).userAgent("Mozilla/5.0").timeout(100 * 1000).get();
 
-            DuLieuCongTy duLieuCongTy = new DuLieuCongTy();
-            duLieuCongTy.setTen(link.getTen());
+        DuLieuCongTy duLieuCongTy = new DuLieuCongTy();
+        duLieuCongTy.setTen(link.getTen());
 
-            // get Data request
-            String text = docRequest.body().text();
-            JSONArray arrayData = new JSONArray(text);
+        // get Data request
+        String text = docRequest.body().text();
+        JSONArray arrayData = new JSONArray(text);
 
-            for (int i = 0; i < 3; i++) {
-                String EPS = arrayData.getJSONObject(i).get("EPS").toString();
-                duLieuCongTy.setEPS(EPS);
+        for (int i = 0; i < 3; i++) {
+            String EPS = arrayData.getJSONObject(i).get("EPS").toString();
+            duLieuCongTy.setEPS(EPS);
 
-                String ROE = arrayData.getJSONObject(i).get("ROE").toString();
-                duLieuCongTy.setROE(ROE);
+            String ROE = arrayData.getJSONObject(i).get("ROE").toString();
+            duLieuCongTy.setROE(ROE);
 
-                String DAR = arrayData.getJSONObject(i).get("DAR").toString();
-                duLieuCongTy.setDAR(DAR);
+            String DAR = arrayData.getJSONObject(i).get("DAR").toString();
+            duLieuCongTy.setDAR(DAR);
+        }
+
+        // get Data HTML
+
+        String[] id = {this.idDoanhThu, this.idLoiNhuanSauThue, this.idVonChuSoHuu};
+
+        for (String item : id) {
+            Element content = docHTML.getElementById(item);
+            // i dont know why it  is  wrong ?????????
+            while (content == null) {
+                System.out.println("die :" + link.getTen());
+                docHTML = Jsoup.connect(link.getLinkDataCompany()).userAgent("Mozilla/5.0").timeout(100 * 1000).get();
+
+                content = docHTML.getElementById(item);
             }
-
-            // get Data HTML
-
-            String[] id = {this.idDoanhThu, this.idLoiNhuanSauThue, this.idVonChuSoHuu};
-
-            for (String item : id) {
-                Element content = docHTML.getElementById(item);
-                // i dont know why it  is  wrong ?????????
-                while (content == null) {
-                    System.out.println("die :" + link.getTen());
-                    docHTML = Jsoup.connect(link.getLinkDataCompany()).userAgent("Mozilla/5.0").timeout(100 * 1000).get();
-
-                    content = docHTML.getElementById(item);
-                }
-                int index = 0;
-                for (Element value : content.children()) {
-                    if (index == 0) {
-                        index++;
-                        continue;
-                    }
-
-                    if (index == 5) break;
-                    if (item.equals(this.idDoanhThu))
-                        duLieuCongTy.setDoanhThuThuan(value.text().replace(",", ""));
-                    if (item.equals(this.idLoiNhuanSauThue))
-                        duLieuCongTy.setLoiNhuanSauThue(value.text().replace(",", ""));
-                    if (item.equals(this.idVonChuSoHuu))
-                        duLieuCongTy.setVonChuSoHuu(value.text().replace(",", ""));
-
+            int index = 0;
+            for (Element value : content.children()) {
+                if (index == 0) {
                     index++;
+                    continue;
                 }
-            }
 
-            return duLieuCongTy;
-        };
+                if (index == 5) break;
+                if (item.equals(this.idDoanhThu))
+                    duLieuCongTy.setDoanhThuThuan(value.text().replace(",", ""));
+                if (item.equals(this.idLoiNhuanSauThue))
+                    duLieuCongTy.setLoiNhuanSauThue(value.text().replace(",", ""));
+                if (item.equals(this.idVonChuSoHuu))
+                    duLieuCongTy.setVonChuSoHuu(value.text().replace(",", ""));
+
+                index++;
+            }
+        }
+
+        return duLieuCongTy;
+    }
+
+    ;
 
     // lấy dữ liệu mã cổ phiếu và dữ liệu công ty
     public void getData() throws IOException, NumberFormatException {
         // date format
-        DateTimeFormatter df =  DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         // lấy dữ liệu mã cổ phiếu
         for (LinkMaCoPhieu link : this.linksGetData) {
@@ -215,7 +214,7 @@ public class Data {
                 dataArrayList.add(data);
             }
 
-            if(link.getTen().equals("VNINDEX")) {
+            if (link.getTen().equals("VNINDEX")) {
                 this.VNINDEX = dataArrayList;
                 continue;
             }

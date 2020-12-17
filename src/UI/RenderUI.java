@@ -15,11 +15,9 @@ public class RenderUI extends JFrame {
     private ArrayList<DuLieuSinhCau> duLieuSinhCauArrayList;
     private JPanel panel;
     private JScrollPane scroll;
-    private JButton tag1, tag2, tag3;
     private ArrayList<DuLieuSinhCau> solution;
+    private String VNINDEX;
 
-//    private ArrayList<DuLieuSinhCau> duLieuSinhCauSearch;
-//    private Search<DuLieuSinhCau> searchEngine;
 
 
     public RenderUI() {
@@ -49,14 +47,31 @@ public class RenderUI extends JFrame {
         panel.setBorder(BorderFactory.createEmptyBorder(10, 30, 10, 30));
         panel.setBackground(Color.LIGHT_GRAY);
 
-        tag1 = new JButton("Tổng hợp");
-        tag2 = new JButton("Nhận định mã cổ phiếu");
-        tag3 = new JButton("Nhận định công ty");
+        JButton VNINDEXButton = new JButton("Nhân định VNINDEX");
+        VNINDEXButton.addActionListener(e -> {
+            this.updatePanel();
+        });
+
+        JButton tongHopButton = new JButton("Tổng hợp");
+        tongHopButton.addActionListener(e -> {
+            this.updatePanel(this.duLieuSinhCauArrayList, "tongHop");
+        });
+
+        JButton maCoPhieuButton = new JButton("Nhận định mã cổ phiếu");
+        maCoPhieuButton.addActionListener(e -> {
+            this.updatePanel(this.duLieuSinhCauArrayList, "maCoPhieu");
+        });
+        JButton congTiButton = new JButton("Nhận định công ty");
+        congTiButton.addActionListener(e -> {
+            this.updatePanel(this.duLieuSinhCauArrayList, "congTy");
+        });
 
 
-        panel.add(tag1);
-        panel.add(tag2);
-        panel.add(tag3);
+        panel.add(VNINDEXButton);
+        panel.add(tongHopButton);
+        panel.add(maCoPhieuButton);
+        panel.add(congTiButton);
+
 
         return panel;
     }
@@ -92,26 +107,14 @@ public class RenderUI extends JFrame {
             protected void updateFieldState() {
                 String data = textsearch.getText();
                 Search<DuLieuSinhCau> key = new Search<>(duLieuSinhCauArrayList, data);
-//                System.out.println(key.getResult().toString());
-                // solution = key.getResult();
-//                System.out.println(solution.toString());
-                setDuLieuSearch(key.getResult());
+
+                updatePanel(key.getResult(), "tongHop");
             }
 
         };
 
         textsearch.getDocument().addDocumentListener(realtime);
 
-//        search.addActionListener(e -> {
-//            String data = textsearch.getText();
-//            Search<DuLieuSinhCau> searchEngine = new Search<>(this.duLieuSinhCauArrayList, data);
-//            ArrayList<DuLieuSinhCau> dataSearch = searchEngine.getResult();
-//            System.out.println(dataSearch.toString());
-//            this.solution = dataSearch;
-////            for(int i = 0 ; i != 5 ; i++){
-////                System.out.println(searchEngine.getCauTraLoi().get(i).getCauHienThi());
-////            }
-//        });
 
 
         panel.add(search, grb);
@@ -122,7 +125,7 @@ public class RenderUI extends JFrame {
         return panel;
     }
 
-    private JScrollPane textPanelTongHop() {
+    private JScrollPane renderTongHop() {
         JPanel panel = new JPanel(new GridLayout(30, 1, 15, 15));
 
         for (DuLieuSinhCau item : this.solution) {
@@ -140,32 +143,32 @@ public class RenderUI extends JFrame {
             nhanDinh.append("\n");
             nhanDinh.append("- Cơ cấu doanh nghiệp: " + item.getCoCauDoanhNghiep());
 
-            tag1.addActionListener(e -> {
-                nhanDinh.setText(null);
-                nhanDinh.append("- Nhận định mã cổ phiếu " + item.getId() + ":");
-                nhanDinh.append("\n");
-                nhanDinh.append("- Thay đổi giá: " + item.getThayDoiGia());
-                nhanDinh.append("\n");
-                nhanDinh.append("- Nhận định công ty " + item.getId() + ":");
-                nhanDinh.append("\n");
-                nhanDinh.append("- Cơ cấu doanh nghiệp: " + item.getCoCauDoanhNghiep());
-            });
+            panel.add(nhanDinh);
 
-            tag2.addActionListener(e -> {
+        }
 
-                nhanDinh.setText(null);
-                nhanDinh.append("- Nhận định mã cổ phiếu " + item.getId() + ":");
-                nhanDinh.append("\n");
-                nhanDinh.append("- Thay đổi giá: " + item.getThayDoiGia());
-                nhanDinh.append("\n");
-            });
+        JScrollPane scroll = new JScrollPane(panel);
+        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scroll.getViewport().add(panel);
 
-            tag3.addActionListener(e -> {
-                nhanDinh.setText(null);
-                nhanDinh.append("- Nhận định công ty " + item.getId() + ":");
-                nhanDinh.append("\n");
-                nhanDinh.append("- Cơ cấu doanh nghiệp: " + item.getCoCauDoanhNghiep());
-            });
+        this.scroll = scroll;
+        return scroll;
+    }
+
+    private JScrollPane renderMaCoPhieu() {
+        JPanel panel = new JPanel(new GridLayout(30, 1, 15, 15));
+
+        for (DuLieuSinhCau item : this.solution) {
+            JTextArea nhanDinh = new JTextArea(10, 20);
+            nhanDinh.setLineWrap(true);
+            nhanDinh.setWrapStyleWord(true);
+            nhanDinh.setFont(new Font("monospaced", Font.PLAIN, 14));
+            nhanDinh.setEnabled(false);
+            nhanDinh.setBackground(Color.GRAY);
+            nhanDinh.append("- Nhận định mã cổ phiếu " + item.getId() + ":");
+            nhanDinh.append("\n");
+            nhanDinh.append("- " + item.getThayDoiGia());
+            nhanDinh.append("\n");
 
             panel.add(nhanDinh);
 
@@ -179,21 +182,99 @@ public class RenderUI extends JFrame {
         return scroll;
     }
 
-    public void setDuLieuSearch(ArrayList<DuLieuSinhCau> duLieuSinhCauArrayList) {
+    private JScrollPane renderCongTy() {
+        JPanel panel = new JPanel(new GridLayout(30, 1, 15, 15));
+
+        for (DuLieuSinhCau item : this.solution) {
+            JTextArea nhanDinh = new JTextArea(10, 20);
+            nhanDinh.setLineWrap(true);
+            nhanDinh.setWrapStyleWord(true);
+            nhanDinh.setFont(new Font("monospaced", Font.PLAIN, 14));
+            nhanDinh.setEnabled(false);
+            nhanDinh.setBackground(Color.GRAY);
+            nhanDinh.append("- Nhận định công ty " + item.getId() + ":");
+            nhanDinh.append("\n");
+            nhanDinh.append("- " + item.getCoCauDoanhNghiep());
+            nhanDinh.append("\n");
+
+            panel.add(nhanDinh);
+
+        }
+
+        JScrollPane scroll = new JScrollPane(panel);
+        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scroll.getViewport().add(panel);
+
+        this.scroll = scroll;
+        return scroll;
+    }
+
+    private void updatePanel(ArrayList<DuLieuSinhCau> duLieuSinhCauArrayList, String field) {
         this.solution = duLieuSinhCauArrayList;
         this.panel.remove(this.scroll);
 
         this.panel.revalidate();
         this.panel.repaint();
 
-        this.panel.add(this.textPanelTongHop());
+        switch (field) {
+            case "tongHop":
+                this.panel.add(this.renderTongHop());
+                break;
+            case "maCoPhieu":
+                this.panel.add(this.renderMaCoPhieu());
+                break;
+            case "congTy":
+                this.panel.add(this.renderCongTy());
+                break;
+        }
+
     }
-    public void setDuLieuSinhCauArrayList(ArrayList<DuLieuSinhCau> duLieuSinhCauArrayList) {
+
+    private JScrollPane renderVNINDEX() {
+        JPanel panel = new JPanel(new GridLayout(30, 1, 15, 15));
+
+
+            JTextArea nhanDinh = new JTextArea(10, 20);
+            nhanDinh.setLineWrap(true);
+            nhanDinh.setWrapStyleWord(true);
+            nhanDinh.setFont(new Font("monospaced", Font.PLAIN, 14));
+            nhanDinh.setEnabled(false);
+            nhanDinh.setBackground(Color.GRAY);
+            nhanDinh.append("- Nhận định VNINDEX :");
+            nhanDinh.append("\n");
+            nhanDinh.append(this.VNINDEX);
+            panel.add(nhanDinh);
+
+
+
+        JScrollPane scroll = new JScrollPane(panel);
+        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scroll.getViewport().add(panel);
+
+        this.scroll = scroll;
+        return scroll;
+    }
+
+    private void updatePanel() {
+
+        // remove panel
+        this.panel.remove(this.scroll);
+        this.panel.revalidate();
+        this.panel.repaint();
+
+        this.panel.add(this.renderVNINDEX());
+    }
+
+
+    public void setDuLieuSinhCauArrayList(ArrayList<DuLieuSinhCau> duLieuSinhCauArrayList, String VNINDEX) {
         this.duLieuSinhCauArrayList = duLieuSinhCauArrayList;
+        this.VNINDEX = VNINDEX;
+
 
         this.solution = duLieuSinhCauArrayList;
-        this.panel.add(this.textPanelTongHop());
+        this.panel.add(this.renderTongHop());
         this.panel.add(this.searchPanel(), BorderLayout.NORTH);
+
         System.out.println(duLieuSinhCauArrayList.size());
     }
 

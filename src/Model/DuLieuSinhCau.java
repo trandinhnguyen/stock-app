@@ -7,17 +7,15 @@ public class DuLieuSinhCau {
     private LocalDate ngay;
     private String coCauDoanhNghiep;
     private String thayDoiGia;
-    private String maVNINDEX;
 
     public DuLieuSinhCau() {
-        this("", null, "", "", "", "", "", "", "");
+        this("", null, "", "");
     }
 
-    public DuLieuSinhCau(String id, LocalDate ngay, String coCauDoanhNghiep, String sucKhoeTaiChinh, String no, String khaNangTangTruong, String khoiLuong, String thayDoiGia, String nhanDinhGia) {
+    public DuLieuSinhCau(String id, LocalDate ngay, String coCauDoanhNghiep, String thayDoiGia) {
         this.id = id;
         this.ngay = ngay;
         this.coCauDoanhNghiep = coCauDoanhNghiep;
-        this.maVNINDEX = maVNINDEX;
         this.thayDoiGia = thayDoiGia;
     }
 
@@ -53,9 +51,6 @@ public class DuLieuSinhCau {
         this.thayDoiGia = thayDoiGia;
     }
 
-    public String getMaVNINDEX() {return maVNINDEX; }
-
-    public void setMaVNINDEX(String maVNINDEX) { this.maVNINDEX = maVNINDEX; }
 
     @Override
     public String toString() {

@@ -12,15 +12,15 @@ public class SinhCau {
     private final ArrayList<DuLieuSinhCau> duLieuSinhCauArrayList; // 6 cong ti thì 6 phan tu
     private final ArrayList<DuLieuCongTy> duLieuCongTyArrayList;
     private final ArrayList<DuLieuMaCoPhieu> VNINDEX;
-    private final DuLieuSinhCau sinhCauVNINDEX;
     private static final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private String sinhCauVNINDEX;
 
 
     public SinhCau(ArrayList<DuLieuCongTy> duLieuCongTyArrayList, ArrayList<DuLieuMaCoPhieu> VNINDEX) {
         this.duLieuCongTyArrayList = duLieuCongTyArrayList;
         this.VNINDEX = VNINDEX;
         this.duLieuSinhCauArrayList = new ArrayList<>();
-        this.sinhCauVNINDEX = new DuLieuSinhCau();
+        this.sinhCauVNINDEX = "";
     }
 
 
@@ -145,9 +145,8 @@ public class SinhCau {
         return coCauDoanhNghiep;
     }
 
-    private void SinhCauVNINDEX() {
-        DuLieuSinhCau duLieuSinhCau = new DuLieuSinhCau();
-        String maVNINDEX= "";
+    private void sinhCauVNINDEX() {
+        String VNINDEX = "";
         double diemHomNay =  this.VNINDEX.get(0).getGiaDongCua();
         double diemHomQua = this.VNINDEX.get(1).getGiaDongCua();
         double khoiLuongHomNay = this.VNINDEX.get(0).getKhoiLuong();
@@ -162,26 +161,26 @@ public class SinhCau {
         double tyLeKhoiLuong = khoiLuongHomNay/MA20KHOILUONG;
         if (diemHomNay < diemHomQua) {
             if ( Math.abs(hieuDiem) < 10){
-                maVNINDEX = "Trong phiên hôm nay thị trường đã trải qua một phiên ảm đạm khi chỉ số VNINDEX có sự sụt giảm nhẹ ~" +
+                VNINDEX += "Trong phiên hôm nay thị trường đã trải qua một phiên ảm đạm khi chỉ số VNINDEX có sự sụt giảm nhẹ ~" +
                         hieuDiem + " điểm ( tương ứng với " + ""+ "%).";
                 if (tyLeDiem > 1.05){
-                    maVNINDEX += "Thị trường mới chỉ có pha điều chỉnh nhẹ do VNINDEX đang đi đến vùng cản " +
+                    VNINDEX += "Thị trường mới chỉ có pha điều chỉnh nhẹ do VNINDEX đang đi đến vùng cản " +
                             "nên không tránh khỏi việc thị trường có một vài nhịp rung lắc. Nhìn chung thị trường vẫn " +
                             "đang trong xu hướng uptrend nên các nhà đâu tư vẫn nên giữ bình tĩnh, quản trị tốt " +
                             "danh mục của mình.";
                 }
                 if (tyLeDiem < 0.95){
-                    maVNINDEX += "Thị trường vẫn đang ở trong một kênh giá giảm. Tuy nhiên hôm nay thị trường" +
+                    VNINDEX += "Thị trường vẫn đang ở trong một kênh giá giảm. Tuy nhiên hôm nay thị trường" +
                             " chỉ có một pha giảm nhẹ nên vẫn chưa thể vội vàng kết luận điều gì, nhà đầu tư c" +
                             "ần phải chờ hành động giá của thị trường trong thời gian tới để đưa ra kết luận mua" +
                             " bán, k nên vội vàng trong thời điểm hiện tại.";
                 }
                 if (tyLeDiem > 0.95 && tyLeDiem <1.05){
-                    maVNINDEX += "Thị trường có thể đang trong giai đoạn tích lũy. Đây chính là thời điểm rất " +
+                    VNINDEX += "Thị trường có thể đang trong giai đoạn tích lũy. Đây chính là thời điểm rất " +
                             "tốt để các nhà đầu tư mua gom chờ thời điểm thị trường bùng nổ.";
                 }
             } else {
-                maVNINDEX = "Thị trường hôm nay có một pha sụt giảm vô cùng nghiêm trọng khi chỉ sổ VNINDEX sụt giảm tận " +
+                VNINDEX = "Thị trường hôm nay có một pha sụt giảm vô cùng nghiêm trọng khi chỉ sổ VNINDEX sụt giảm tận " +
                         hieuDiem + " điểm (tương ứng với " + "..............." + "%). Phiên giảm điểm hôm nay" +
                         " có thể là một dấu hiệu cho thấy dòng tiền chảy vào thị trường đang giảm dần, thị trường có thể " +
                         "đang đi đến giai đoạn phân phối. Các nhà đầu tư cần hết sức chú ý đến thị trường trong thời điểm" +
@@ -190,20 +189,25 @@ public class SinhCau {
         }
 
         if (tyLeKhoiLuong > 1.2){
-            maVNINDEX = "Thanh khoản thị trường thời gian gần đây tăng đột biến chứng tỏ nhà đầu tư ngày" +
+            VNINDEX = "Thanh khoản thị trường thời gian gần đây tăng đột biến chứng tỏ nhà đầu tư ngày" +
                     " càng quan tâm đến thị trường chứng khoán, dự báo tương lai sẽ có thêm nhiều dòng" +
                     " tiền đổ vào thị trường.";
         } else {
-            maVNINDEX = "Thanh khoản thị trường thời gian gần đây đang có xu hướng giảm rõ rệt, thị trường" +
+            VNINDEX = "Thanh khoản thị trường thời gian gần đây đang có xu hướng giảm rõ rệt, thị trường" +
                     " đang đi đến giai đoạn kiệt sức. Tại vùng này xu hướng rất có dấu hiệu sẽ đảo chiều nên" +
                     " các nhà đầu tư cần rất cẩn thận.";
         }
-        duLieuSinhCau.setMaVNINDEX(maVNINDEX);
-        this.duLieuSinhCauArrayList.add(duLieuSinhCau);
+
+        this.sinhCauVNINDEX = VNINDEX;
     }
 
     public ArrayList<DuLieuSinhCau> getDuLieuSinhCauArrayList() {
         this.sinhCau();
+        this.sinhCauVNINDEX();
         return duLieuSinhCauArrayList;
+    }
+
+    public String getSinhCauVNINDEX() {
+        return this.sinhCauVNINDEX;
     }
 }
