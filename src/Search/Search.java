@@ -3,8 +3,8 @@ package Search;
 import java.util.ArrayList;
 
 public class  Search<T> {
-    private ArrayList<T> result;
-    private ArrayList<Answer> cauTraLoi;
+    private final ArrayList<T> result;
+    private final ArrayList<Answer> cauTraLoi;
 
 
 //    private void implementationSearch(String text) {
@@ -20,8 +20,8 @@ public class  Search<T> {
 //    }
 
     public Search(ArrayList<T> searchArrayList , String text){
-        this.result = new ArrayList<T>();
-        this.cauTraLoi = new ArrayList<Answer>();
+        this.result = new ArrayList<>();
+        this.cauTraLoi = new ArrayList<>();
         int i = 0;
         for(T item: searchArrayList) {
             String resource = item.toString().toLowerCase();
@@ -44,9 +44,9 @@ public class  Search<T> {
 //        return chiSoHienThi;
 //    }
 
-    public ArrayList<Answer> getCauTraLoi() {
-        return cauTraLoi;
-    }
+//    public ArrayList<Answer> getCauTraLoi() {
+//        return cauTraLoi;
+//    }
 
 }
 
