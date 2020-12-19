@@ -55,7 +55,7 @@ public class SinhCau {
                 }
             }
             else{
-                thayDoiGia += "Ngày " + duLieuNgayGanNhat.getNgay().toString() + " cổ phiếu " + duLieuNgayGanNhat.getTen() + " giao"
+                thayDoiGia += "Ngày " + duLieuNgayGanNhat.getNgay().format(dateFormat) + " cổ phiếu " + duLieuNgayGanNhat.getTen() + " giao"
                             + " dịch với khối lượng là " + duLieuNgayGanNhat.getKhoiLuong() + " cổ phiếu; trong khi giá cổ phiếu đã tăng "
                             + duLieuNgayGanNhat.getTyLe().replace("-", "");
                     if (duLieuNgayGanNhat.getKhoiLuong() > tyLeKhoiLuong) {
@@ -86,10 +86,10 @@ public class SinhCau {
         double DAR0 = Double.parseDouble(item.getDAR().get(0));
         double ROE0 = Double.parseDouble(item.getROE().get(0));
         double vonChuSoHuu0 = Double.parseDouble(item.getVonChuSoHuu().get(0));
-        double vonChuSoHuu1 = Double.parseDouble(item.getVonChuSoHuu().get(0));
+        double vonChuSoHuu1 = Double.parseDouble(item.getVonChuSoHuu().get(1));
         double loiNhuan = Double.parseDouble(item.getLoiNhuanSauThue().get(0));
         double doanhThu = Double.parseDouble(item.getDoanhThuThuan().get(0));
-        R = (vonChuSoHuu0/vonChuSoHuu1 -1)/100;
+        R = ((vonChuSoHuu0/vonChuSoHuu1) -1)/100;
         ratio = EPS0 / EPS1;
         String coCauDoanhNghiep = "";
         //ROE
@@ -162,7 +162,7 @@ public class SinhCau {
         if (diemHomNay < diemHomQua) {
             if ( Math.abs(hieuDiem) < 10){
                 VNINDEX += "Trong phiên hôm nay thị trường đã trải qua một phiên ảm đạm khi chỉ số VNINDEX có sự sụt giảm nhẹ ~" +
-                        hieuDiem + " điểm ( tương ứng với " + ""+ "%).";
+                        this.VNINDEX.get(0).getTyLe() + " điểm.";
                 if (tyLeDiem > 1.05){
                     VNINDEX += "Thị trường mới chỉ có pha điều chỉnh nhẹ do VNINDEX đang đi đến vùng cản " +
                             "nên không tránh khỏi việc thị trường có một vài nhịp rung lắc. Nhìn chung thị trường vẫn " +
@@ -180,20 +180,22 @@ public class SinhCau {
                             "tốt để các nhà đầu tư mua gom chờ thời điểm thị trường bùng nổ.";
                 }
             } else {
-                VNINDEX = "Thị trường hôm nay có một pha sụt giảm vô cùng nghiêm trọng khi chỉ sổ VNINDEX sụt giảm tận " +
-                        hieuDiem + " điểm (tương ứng với " + "..............." + "%). Phiên giảm điểm hôm nay" +
+                VNINDEX += "Thị trường hôm nay có một pha sụt giảm vô cùng nghiêm trọng khi chỉ sổ VNINDEX sụt giảm tận " +
+                        this.VNINDEX.get(0).getTyLe() + " điểm. Phiên giảm điểm hôm nay" +
                         " có thể là một dấu hiệu cho thấy dòng tiền chảy vào thị trường đang giảm dần, thị trường có thể " +
                         "đang đi đến giai đoạn phân phối. Các nhà đầu tư cần hết sức chú ý đến thị trường trong thời điểm" +
                         " này, và cũng có thể cân nhắc tìm điểm đẹp để giảm bớt tỉ trọng trong danh mục của mình.";
             }
+        } else {
+            VNINDEX += "Đã tăng.";
         }
 
         if (tyLeKhoiLuong > 1.2){
-            VNINDEX = "Thanh khoản thị trường thời gian gần đây tăng đột biến chứng tỏ nhà đầu tư ngày" +
+            VNINDEX += "Thanh khoản thị trường thời gian gần đây tăng đột biến chứng tỏ nhà đầu tư ngày" +
                     " càng quan tâm đến thị trường chứng khoán, dự báo tương lai sẽ có thêm nhiều dòng" +
                     " tiền đổ vào thị trường.";
         } else {
-            VNINDEX = "Thanh khoản thị trường thời gian gần đây đang có xu hướng giảm rõ rệt, thị trường" +
+            VNINDEX += "Thanh khoản thị trường thời gian gần đây đang có xu hướng giảm rõ rệt, thị trường" +
                     " đang đi đến giai đoạn kiệt sức. Tại vùng này xu hướng rất có dấu hiệu sẽ đảo chiều nên" +
                     " các nhà đầu tư cần rất cẩn thận.";
         }
