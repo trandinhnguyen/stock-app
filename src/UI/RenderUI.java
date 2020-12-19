@@ -83,7 +83,7 @@ public class RenderUI extends JFrame {
         grb.gridx = 0;
         grb.gridy = 0;
         grb.ipady = 4;
-        JTextField textsearch = new JTextField(40);
+        JTextField textSearch = new JTextField(40);
 
         JButton search = new JButton("SEARCH");
 
@@ -105,15 +105,15 @@ public class RenderUI extends JFrame {
             }
 
             protected void updateFieldState() {
-                String data = textsearch.getText();
-                Search<DuLieuSinhCau> key = new Search<>(duLieuSinhCauArrayList, data);
+                String data = textSearch.getText();
+                Search<DuLieuSinhCau> key = new Search<>(duLieuSinhCauArrayList);
 
-                updatePanel(key.getResult(), "tongHop");
+                updatePanel(key.getResult(data), "tongHop");
             }
 
         };
 
-        textsearch.getDocument().addDocumentListener(realtime);
+        textSearch.getDocument().addDocumentListener(realtime);
 
 
 
@@ -121,7 +121,7 @@ public class RenderUI extends JFrame {
         grb.gridx = 1;
         grb.ipadx = 100;
         grb.ipady = 10;
-        panel.add(textsearch, grb);
+        panel.add(textSearch, grb);
         return panel;
     }
 
