@@ -5,6 +5,8 @@ import Model.DuLieuMaCoPhieu;
 import Model.DuLieuSinhCau;
 
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
@@ -38,10 +40,11 @@ public class SinhCau {
             }
             double tyLeKhoiLuong = duLieuNgayGanNhat.getKhoiLuong()/(MA20Khoiluong * 1.5);
             String thayDoiGia = "";
+            double kL = duLieuNgayGanNhat.getKhoiLuong()/1000000;
             if (duLieuNgayGanNhat.getGiaDongCua() < item.getDuLieuLichSu().get(1).getGiaDongCua()) {
                 thayDoiGia += "Ngày " + duLieuNgayGanNhat.getNgay().format(dateFormat) + " cổ phiếu " + duLieuNgayGanNhat.getTen() +
-                        " giao dịch với khối lượng là " + duLieuNgayGanNhat.getKhoiLuong() +
-                        " cổ phiếu; trong khi giá cổ phiếu đã giảm "
+                        " giao dịch với khối lượng là " + (double)Math.round(kL*1000)/1000 +
+                        " triệu cổ phiếu; trong khi giá cổ phiếu đã giảm "
                         + duLieuNgayGanNhat.getTyLe().replace("-", "") + ".";
                 if (duLieuNgayGanNhat.getKhoiLuong() > tyLeKhoiLuong) {
                     thayDoiGia += "Trong phiên hôm nay ghi nhận sự đột biến về thanh khoản.";
@@ -56,7 +59,7 @@ public class SinhCau {
             }
             else{
                 thayDoiGia += "Ngày " + duLieuNgayGanNhat.getNgay().format(dateFormat) + " cổ phiếu " + duLieuNgayGanNhat.getTen() + " giao"
-                            + " dịch với khối lượng là " + duLieuNgayGanNhat.getKhoiLuong() + " cổ phiếu; trong khi giá cổ phiếu đã tăng "
+                            + " dịch với khối lượng là " + (double)Math.round(kL*1000)/1000 + " triệu cổ phiếu; trong khi giá cổ phiếu đã tăng "
                             + duLieuNgayGanNhat.getTyLe().replace("-", "");
                     if (duLieuNgayGanNhat.getKhoiLuong() > tyLeKhoiLuong) {
                         thayDoiGia += "Trong phiên hôm nay ghi nhận sự đột biến về thanh khoản.";
@@ -92,6 +95,10 @@ public class SinhCau {
         R = ((vonChuSoHuu0/vonChuSoHuu1) -1)/100;
         ratio = EPS0 / EPS1;
         String coCauDoanhNghiep = "";
+        double vCSH0 = vonChuSoHuu0/100000000;
+        double vCSH1 = vonChuSoHuu1/100000000;
+        double lN = loiNhuan/100000000;
+        double dT = doanhThu/100000000;
         //ROE
         if (ROE0 > 25) {
             coCauDoanhNghiep = "Công ty đang có tình hình tài chính cực tốt với mức sinh lời trên tài sản (ROE) đạt top đầu " +
@@ -127,14 +134,16 @@ public class SinhCau {
         if (ratio > 1.2) {
             coCauDoanhNghiep = "Công ty đang  có hoạt động kinh doanh vô cùng tốt. ban lãnh đạo đã có những" +
                             " chính sách tích cực đẩy mạnh tăng trưởng doanh thu và lợi nhuân trong một thời gian" +
-                            " ngắn khi đạt lợi nhuận quý 3 "+ loiNhuan + " tỉ đồng và vốn chủ sở hữu tăng từ " +
-                            vonChuSoHuu1 + " lên đến " + vonChuSoHuu0 + " tương đương " +
-                            R + "%.";
+                            " ngắn khi đạt lợi nhuận quý 3 là "+ (double)Math.round(lN*1000)/1000 + " trăm triệu đồng "
+                            + "và vốn chủ sở hữu tăng từ " + (double)Math.round(vCSH1*1000)/1000 + " lên đến "
+                            + (double)Math.round(vCSH0*1000)/1000 + " trăm triệu đồng tương đương " +
+                            (double)Math.round(R*10000)/10000 + "%.";
         }
         if (ratio > 0.9 && ratio < 1.2) {
             coCauDoanhNghiep = "Công ty vẫn duy trì ổn hoạt động kinh doanh của mình tuy nhiên không có sự tăng" +
                             " trưởng quá rõ rệt, ban lãnh đạo đã làm tròn vai trò của mình. Doanh thu và lợi nhuận" +
-                            " vẫn giữ nguyên ở mức " + doanhThu + " và " + loiNhuan + ".";
+                            " vẫn giữ nguyên ở mức " + (double)Math.round(dT*1000)/1000 + " trăm triệu đồng" +
+                            " và " + (double)Math.round(lN*1000)/1000 + " trăm triệu đồng.";
         }
         if (ratio < 0.9) {
             coCauDoanhNghiep = "Công ty đang gặp vấn đề trong hoạt động kinh doanh dẫn đến doanh thu và lợi" +
