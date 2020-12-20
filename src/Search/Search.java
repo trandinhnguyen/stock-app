@@ -6,6 +6,10 @@ public class Search<T> {
     private final ArrayList<T> result;
     private final ArrayList<T> searchArrayList;
 
+    public Search(ArrayList<T> searchArrayList) {
+        this.searchArrayList = searchArrayList;
+        this.result = new ArrayList<>();
+    }
 
     private void implementationSearch(String text) {
         this.result.clear();
@@ -17,10 +21,6 @@ public class Search<T> {
         }
     }
 
-    public Search(ArrayList<T> searchArrayList) {
-        this.searchArrayList = searchArrayList;
-        this.result = new ArrayList<>();
-    }
 
     public ArrayList<T> getResult(String text) {
         this.implementationSearch(text);

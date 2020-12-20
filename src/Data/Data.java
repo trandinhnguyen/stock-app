@@ -16,9 +16,6 @@ import java.util.Arrays;
 
 
 public class Data {
-    private final String idDoanhThu = "ctl00_ContentPlaceHolder1_CompanyInfo_FinanceStatement1_rptNhomChiTieu_ctl00_rptData_ctl00_TrData";
-    private final String idLoiNhuanSauThue = "ctl00_ContentPlaceHolder1_CompanyInfo_FinanceStatement1_rptNhomChiTieu_ctl00_rptData_ctl08_TrData";
-    private final String idVonChuSoHuu = "ctl00_ContentPlaceHolder1_CompanyInfo_FinanceStatement1_rptNhomChiTieu_ctl01_rptData_ctl04_TrData";
 
 
     private final ArrayList<LinkMaCoPhieu> linksGetData;
@@ -60,7 +57,10 @@ public class Data {
 
         // get Data HTML
 
-        String[] id = {this.idDoanhThu, this.idLoiNhuanSauThue, this.idVonChuSoHuu};
+        String idDoanhThu = "ctl00_ContentPlaceHolder1_CompanyInfo_FinanceStatement1_rptNhomChiTieu_ctl00_rptData_ctl00_TrData";
+        String idLoiNhuanSauThue = "ctl00_ContentPlaceHolder1_CompanyInfo_FinanceStatement1_rptNhomChiTieu_ctl00_rptData_ctl08_TrData";
+        String idVonChuSoHuu = "ctl00_ContentPlaceHolder1_CompanyInfo_FinanceStatement1_rptNhomChiTieu_ctl01_rptData_ctl04_TrData";
+        String[] id = {idDoanhThu, idLoiNhuanSauThue, idVonChuSoHuu};
 
         for (String item : id) {
             Element content = docHTML.getElementById(item);
@@ -79,11 +79,11 @@ public class Data {
                 }
 
                 if (index == 5) break;
-                if (item.equals(this.idDoanhThu))
+                if (item.equals(idDoanhThu))
                     duLieuCongTy.setDoanhThuThuan(value.text().replace(",", ""));
-                if (item.equals(this.idLoiNhuanSauThue))
+                if (item.equals(idLoiNhuanSauThue))
                     duLieuCongTy.setLoiNhuanSauThue(value.text().replace(",", ""));
-                if (item.equals(this.idVonChuSoHuu))
+                if (item.equals(idVonChuSoHuu))
                     duLieuCongTy.setVonChuSoHuu(value.text().replace(",", ""));
 
                 index++;

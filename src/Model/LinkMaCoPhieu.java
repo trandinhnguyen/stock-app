@@ -6,10 +6,6 @@ public class LinkMaCoPhieu {
     private String linkDataCompany;
     private String linkDataIndex;
 
-    public LinkMaCoPhieu() {
-        this("", "", "", "");
-    }
-
     public LinkMaCoPhieu(String ten, String linkDataHistory, String linkDataCompany, String linkDataIndex) {
         this.ten = ten;
         this.linkDataHistory = linkDataHistory;

@@ -22,7 +22,7 @@ class Main {
         data.getData();
 
         // Bắt đầu sinh câu từ dữ liệu
-        SinhCau sinhCau = new SinhCau(data.getDuLieuCongTyArrayList(), data.getVNINDEX());
+        SinhCau sinhCau = new SinhCau(data.getDuLieuCongTyArrayList(), data.getVNINDEX()); // An, Nguyên
 
         // truyền dữ liệu vào UI để hiển thi
         UI.setDuLieuSinhCauArrayList(sinhCau.getDuLieuSinhCauArrayList(), sinhCau.getSinhCauVNINDEX());

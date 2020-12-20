@@ -14,7 +14,7 @@ public class RenderUI extends JFrame {
 
     private ArrayList<DuLieuSinhCau> duLieuSinhCauArrayList;
     private JPanel panel;
-    private JScrollPane scroll;
+    private JScrollPane scrollPanel;
     private ArrayList<DuLieuSinhCau> solution;
     private String VNINDEX;
 
@@ -48,23 +48,15 @@ public class RenderUI extends JFrame {
         panel.setBackground(Color.LIGHT_GRAY);
 
         JButton VNINDEXButton = new JButton("Nhân định VNINDEX");
-        VNINDEXButton.addActionListener(e -> {
-            this.updatePanel();
-        });
+        VNINDEXButton.addActionListener(e -> this.updatePanel());
 
         JButton tongHopButton = new JButton("Tổng hợp");
-        tongHopButton.addActionListener(e -> {
-            this.updatePanel(this.duLieuSinhCauArrayList, "tongHop");
-        });
+        tongHopButton.addActionListener(e -> this.updatePanel(this.duLieuSinhCauArrayList, "tongHop"));
 
         JButton maCoPhieuButton = new JButton("Nhận định mã cổ phiếu");
-        maCoPhieuButton.addActionListener(e -> {
-            this.updatePanel(this.duLieuSinhCauArrayList, "maCoPhieu");
-        });
+        maCoPhieuButton.addActionListener(e -> this.updatePanel(this.duLieuSinhCauArrayList, "maCoPhieu"));
         JButton congTiButton = new JButton("Nhận định công ty");
-        congTiButton.addActionListener(e -> {
-            this.updatePanel(this.duLieuSinhCauArrayList, "congTy");
-        });
+        congTiButton.addActionListener(e -> this.updatePanel(this.duLieuSinhCauArrayList, "congTy"));
 
 
         panel.add(VNINDEXButton);
@@ -107,7 +99,7 @@ public class RenderUI extends JFrame {
             protected void updateFieldState() {
                 String data = textSearch.getText();
                 Search<DuLieuSinhCau> key = new Search<>(duLieuSinhCauArrayList);
-
+                //
                 updatePanel(key.getResult(data), "tongHop");
             }
 
@@ -151,7 +143,7 @@ public class RenderUI extends JFrame {
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scroll.getViewport().add(panel);
 
-        this.scroll = scroll;
+        this.scrollPanel = scroll;
         return scroll;
     }
 
@@ -178,7 +170,7 @@ public class RenderUI extends JFrame {
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scroll.getViewport().add(panel);
 
-        this.scroll = scroll;
+        this.scrollPanel = scroll;
         return scroll;
     }
 
@@ -205,45 +197,24 @@ public class RenderUI extends JFrame {
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scroll.getViewport().add(panel);
 
-        this.scroll = scroll;
+        this.scrollPanel = scroll;
         return scroll;
-    }
-
-    private void updatePanel(ArrayList<DuLieuSinhCau> duLieuSinhCauArrayList, String field) {
-        this.solution = duLieuSinhCauArrayList;
-        this.panel.remove(this.scroll);
-
-        this.panel.revalidate();
-        this.panel.repaint();
-
-        switch (field) {
-            case "tongHop":
-                this.panel.add(this.renderTongHop());
-                break;
-            case "maCoPhieu":
-                this.panel.add(this.renderMaCoPhieu());
-                break;
-            case "congTy":
-                this.panel.add(this.renderCongTy());
-                break;
-        }
-
     }
 
     private JScrollPane renderVNINDEX() {
         JPanel panel = new JPanel(new GridLayout(30, 1, 15, 15));
 
 
-            JTextArea nhanDinh = new JTextArea(10, 20);
-            nhanDinh.setLineWrap(true);
-            nhanDinh.setWrapStyleWord(true);
-            nhanDinh.setFont(new Font("monospaced", Font.PLAIN, 14));
-            nhanDinh.setEnabled(false);
-            nhanDinh.setBackground(Color.GRAY);
-            nhanDinh.append("- Nhận định VNINDEX :");
-            nhanDinh.append("\n");
-            nhanDinh.append(this.VNINDEX);
-            panel.add(nhanDinh);
+        JTextArea nhanDinh = new JTextArea(10, 20);
+        nhanDinh.setLineWrap(true);
+        nhanDinh.setWrapStyleWord(true);
+        nhanDinh.setFont(new Font("monospaced", Font.PLAIN, 14));
+        nhanDinh.setEnabled(false);
+        nhanDinh.setBackground(Color.GRAY);
+        nhanDinh.append("- Nhận định VNINDEX :");
+        nhanDinh.append("\n");
+        nhanDinh.append(this.VNINDEX);
+        panel.add(nhanDinh);
 
 
 
@@ -251,14 +222,31 @@ public class RenderUI extends JFrame {
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scroll.getViewport().add(panel);
 
-        this.scroll = scroll;
+        this.scrollPanel = scroll;
         return scroll;
     }
+
+    private void updatePanel(ArrayList<DuLieuSinhCau> duLieuSinhCauArrayList, String field) {
+        this.solution = duLieuSinhCauArrayList;
+        this.panel.remove(this.scrollPanel);
+
+        this.panel.revalidate();
+        this.panel.repaint();
+
+        switch (field) {
+            case "tongHop" -> this.panel.add(this.renderTongHop());
+            case "maCoPhieu" -> this.panel.add(this.renderMaCoPhieu());
+            case "congTy" -> this.panel.add(this.renderCongTy());
+        }
+
+    }
+
+
 
     private void updatePanel() {
 
         // remove panel
-        this.panel.remove(this.scroll);
+        this.panel.remove(this.scrollPanel);
         this.panel.revalidate();
         this.panel.repaint();
 
@@ -272,6 +260,8 @@ public class RenderUI extends JFrame {
 
 
         this.solution = duLieuSinhCauArrayList;
+
+
         this.panel.add(this.renderTongHop());
         this.panel.add(this.searchPanel(), BorderLayout.NORTH);
 

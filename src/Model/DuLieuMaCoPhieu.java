@@ -3,11 +3,8 @@ package Model;
 import java.time.LocalDate;
 
 public class DuLieuMaCoPhieu {
-    private String id;
-    private String idNhomNganh;
     private String ten;
     private LocalDate ngay;
-    private String diem;
     private String tyLe;
     private double khoiLuong;
     private String giaTri;
@@ -16,34 +13,17 @@ public class DuLieuMaCoPhieu {
     private String RSI;
 
     public DuLieuMaCoPhieu() {
-        this("","", null, "", "", 0.00, 0.00, 0.00, "");
+        this("", null, "", 0.00, 0.00, 0.00, "");
     }
 
-    public DuLieuMaCoPhieu(String id, String ten, LocalDate ngay, String diem, String tyLe, double khoiLuong, double giaMoCua, double giaDongCua, String giaTri) {
-        this.id = id;
+    public DuLieuMaCoPhieu(String ten, LocalDate ngay, String tyLe, double khoiLuong, double giaMoCua, double giaDongCua, String giaTri) {
         this.ten = ten;
         this.ngay = ngay;
-        this.diem = diem;
         this.khoiLuong = khoiLuong;
         this.tyLe = tyLe;
         this.giaMoCua = giaMoCua;
         this.giaDongCua = giaDongCua;
         this.giaTri = giaTri;
-    }
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getIdNhomNganh() {
-        return idNhomNganh;
-    }
-
-    public void setIdNhomNganh(String idNhomNganh) {
-        this.idNhomNganh = idNhomNganh;
     }
 
     public String getTen() {
@@ -60,14 +40,6 @@ public class DuLieuMaCoPhieu {
 
     public void setNgay(LocalDate ngay) {
         this.ngay = ngay;
-    }
-
-    public String getDiem() {
-        return diem;
-    }
-
-    public void setDiem(String diem) {
-        this.diem = diem;
     }
 
     public String getTyLe() {
@@ -114,8 +86,8 @@ public class DuLieuMaCoPhieu {
         this.giaTri = giaTri;
     }
 
-    public String getGiaTri() {return this.giaTri;}
+    public String getGiaTri() {
+        return this.giaTri;
+    }
 
-
-    public String compare( DuLieuMaCoPhieu quaKhu) {return ""; };
 }

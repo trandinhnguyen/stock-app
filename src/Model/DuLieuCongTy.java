@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 public class DuLieuCongTy {
     private String ten;
-    private ArrayList<String> EPS;
-    private ArrayList<String> ROE;
-    private ArrayList<String> DAR;
-    private ArrayList<String> doanhThuThuan;
-    private ArrayList<String> loiNhuanSauThue;
-    private ArrayList<String> vonChuSoHuu;
+    private final ArrayList<String> EPS;
+    private final ArrayList<String> ROE;
+    private final ArrayList<String> DAR;
+    private final ArrayList<String> doanhThuThuan;
+    private final ArrayList<String> loiNhuanSauThue;
+    private final ArrayList<String> vonChuSoHuu;
 
     private ArrayList<DuLieuMaCoPhieu> duLieuLichSu;
 
@@ -72,8 +72,6 @@ public class DuLieuCongTy {
     public void setVonChuSoHuu(String vonChuSoHuu) {
         this.vonChuSoHuu.add(vonChuSoHuu);
     }
-
-    public String getEPS(int i) { return ""; }
 
     public void setDuLieuLichSu(ArrayList<DuLieuMaCoPhieu> duLieuLichSu) {
         this.duLieuLichSu = duLieuLichSu;
