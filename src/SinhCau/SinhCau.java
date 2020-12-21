@@ -5,8 +5,6 @@ import Model.DuLieuMaCoPhieu;
 import Model.DuLieuSinhCau;
 
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
@@ -99,7 +97,6 @@ public class SinhCau {
         double vCSH1 = vonChuSoHuu1/100000000;
         double lN = loiNhuan/100000000;
         double dT = doanhThu/100000000;
-        String t = R < 0 ? "giảm" : "tăng";
         //ROE
         if (ROE0 > 25) {
             coCauDoanhNghiep += "Công ty đang có tình hình tài chính cực tốt với mức sinh lời trên tài sản (ROE) đạt top đầu " +
@@ -107,12 +104,12 @@ public class SinhCau {
         }
         if (ROE0 > 10 && ROE0 < 25) {
             coCauDoanhNghiep += "Công ty có tình hình tài chính ổn với mức sinh lời trên tài sản (ROE) đạt mức " + ROE0 +
-                            "%/ năm.";
+                            "%/năm.";
         }
         if (ROE0 < 10) {
             coCauDoanhNghiep += "Công ty đang gặp vấn đề về tài chính cũng như hoạt động kinh doanh của công ty đang vận hành " +
                             "có vấn đề khi mà khả năng sinh lời trên tài sản của công ty đang ở mức đáng báo động, chỉ " + ROE0 +
-                            "%/ năm.";
+                            "%/năm.";
         }
         //DAR
         if (DAR0 > 70) {
@@ -135,16 +132,24 @@ public class SinhCau {
         if (ratio > 1.2) {
             coCauDoanhNghiep += " Công ty đang  có hoạt động kinh doanh vô cùng tốt. ban lãnh đạo đã có những" +
                             " chính sách tích cực đẩy mạnh tăng trưởng doanh thu và lợi nhuân trong một thời gian" +
-                            " ngắn khi đạt lợi nhuận quý 3 là "+ (double)Math.round(lN*1000)/1000 + " trăm triệu đồng "
-                            + "và vốn chủ sở hữu tăng từ " + (double)Math.round(vCSH1*1000)/1000 + " lên đến "
-                            + (double)Math.round(vCSH0*1000)/1000 + " trăm triệu đồng tương đương " +
-                            (double)Math.round(R*10000)/10000 + "%.";
+                            " ngắn khi đạt lợi nhuận quý 3 là "+ (double)Math.round(lN*10)/10 + " trăm triệu đồng ";
+            if (vonChuSoHuu0 > vonChuSoHuu1) {
+                coCauDoanhNghiep += "và vốn chủ sở hữu tăng từ " + (double)Math.round(vCSH1*10)/10 + " lên đến " +
+                                    (double)Math.round(vCSH0*10)/10 + " trăm triệu đồng tương đương " +
+                                    (double)Math.round(R*10000)/10000 + "%.";
+            } else {
+                coCauDoanhNghiep += ". Tuy nhiên nhiều khi do dịch bệnh nên công ty phải cắt giảm nhân công để đỡ " +
+                                    "chi phí, mô hình kinh doanh bị thu hẹp nên vốn chủ sở hữu từ " +
+                                    (double)Math.round(vCSH1*10)/10 + " xuống " + (double)Math.round(vCSH0*10)/10
+                                    + " trăm triệu đồng tương đương " + (double)Math.round(R*10000)/10000 + "%." +
+                                    " Nhưng công ty vẫn tăng lợi nhuận như trên.";
+            }
         }
         if (ratio > 0.9 && ratio < 1.2) {
             coCauDoanhNghiep += " Công ty vẫn duy trì ổn hoạt động kinh doanh của mình tuy nhiên không có sự tăng" +
                             " trưởng quá rõ rệt, ban lãnh đạo đã làm tròn vai trò của mình. Doanh thu và lợi nhuận" +
-                            " vẫn giữ nguyên ở mức " + (double)Math.round(dT*1000)/1000 + " trăm triệu đồng" +
-                            " và " + (double)Math.round(lN*1000)/1000 + " trăm triệu đồng.";
+                            " vẫn giữ nguyên ở mức " + (double)Math.round(dT*10)/10 + " trăm triệu đồng" +
+                            " và " + (double)Math.round(lN*10)/10 + " trăm triệu đồng.";
         }
         if (ratio < 0.9) {
             coCauDoanhNghiep += " Công ty đang gặp vấn đề trong hoạt động kinh doanh dẫn đến doanh thu và lợi" +
