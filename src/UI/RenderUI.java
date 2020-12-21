@@ -118,7 +118,7 @@ public class RenderUI extends JFrame {
     }
 
     private JScrollPane renderTongHop() {
-        JPanel panel = new JPanel(new GridLayout(30, 1, 15, 15));
+        JPanel panel = new JPanel(new GridLayout(20, 1, 15, 15));
 
         for (DuLieuSinhCau item : this.solution) {
             JTextArea nhanDinh = new JTextArea(10, 20);
@@ -141,6 +141,7 @@ public class RenderUI extends JFrame {
 
         JScrollPane scroll = new JScrollPane(panel);
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scroll.getVerticalScrollBar().setUnitIncrement(15);
         scroll.getViewport().add(panel);
 
         this.scrollPanel = scroll;
@@ -148,7 +149,7 @@ public class RenderUI extends JFrame {
     }
 
     private JScrollPane renderMaCoPhieu() {
-        JPanel panel = new JPanel(new GridLayout(30, 1, 15, 15));
+        JPanel panel = new JPanel(new GridLayout(20, 1, 15, 15));
 
         for (DuLieuSinhCau item : this.solution) {
             JTextArea nhanDinh = new JTextArea(10, 20);
@@ -168,6 +169,7 @@ public class RenderUI extends JFrame {
 
         JScrollPane scroll = new JScrollPane(panel);
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scroll.getVerticalScrollBar().setUnitIncrement(15);
         scroll.getViewport().add(panel);
 
         this.scrollPanel = scroll;
@@ -175,7 +177,7 @@ public class RenderUI extends JFrame {
     }
 
     private JScrollPane renderCongTy() {
-        JPanel panel = new JPanel(new GridLayout(30, 1, 15, 15));
+        JPanel panel = new JPanel(new GridLayout(20, 1, 15, 15));
 
         for (DuLieuSinhCau item : this.solution) {
             JTextArea nhanDinh = new JTextArea(10, 20);
@@ -195,6 +197,7 @@ public class RenderUI extends JFrame {
 
         JScrollPane scroll = new JScrollPane(panel);
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scroll.getVerticalScrollBar().setUnitIncrement(15);
         scroll.getViewport().add(panel);
 
         this.scrollPanel = scroll;
@@ -202,7 +205,7 @@ public class RenderUI extends JFrame {
     }
 
     private JScrollPane renderVNINDEX() {
-        JPanel panel = new JPanel(new GridLayout(30, 1, 15, 15));
+        JPanel panel = new JPanel(new GridLayout(1, 1, 15, 15));
 
 
         JTextArea nhanDinh = new JTextArea(10, 20);
@@ -213,13 +216,14 @@ public class RenderUI extends JFrame {
         nhanDinh.setBackground(Color.GRAY);
         nhanDinh.append("- Nhận định VNINDEX :");
         nhanDinh.append("\n");
-        nhanDinh.append(this.VNINDEX);
+        nhanDinh.append("- " + this.VNINDEX);
         panel.add(nhanDinh);
 
 
 
         JScrollPane scroll = new JScrollPane(panel);
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scroll.getVerticalScrollBar().setUnitIncrement(15);
         scroll.getViewport().add(panel);
 
         this.scrollPanel = scroll;
